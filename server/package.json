@@ -1,7 +1,6 @@
 {
-  "name": "flora",
+  "name": "flora-server",
   "version": "1.0.0",
-  "private": true,
   "description": "A community for plant lovers.",
   "main": "index.js",
   "scripts": {
@@ -19,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/aelizj/Flora/issues"
   },
-  "homepage": "https://github.com/aelizj/Flora#readme"
+  "homepage": "https://github.com/aelizj/Flora#readme",
+  "dependencies": {
+    "dotenv": "16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^7.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22"
+  }
 }
