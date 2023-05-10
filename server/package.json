@@ -1,0 +1,23 @@
+{
+  "name": "flora",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A community for plant lovers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aelizj/Flora.git"
+  },
+  "keywords": [
+    "mern-stack"
+  ],
+  "author": "Anne Jones",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/aelizj/Flora/issues"
+  },
+  "homepage": "https://github.com/aelizj/Flora#readme"
+}
