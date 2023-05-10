@@ -1,7 +1,7 @@
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
 import apiRoutes from './routes/api';
 import uiRoutes from './routes/ui';
 
@@ -23,7 +23,6 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use('/api', apiRoutes);
 app.use('/ui', uiRoutes);
-
 app.use((err, next) => {
   console.log(err);
   next();
