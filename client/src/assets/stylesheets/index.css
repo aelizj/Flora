@@ -12,6 +12,14 @@ code {
 
 h1 {
   font-family: 'Fugaz One';
+}
+
+h2 {
+  font-family: 'Fugaz One';
   font-weight: normal;
-  font-size: 3.0rem;
+}
+
+#footer {
+  font-size:x-small;
+  font-weight: 300;
 }
