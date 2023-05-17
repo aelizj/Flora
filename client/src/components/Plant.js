@@ -1,4 +1,5 @@
 import React from 'react';
+import '../assets/stylesheets/Plant.css'
 
 const Plant = ({ plant }) => {
   return (

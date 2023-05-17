@@ -1,0 +1,20 @@
+.plant-card {
+  border: 1px solid #ccc;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 10px;
+}
+
+.plant-title {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.plant-image {
+  width: 100%;
+  height: auto;
+}
+
+.plant-description {
+  margin-top: 1em;
+}
