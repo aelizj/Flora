@@ -1,10 +1,9 @@
-import logo from '../assets/images/icon.svg';
 import React from 'react';
 
 const Header = () => {
   return (
-    <header>
-      <h1>Flora</h1>
+    <header className='header'>
+      <h1 className='header-title'>Flora</h1>
     </header>
   );
 };

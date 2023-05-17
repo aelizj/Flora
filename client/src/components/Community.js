@@ -2,8 +2,8 @@ import React from 'react';
 
 const Community = () => {
   return (
-    <div>
-      <h1>Community</h1>
+    <div className='community'>
+      <div className='community-post'></div>
     </div>
   );
 };
