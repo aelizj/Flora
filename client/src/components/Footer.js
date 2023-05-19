@@ -1,33 +1,33 @@
-import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
-import { makeStyles } from '@mui/material/styles';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
-
-const useStyles = makeStyles({
-  footer: {
-    position: 'fixed',
-    left: 0,
-    bottom: 0,
-    width: '100%',
-    backgroundColor: '#f5f5f5',
-    padding: 20,
-    textAlign: 'center',
-  },
-});
-
-const Footer = () => {
-  const classes = useStyles();
-
+const StickyFooter = () => {
   return (
-    <AppBar className={classes.footer}>
-      <Toolbar>
-        <Typography variant="body1">
-          Copyright ©Flora 2023
-        </Typography>
-      </Toolbar>
-    </AppBar>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      <Box
+        component="footer"
+        sx={{
+          py: 3,
+          px: 2,
+          mt: 'auto',
+        }}
+      >
+        <Container maxWidth="sm">
+          <Typography variant="footer" color="primary">
+            Copyright ©Flora 2023
+          </Typography>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 
-export default Footer;
-
+export default StickyFooter;

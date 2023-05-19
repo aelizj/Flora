@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 
@@ -12,7 +12,6 @@ import Community  from './Community';
 import Events     from './Events';
 import Footer     from './Footer';
 import Home       from './Home';
-import Navigation from './Navigation';
 import PlantInfo  from './PlantInfo';
 import PlantList  from './PlantList'
 import Profile    from './Profile';
@@ -85,7 +84,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
@@ -93,6 +91,20 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const App = () => {
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+
+  const linkIcons = [
+    HomeRoundedIcon,
+    AccountCircleRoundedIcon,
+    TipsAndUpdatesRoundedIcon,
+    InfoRoundedIcon,
+    PeopleRoundedIcon,
+    CalendarMonthRoundedIcon
+  ];
+
+  const StyledNavLink = styled(NavLink)({
+    textDecoration: 'none',
+    color: 'inherit',
+  });
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -102,11 +114,15 @@ const App = () => {
     setDrawerOpen(false);
   };
 
-  const linkIcons = [HomeRoundedIcon, AccountCircleRoundedIcon, TipsAndUpdatesRoundedIcon, InfoRoundedIcon, PeopleRoundedIcon, CalendarMonthRoundedIcon];
-
   return (
     <Router>
-      <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          WebkitFontSmoothing: 'antialiased', // For Safari and Chrome
+          MozOsxFontSmoothing: 'grayscale',   // For Firefox on macOS
+          fontSmoothing: 'antialiased',       // For other browsers
+        }}>
         <CssBaseline />
         <AppBar position="fixed" open={drawerOpen}>
           <Toolbar>
@@ -119,7 +135,7 @@ const App = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h4" noWrap component="div">
+            <Typography variant="h5" noWrap component="div">
               Flora
             </Typography>
           </Toolbar>
@@ -145,14 +161,19 @@ const App = () => {
           </DrawerHeader>
           <List>
             {links.map((link, index) => (
-              <ListItem key={link.path} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {React.createElement(linkIcons[index])}
-                  </ListItemIcon>
-                  <ListItemText primary={link.name} />
-                </ListItemButton>
-              </ListItem>
+              <StyledNavLink to={link.path} key={index}>
+                <ListItem key={link.path} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      {React.createElement(linkIcons[index])}
+                    </ListItemIcon>
+                    <ListItemText primary={
+                      <Typography variant="drawerLink" color="primary">
+                        {link.name}
+                      </Typography>} />
+                  </ListItemButton>
+                </ListItem>
+              </StyledNavLink>
             ))}
           </List>
         </Drawer>

@@ -1,10 +1,16 @@
 import React from 'react';
+import { Typography, Divider } from '@mui/material';
 
 const Home = () => {
   return (
     <div className='home'>
-      <h2>Welcome to Flora!</h2>
-      <p>Learn about plants, share your experiences, and connect with other plant enthusiasts!</p>
+      <Typography variant="h4">
+        Welcome to Flora!
+      </Typography>
+      <Divider />
+      <Typography variant="body1">
+        Learn about plants, share your experiences, and connect with other plant enthusiasts!
+      </Typography>
     </div>
   );
 };
