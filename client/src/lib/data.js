@@ -1,11 +1,61 @@
 const plantData = [
   {
-    commonName: 'Monstera, \'Swiss Cheese Plant\'',
+    commonName: 'Monstera, Swiss cheese plant',
     scientificName: 'Monstera deliciosa',
     imageUrl: 'https://images.unsplash.com/photo-1625582598943-2445bb7b8253?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80',
-    description: 'Monstera deliciosa, also known as the Swiss cheese plant, is a popular houseplant native to the tropical rainforests of Central and South America. It is loved for its unique, large, glossy leaves with natural holes, or fenestrations.',
-    careGuide: "**Monstera deliciosa**, also known as the Swiss cheese plant, is a popular houseplant native to the tropical rainforests of Central and South America. It is loved for its unique, large, glossy leaves with natural holes, or fenestrations. Here are the detailed care instructions for Monstera deliciosa:\n\n- **Light:** Monstera deliciosa prefers bright, indirect light. They can tolerate lower light conditions, but their growth may slow and the characteristic fenestrations may not develop as well. In terms of foot candles (fc), an appropriate range would be 200-1000 fc. Remember that too much direct sunlight can cause the leaves to burn.\n\n- **Water:** These plants prefer their soil to dry out slightly between waterings. A good rule of thumb is to water when the top inch or so of the soil feels dry. The exact frequency of watering will depend on the plant's environment, such as light, humidity, and temperature conditions, but generally, watering every 1-2 weeks is sufficient.\n\n- **Temperature:** Monstera deliciosa prefers temperatures between 65-85°F (18-29°C). They can tolerate slightly lower temperatures, but growth may slow. They are not frost tolerant.\n\n- **Humidity:** As tropical plants, they appreciate higher humidity levels, around 60-80%. However, they can adapt to typical indoor humidity levels.\n\n- **Soil:** Use a well-draining potting mix. You can make your own by mixing one part indoor potting soil, one part peat, and one part perlite or coarse sand. The pH should be between 5.5 and 7.0.\n\n- **Fertilizer:** Fertilize every 4-6 weeks during the growing season (spring and summer) with a balanced houseplant fertilizer diluted to half strength. Reduce fertilization during the winter months when the plant's growth slows.\n\n- **Pruning:** Prune as needed to control the plant's size and shape. You can also use a moss pole or other support to encourage the plant's natural climbing behavior.\n\n- **Repotting:** Repot every 2-3 years as the plant grows, or when the roots have filled the pot. Spring is the best time to repot.\n\n\nBelow is a table summarizing these care instructions:\n| Care Factor | Recommended Conditions |\n| --- | --- |\n| Light | 200-1000 fc, bright indirect light |\n| Water | When top inch of soil is dry, approx. every 1-2 weeks |\n| Temperature | 65-85°F (18-29°C) |\n| Humidity | 60-80% preferred, but can adapt to typical indoor levels |\n| Soil | Well-draining mix, pH 5.5-7.0 |\n| Fertilizer | Balanced houseplant fertilizer, every 4-6 weeks during growing season |\n| Pruning | As needed to control size and shape |\n| Repotting | Every 2-3 years, or when roots fill pot |\n\nRemember, the best care is attentive care. Keep an eye on your Monstera deliciosa's health by observing changes in its leaves and growth patterns. This can help you adjust care practices as necessary to meet the plant's needs."
+    description: 'Monstera deliciosa, also known as the Swiss cheese plant, is a popular houseplant native to the tropical rainforests of Central and South America. It is loved for its unique, large, glossy leaves with natural holes, or fenestrations.'
+  },
+  {
+    commonName: 'Heartleaf philodendron',
+    scientificName: 'Philodendron brasil',
+    imageUrl: 'https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80',
+    description: 'The Philodendron Brasil, also known as Philodendron hederaceum \'Brasil\' or Philodendron scandens \'Brasil,\' is a popular tropical houseplant that belongs to the Araceae family. It is a cultivar of the species Philodendron hederaceum, native to the rainforests of Central and South America.'
+  },
+  {
+    commonName: 'Rabbit\'s foot fern',
+    scientificName: 'Davallia fejeensis',
+    imageUrl: 'https://images.mobot.org/PlantRecordsVol2/prod/large960/00005000/5835_B587-0120040.jpg',
+    description: 'Rabbit\'s Foot Fern (Davallia fejeensis) is a unique and interesting fern variety known for its furry, creeping rhizomes that resemble a rabbit\'s foot. This tropical plant prefers conditions similar to its native habitat in the Fiji Islands and requires appropriate care to thrive.'
+  },
+  {
+    commonName: 'Silver sword philodendron',
+    scientificName: 'Philodendron hastatum',
+    imageUrl: 'https://live.staticflickr.com/65535/51282015899_cf10f7bf2a_b.jpg',
+    description: 'Native to Fiji, the Silver Sword Philodendron, scientifically known as Philodendron hastatum, is a popular houseplant due to its unique silvery, metallic-looking foliage. '
+  },
+  {
+    commonName: 'Golden pothos, Devil\'s ivy',
+    scientificName: 'Epipremnum aureum',
+    imageUrl: 'https://bs.plantnet.org/image/o/d56087a265bed821a33d2f20ad22338071152272',
+    description: 'Epipremnum aureum is a species in the arum family Araceae, native to Mo\'orea in the Society Islands of French Polynesia'
+  },
+  {
+    commonName: 'Snake plant',
+    scientificName: 'Dracaena trifasciata',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/fb/Snake_Plant_%28Sansevieria_trifasciata_%27Laurentii%27%29.jpg',
+    description: 'Snake plant is an erect, clumping, broadleaf evergreen houseplant in the Asparagaceae (asparagus) family. It is native to Africa.'
+  },
+  {
+    commonName: 'Spider plant',
+    scientificName: 'Chlorophytum comosum',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Spider_plant_with_plantlets_and_flowers.jpg',
+    description: 'Chlorophytum comosum, usually called spider plant or common spider plant due to its spider-like look, also known as spider ivy, ribbon plant, and hen and chickens is a species of evergreen perennial flowering plant of the family Asparagaceae.'
+  },
+  {
+    commonName: 'ZZ plant',
+    scientificName: 'Zamioculcas zamiifolia',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d6/Zamioculcas.jpg',
+    description: 'Zamioculcas is genus of flowering plants in the family Araceae, containing the single species Zamioculcas zamiifolia. It is a tropical perennial plant, native to eastern Africa, from southern Kenya to northeastern South Africa.'
   }
 ];
 
 export default plantData;
+
+
+
+// {
+//   commonName: '',
+//   scientificName: '',
+//   imageUrl: '',
+//   description: ''
+// }

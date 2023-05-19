@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Grid from '@mui/material/Grid';
 import PlantCard from './PlantCard';
 import plantData from '../lib/data.js';
 // import { useDispatch, useSelector } from 'react-redux';
@@ -24,9 +25,14 @@ const PlantList = () => {
       <h1>Plants</h1>
       <div>
         <h2>Plants</h2>
-        {plants.map(p => (
-          <PlantCard plant={p}/>
-        ))}
+        <Grid container spacing={0}>
+            {plants.map(p => (
+              <Grid item xs={4}>
+                <PlantCard plant={p}/>
+              </Grid>
+            ))}
+        </Grid>
+
       </div>
     </>
   );
