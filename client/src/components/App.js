@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
-import { Box, Container, CssBaseline } from '@mui/material';
-import { drawerWidth } from '../constants/UiValues';
 import { styled } from '@mui/material/styles';
+
+//constants
+import { drawerWidth } from '../constants/UiValues';
+import links from '../constants/links';
+
+//react components
 import Community  from './Community';
 import Events     from './Events';
 import Footer     from './Footer';
@@ -12,25 +16,34 @@ import Navigation from './Navigation';
 import PlantInfo  from './PlantInfo';
 import PlantList  from './PlantList'
 import Profile    from './Profile';
+
+// mui elements
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Drawer from '@mui/material/Drawer';
+import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
-import {
-  Drawer,
-  List,
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-  Toolbar
-} from '@mui/material';
-import {
-  Menu as MenuIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  Inbox as InboxIcon,
-  Mail as MailIcon
-} from '@mui/icons-material';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+
+// icons
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import TipsAndUpdatesRoundedIcon from '@mui/icons-material/TipsAndUpdatesRounded';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
+import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
+import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+
+//* NEEDS SERIOUS REFACTORING
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -89,11 +102,12 @@ const App = () => {
     setDrawerOpen(false);
   };
 
+  const linkIcons = [HomeRoundedIcon, AccountCircleRoundedIcon, TipsAndUpdatesRoundedIcon, InfoRoundedIcon, PeopleRoundedIcon, CalendarMonthRoundedIcon];
+
   return (
     <Router>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-
         <AppBar position="fixed" open={drawerOpen}>
           <Toolbar>
             <IconButton
@@ -130,25 +144,13 @@ const App = () => {
             </IconButton>
           </DrawerHeader>
           <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
+            {links.map((link, index) => (
+              <ListItem key={link.path} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                    {React.createElement(linkIcons[index])}
                   </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={link.name} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -157,7 +159,6 @@ const App = () => {
 
         <Main open={drawerOpen} theme={theme}>
           <DrawerHeader />
-          <Navigation />
           <Container maxWidth="xl">
             <Routes>
               <Route path="/"          element={<Home />} />
@@ -167,8 +168,8 @@ const App = () => {
               <Route path="/community" element={<Community />} />
               <Route path="/events"    element={<Events />} />
             </Routes>
+            <Footer />
           </Container>
-          <Footer />
         </Main>
       </Box>
     </Router>
