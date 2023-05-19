@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { drawerWidth } from '../constants/UiValues';
-import DrawerHeader from './DrawerHeader';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import {
@@ -22,7 +21,16 @@ import {
   Mail
 } from '@mui/icons-material';
 
-const SideDrawer = (open, theme, handleDrawerOpen, handleDrawerClose) => {
+const SideDrawer = ({ open, handleDrawerOpen, handleDrawerClose, theme }) => {
+  const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  }));
+
   const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
     })(({ theme, open }) => ({
@@ -53,8 +61,8 @@ const SideDrawer = (open, theme, handleDrawerOpen, handleDrawerClose) => {
           >
             <Menu />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Persistent drawer
+          <Typography variant="h4" noWrap component="div">
+            Flora
           </Typography>
         </Toolbar>
       </AppBar>
