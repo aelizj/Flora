@@ -8,6 +8,7 @@ import "@fontsource/unbounded/700.css";
 
 const testTheme = createTheme({
   typography: {
+    htmlFontSize: 16,
     drawerLink: {
       fontFamily: '"Unbounded"',
       fontWeight: 400,

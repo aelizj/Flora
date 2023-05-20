@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import PlantCard from './PlantCard';
 import plantData from '../lib/data.js';
+import { Typography } from '@mui/material';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchPlants } from '../store/actions/plantsActions';
 
@@ -22,9 +23,10 @@ const PlantList = () => {
 
   return (
     <>
-      <h1>Plants</h1>
+    <Typography variant="h1" color="secondary">
+      Plants
+    </Typography>
       <div>
-        <h2>Plants</h2>
         <Grid container spacing={0}>
             {plants.map(p => (
               <Grid item xs={4}>

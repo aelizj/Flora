@@ -21,7 +21,7 @@ const PlantCard = ({ plant }) => {
           image={plant.imageUrl}
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 500 }}>
+          <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 500 }}>
             {plant.commonName}
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
