@@ -23,7 +23,7 @@ const PlantList = () => {
 
   return (
     <>
-    <Typography variant="h1" color="secondary">
+    <Typography variant="h2" color="secondary">
       Plants
     </Typography>
       <div>
