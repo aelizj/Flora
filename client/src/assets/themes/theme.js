@@ -81,7 +81,10 @@ const testTheme = createTheme({
         }
       }
     }
-   }
+   },
+   customIcon: {
+    color: 'primary',
+  },
 });
 
 export default testTheme;

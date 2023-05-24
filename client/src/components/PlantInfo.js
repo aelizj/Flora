@@ -1,9 +1,12 @@
 import React from 'react';
+import { Typography } from '@mui/material';
 
 const PlantInfo = () => {
   return (
     <div className='plant-basics'>
-      <p>Plant Basics</p>
+      <Typography variant="h2" color="secondary">
+        Profile
+      </Typography>
     </div>
   );
 };

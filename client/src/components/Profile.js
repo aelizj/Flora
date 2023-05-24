@@ -1,10 +1,12 @@
 import React from 'react';
+import { Typography } from '@mui/material';
+
 
 const Profile = () => {
   return (
-    <div className='profile'>
-      <p className='profile-info'>Profile</p>
-    </div>
+    <Typography variant="h2" color="secondary">
+      Profile
+    </Typography>
   );
 };
 

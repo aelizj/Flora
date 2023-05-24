@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/material/styles';
 
 //constants
-import { drawerWidth } from '../constants/UiValues';
+import { drawerWidth, mainColor } from '../constants/UiValues';
 import links from '../constants/links';
 
 //react components
@@ -165,7 +165,7 @@ const App = () => {
                 <ListItem key={link.path} disablePadding>
                   <ListItemButton>
                     <ListItemIcon>
-                      {React.createElement(linkIcons[index])}
+                      {React.createElement(linkIcons[index], { style: { color: mainColor } })}
                     </ListItemIcon>
                     <ListItemText primary={
                       <Typography variant="drawerLink" color="primary">
