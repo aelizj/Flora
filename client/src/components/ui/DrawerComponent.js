@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import { drawerWidth, mainColor } from '../constants/UiValues';
-import links from '../constants/links';
+import { drawerWidth, mainColor } from '../../constants/UiValues';
+import links from '../../constants/links';
 import { styled } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
