@@ -32,9 +32,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 );
 
 const MainComponent = ({ drawerOpen, theme }) => (
-  <Main open={drawerOpen} theme={theme}>
+  <Main open={drawerOpen} theme={theme} maxWidth='100%' sx={{ padding: 0 }} >
     <DrawerHeader />
-    <Container maxWidth="xl">
+    <Container maxWidth="100%" disableGutters>
       <Routes>
         <Route path="/"          element={<Home />} />
         <Route path="/profile"   element={<Profile />} />

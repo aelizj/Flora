@@ -1,8 +1,9 @@
 import React from 'react';
-import { Box, Typography, Avatar, Button, Grid, Chip, Paper, Card, CardMedia, Stack } from '@mui/material';
-import { amber, teal } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Box, Card, CardMedia, Grid, Button } from '@mui/material';
+import UserAvatar from './UserAvatar.js';
+import UserInfo from './UserInfo';
+import UserCard from './UserCard';
+import UserAchievements from './UserAchievements';
 
 const userData = {
   name: "John Doe",
@@ -18,6 +19,16 @@ const userData = {
 
 const ProfilePage = () => {
   return (
+    <div sx={{padding: 0}}>
+  <Card sx={{ width: '100%', objectFit: 'cover', padding: 0, margin: 0 }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image={userData.cover}
+      alt="cover photo"
+      sx={{padding:0, margin: 0}}
+    />
+  </Card>
     <Box
       sx={{
         display: 'flex',
@@ -27,56 +38,9 @@ const ProfilePage = () => {
         padding: 2,
       }}
     >
-      <Card sx={{ width: '100%', overflow: 'hidden' }}>
-        <CardMedia
-          component="img"
-          height="140"
-          image={userData.cover}
-          alt="cover photo"
-        />
-      </Card>
-      <Box
-        sx={{
-          position: 'relative',
-          bottom: '28px',
-          display: 'flex',
-          justifyContent: 'center',
-        }}
-      >
-        <Avatar
-          sx={{
-            bgcolor: amber[500],
-            height: { xs: 56, sm: 80 },
-            width: { xs: 56, sm: 80 }
-          }}
-          src={userData.avatar}
-        />
-      </Box>
-      <Typography
-        sx={{
-          mt: 1,
-          fontWeight: 'bold',
-          fontSize: { xs: 'h6.fontSize', sm: 'h4.fontSize' }
-        }}
-        variant="h5"
-      >
-        {userData.name}
-      </Typography>
-      <Typography
-        color="textSecondary"
-        variant="body1"
-        sx={{ fontSize: { xs: 'body2.fontSize', sm: 'body1.fontSize' } }}
-      >
-        {userData.email}
-      </Typography>
-      <Typography
-        color="textSecondary"
-        variant="body2"
-        sx={{ display: 'flex', alignItems: 'center', mt: 1 }}
-      >
-        <LocationOnIcon fontSize="small" />
-        {userData.location}
-      </Typography>
+
+      <UserAvatar avatar={userData.avatar} />
+      <UserInfo name={userData.name} email={userData.email} location={userData.location} />
       <Grid
         container
         direction="row"
@@ -86,37 +50,11 @@ const ProfilePage = () => {
       >
         {['Interests', 'Collection', 'Wishlist'].map((category, index) => (
           <Grid item xs={12} sm={4} key={index}>
-            <Paper elevation={2} sx={{ padding: 2 }}>
-              <Typography variant="h6">{category}</Typography>
-              <Stack direction="row" spacing={1} mt={1} flexWrap="wrap">
-                {userData[category.toLowerCase()].map((item, i) => {
-                  console.log('index: ' + index + ' category: ' + category + '\ni: ' + i + ' item: ' + item)
-                  return (
-                   <Chip key={i} label={item} color="primary" />
-                  )
-                })}
-              </Stack>
-            </Paper>
+            <UserCard category={category} items={userData[category.toLowerCase()]} />
           </Grid>
         ))}
       </Grid>
-      <Typography
-        variant="h6"
-        sx={{ mt: 2 }}
-      >
-        Achievements
-      </Typography>
-      <Stack direction="row" spacing={1} mt={1} flexWrap="wrap">
-        {userData.achievements.map((achievement, index) => (
-          <Chip
-            key={index}
-            label={achievement}
-            color="success"
-            variant="outlined"
-            sx={{ bgcolor: teal[50] }}
-          />
-        ))}
-      </Stack>
+      <UserAchievements achievements={userData.achievements} />
       <Button
         sx={{
           mt: 2,
@@ -127,9 +65,9 @@ const ProfilePage = () => {
         Edit Profile
       </Button>
     </Box>
+    </div>
+
   );
 }
 
 export default ProfilePage;
-
-
