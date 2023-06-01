@@ -20,51 +20,53 @@ const userData = {
 const ProfilePage = () => {
   return (
     <div sx={{padding: 0}}>
-  <Card sx={{ width: '100%', objectFit: 'cover', padding: 0, margin: 0 }}>
-    <CardMedia
-      component="img"
-      height="140"
-      image={userData.cover}
-      alt="cover photo"
-      sx={{padding:0, margin: 0}}
-    />
-  </Card>
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        minHeight: 'fit-content',
-        padding: 2,
-      }}
-    >
+      <Card sx={{ width: '100%', objectFit: 'cover' }}>
+        <CardMedia
+          component="img"
+          height="140"
+          image={userData.cover}
+          alt="cover photo"
+        />
+      </Card>
 
-      <UserAvatar avatar={userData.avatar} />
-      <UserInfo name={userData.name} email={userData.email} location={userData.location} />
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-between"
-        spacing={2}
-        sx={{ mt: 2, width: '100%' }}
-      >
-        {['Interests', 'Collection', 'Wishlist'].map((category, index) => (
-          <Grid item xs={12} sm={4} key={index}>
-            <UserCard category={category} items={userData[category.toLowerCase()]} />
+      <Container sx={{ paddingBottom: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            minHeight: 'fit-content',
+            padding: 2,
+          }}
+        >
+          <UserAvatar avatar={userData.avatar} />
+          <UserInfo name={userData.name} email={userData.email} location={userData.location} />
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            spacing={2}
+            sx={{ mt: 2, width: '100%' }}
+          >
+            {['Interests', 'Collection', 'Wishlist'].map((category, index) => (
+              <Grid item xs={12} sm={4} key={index}>
+                <UserCard category={category} items={userData[category.toLowerCase()]} />
+              </Grid>
+            ))}
           </Grid>
-        ))}
-      </Grid>
-      <UserAchievements achievements={userData.achievements} />
-      <Button
-        sx={{
-          mt: 2,
-          fontSize: { xs: 'body2.fontSize', sm: 'body1.fontSize' },
-        }}
-        variant="outlined"
-      >
-        Edit Profile
-      </Button>
-    </Box>
+          <UserAchievements achievements={userData.achievements} />
+          <Button
+            sx={{
+              mt: 2,
+              fontSize: { xs: 'body2.fontSize', sm: 'body1.fontSize' },
+            }}
+            variant="outlined"
+          >
+            Edit Profile
+          </Button>
+        </Box>
+      </Container>
+
     </div>
 
   );
