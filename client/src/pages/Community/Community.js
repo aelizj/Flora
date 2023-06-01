@@ -1,15 +1,15 @@
 import React from 'react';
-import { Typography } from '@mui/material';
-
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 
 const Community = () => {
   return (
-    <div className='community'>
+    <Container sx={{ p: 2 }}>
       <Typography variant="h2" color="secondary">
         Community
       </Typography>
       <div className='community-post'></div>
-    </div>
+    </Container>
   );
 };
 

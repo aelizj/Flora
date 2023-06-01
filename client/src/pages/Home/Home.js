@@ -1,9 +1,11 @@
 import React from 'react';
-import { Typography, Divider } from '@mui/material';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 const Home = () => {
   return (
-    <div className='home'>
+    <Container sx={{ p: 2 }}>
       <Typography variant="h2" color="secondary">
         Welcome to Flora!
       </Typography>
@@ -11,7 +13,7 @@ const Home = () => {
       <Typography variant="body1" sx={{ p: 1 }} >
         Learn about plants, share your experiences, and connect with other plant enthusiasts!
       </Typography>
-    </div>
+    </Container>
   );
 };
 

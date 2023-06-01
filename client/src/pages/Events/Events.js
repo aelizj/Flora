@@ -1,18 +1,19 @@
 import React from 'react';
-import { Typography } from '@mui/material';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 // import Event from './Event.js';
 
 
 const Events = () => {
   return (
-    <div className='events'>
+    <Container sx={{ p: 2 }}>
       <Typography variant="h2" color="secondary">
         Events
       </Typography>
       <div>
         {/* map through events and send each to Event component */}
       </div>
-    </div>
+    </Container>
   );
 };
 

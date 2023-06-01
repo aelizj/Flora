@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import PlantCard from './PlantCard';
 import plantData from '../../lib/data.js';
-import { Typography } from '@mui/material';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchPlants } from '../store/actions/plantsActions';
 
@@ -22,7 +23,7 @@ const PlantList = () => {
   // if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
+    <Container sx={{ p: 2 }}>
     <Typography variant="h2" color="secondary">
       Plants
     </Typography>
@@ -36,7 +37,7 @@ const PlantList = () => {
         </Grid>
 
       </div>
-    </>
+    </Container>
   );
 };
 
