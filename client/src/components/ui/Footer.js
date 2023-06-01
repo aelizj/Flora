@@ -9,7 +9,7 @@ const StickyFooter = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '100vh',
+        minHeight: '90vh',
       }}
     >
       <Box
@@ -20,8 +20,8 @@ const StickyFooter = () => {
           mt: 'auto',
         }}
       >
-        <Container maxWidth="sm">
-          <Typography variant="footer" color="primary">
+        <Container maxWidth="100%" sx={{justifyContent: 'space-evenly', component: 'div',}}>
+          <Typography variant="footer" color="primary"  sx={{ flexGrow: 1,  }}>
             Copyright ©Flora 2023
           </Typography>
         </Container>
