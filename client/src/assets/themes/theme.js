@@ -16,8 +16,8 @@ const testTheme = createTheme({
     },
     footer: {
       fontFamily: '"Unbounded"',
-      fontWeight: 300,
-      fontSize: 6,
+      fontWeight: 500,
+      fontSize: 10,
     },
     h1: {
       fontFamily: [
