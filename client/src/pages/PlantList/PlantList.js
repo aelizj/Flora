@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-import Grid from '@mui/material/Grid';
+import AddPlantDialog from './AddPlantDialog';
 import PlantCard from './PlantCard';
 import plantData from '../../lib/data.js';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Container, Grid, Typography } from '@mui/material';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchPlants } from '../store/actions/plantsActions';
-
-
 
 const PlantList = () => {
   const plants = plantData;
@@ -24,10 +21,11 @@ const PlantList = () => {
 
   return (
     <Container sx={{ p: 2 }}>
-    <Typography variant="h2" color="secondary">
-      Plants
-    </Typography>
-      <div>
+      <Typography variant="h2" color="secondary">
+        Plants
+      </Typography>
+
+      <div className="plant-grid">
         <Grid container spacing={0}>
             {plants.map(p => (
               <Grid item xs={4}>
@@ -35,8 +33,11 @@ const PlantList = () => {
               </Grid>
             ))}
         </Grid>
-
       </div>
+
+      <AddPlantDialog />
+
+
     </Container>
   );
 };
