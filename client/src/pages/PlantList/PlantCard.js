@@ -7,7 +7,6 @@ import {
   CardContent,
   CardMedia,
   Typography,
-  Paper
 } from "@mui/material";
 
 const PlantCard = ({ plant }) => {
@@ -16,7 +15,7 @@ const PlantCard = ({ plant }) => {
       <Card sx={{maxWidth: 450}}>
         <CardMedia
           component="img"
-          alt={plant.commonName}
+          alt={'Picture of ' + plant.commonName}
           height="140"
           image={plant.imageUrl}
         />
