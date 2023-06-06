@@ -1,16 +1,16 @@
-import { drawerWidth } from './constants/UiValues';
+import { drawerWidth } from '../constants/UiValues';
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import { Routes, Route } from 'react-router-dom';
 import Container from '@mui/material/Container';
-import DrawerHeader from './components/ui/DrawerHeader';
+import DrawerHeader from './ui/DrawerHeader';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
 import PlantList from './pages/PlantList/PlantList';
 import PlantInfo from './pages/PlantInfo/PlantInfo';
 import Community from './pages/Community/Community';
 import Events from './pages/Events/Events';
-import Footer from './components/ui/Footer';
+import Footer from './ui/Footer';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
