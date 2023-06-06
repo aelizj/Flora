@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { drawerWidth, mainColor } from '../../constants/UiValues';
-import links from '../../constants/links';
+import NavLinks from '../../constants/NavLinks';
 import { styled } from '@mui/material/styles';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
@@ -40,7 +40,7 @@ const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) =>
       </IconButton>
     </DrawerHeader>
     <List>
-      {links.map((link, index) => (
+      {NavLinks.map((link, index) => (
         <StyledNavLink to={link.path} key={index}>
           <ListItem key={link.path} disablePadding>
             <ListItemButton>

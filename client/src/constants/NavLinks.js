@@ -1,4 +1,4 @@
-const links = [
+const NavLinks = [
   {
     name: 'Home',
     path: '/',
@@ -27,4 +27,4 @@ const links = [
 
 ];
 
-export default links;
+export default NavLinks;
