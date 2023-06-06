@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Card, CardMedia, Grid, Button } from '@mui/material';
+import { Box, Card, CardMedia, Container, Grid, Button } from '@mui/material';
 import UserAvatar from './UserAvatar.js';
 import UserInfo from './UserInfo';
 import UserCard from './UserCard';
