@@ -12,9 +12,6 @@ import {
  } from "@mui/material";
 
 const AddPlantDialog = () => {
-  const inputBaseStyles = roundTextFieldStylesHook.useInputBase();
-  const inputLabelStyles = roundTextFieldStylesHook.useInputLabel();
-  const helperTextStyles = roundTextFieldStylesHook.useHelperText();
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
   const handleClickOpenDialog = () => {
@@ -71,7 +68,7 @@ const AddPlantDialog = () => {
               variant="filled"
               color='primary'
               size="small"
-              helperText=""
+              helperText="Plant's colloquial name; i.e. Chinese money plant"
             />
 
             <TextField // scientific name
