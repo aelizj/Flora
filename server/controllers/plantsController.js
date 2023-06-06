@@ -1,4 +1,4 @@
-import HttpError from '../middleware/httpError';
+import HttpError from '../utils/httpError';
 import Plant from '../models/plant';
 
 // Fetches all plant guides from the database
