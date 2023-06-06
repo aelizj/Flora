@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import AddPlantDialog from './AddPlantDialog';
 import PlantCard from './PlantCard';
-import plantData from '../../lib/data.js';
+import plantData from '../../../lib/data';
 import { Container, Grid, Typography } from '@mui/material';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { fetchPlants } from '../store/actions/plantsActions';
