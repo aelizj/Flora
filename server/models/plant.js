@@ -3,11 +3,11 @@ import mongoose from 'mongoose';
 const plantSchema = new mongoose.Schema({
   commonName: {
     type: String,
-    required: true,
+    required: [true, 'A common name is required'],
   },
   scientificName: {
     type: String,
-    required: true,
+    required: [true, 'A scientific name is required'],
   },
   imageUrl: {
     type: String,
@@ -20,6 +20,16 @@ const plantSchema = new mongoose.Schema({
   careGuide: {
     type: String,
     required: false,
+  },
+  createdAt: {
+    type: String,
+    default: Date.now,
+    required: [true, 'A timestamp for createdAt is needed to submit.'],
+  },
+  updatedAt: {
+    type: String,
+    default: Date.now,
+    required: [true, 'A timestamp for createdAt is needed to submit.'],
   },
 });
 
