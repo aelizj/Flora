@@ -1,4 +1,4 @@
-import HttpError from '../models/httpError';
+import HttpError from '../middleware/httpError';
 import Plant from '../models/plant';
 
 // Fetches all plant guides from the database
@@ -15,8 +15,9 @@ const getPlants = async (req, res, next) => {
 const createPlant = async (req, res, next) => {
   try {
     const plant = await Plant.create(req.body.plant);
-    const result = await Plant.find({ id: plant._id }, 'commonName scientificName _id createdAt updatedAt');
-    res.json(result);
+    await Plant.find({ _id: plant._id }, 'commonName scientificName _id createdAt updatedAt')
+      .then((result) => res.json(result))
+      .catch((err) => next(new HttpError(`Error retrieving the newly created plant: ${err.message}`, 500)));
   } catch (err) {
     next(new HttpError('Creating plant failed, please try again', 503));
   }
