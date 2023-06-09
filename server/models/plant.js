@@ -33,5 +33,5 @@ const PlantSchema = new mongoose.Schema({
   },
 });
 
-const Plant = mongoose.model('plant', PlantSchema);
+const Plant = mongoose.model('Plant', PlantSchema);
 export default Plant;
