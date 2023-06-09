@@ -2,11 +2,11 @@
   "name": "flora-server",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "/server/index.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "node index.js",
-    "server": "nodemon index.js",
+    "start": "node ./server/index",
+    "server": "nodemon ./server/index",
     "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,7 +27,9 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.1.0"
+    "mongoose": "^7.1.0",
+    "node": "20.2.0",
+    "npm": "9.6.7"
   },
   "devDependencies": {
     "concurrently": "^8.1.0",
@@ -40,8 +42,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "node": "20.2.0",
-    "nodemon": "^2.0.22",
-    "npm": "9.6.7"
+    "nodemon": "^2.0.22"
   }
 }
