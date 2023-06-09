@@ -22,7 +22,7 @@ const plantsSlice = createSlice({
   name: 'plants',
   initialState: {
     loading: false,
-    plants: getPlants(),
+    plantsArray: [],
     error: null,
   },
   reducers: {},
@@ -33,12 +33,12 @@ const plantsSlice = createSlice({
       })
       .addCase(getPlants.fulfilled, (state, action) => {
         state.loading = false;
-        state.plants = action.payload;
+        state.plantsArray = [...action.payload];
         state.error = null;
       })
       .addCase(getPlants.rejected, (state, action) => {
         state.loading = false;
-        state.plants = [];
+        state.plantsArray = [];
         state.error = action.error.code;
       })
       .addCase(createPlant.pending, (state) => {
@@ -46,12 +46,11 @@ const plantsSlice = createSlice({
       })
       .addCase(createPlant.fulfilled, (state, action) => {
         state.loading = false;
-        state.plants = [...state.plants, action.payload]
-        state.error = null;
+        state.plantsArray = [...state.plantsArray, action.payload];
       })
       .addCase(createPlant.rejected, (state, action) => {
         state.loading = false;
-        state.plants = [...state];
+        state.plantsArray = [...state.plantsArray];
         state.error = action.error.code;
       });
   }

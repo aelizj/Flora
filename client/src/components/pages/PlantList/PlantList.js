@@ -7,7 +7,7 @@ import { Container, Grid, Typography } from '@mui/material';
 
 const PlantList = () => {
   const dispatch = useDispatch();
-  const { plantsList, loading, error } = useSelector(state => state.plants);
+  const { loading, plantsArray, error } = useSelector(state => state.plants);
 
   useEffect(() => {
     dispatch(getPlants());
@@ -23,7 +23,7 @@ const PlantList = () => {
       </Typography>
       <div className="plant-grid">
         <Grid container spacing={0}>
-            {plantsList && plantsList.map(p => (
+            {plantsArray && plantsArray.map(p => (
               <Grid item xs={4} key={p.id}>
                 <PlantCard plant={p}/>
               </Grid>
