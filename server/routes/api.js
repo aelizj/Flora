@@ -1,5 +1,5 @@
 import express from 'express';
-import { getPlants, createPlant } from '../controllers/plantsController';
+import { getPlants, createPlant } from '../controllers/plantsController.js';
 
 const router = express.Router();
 

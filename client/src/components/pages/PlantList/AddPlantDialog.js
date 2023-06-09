@@ -1,4 +1,7 @@
-import * as React from 'react';
+import React, { useEffect,useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createPlant } from '../../../store/features/plants';
+
 import {
   Box,
   Button,
@@ -12,7 +15,18 @@ import {
  } from "@mui/material";
 
 const AddPlantDialog = () => {
+  const dispatch = useDispatch();
+  const { plantsList, loading, error } = useSelector(state => state.plants);
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  console.log(plantsList)
+
+  const [newPlant, setNewPlant] = useState({
+    commonName: '',
+    scientificName: '',
+    imageUrl: '',
+    description: '',
+    careGuide: '',
+  });
 
   const handleClickOpenDialog = () => {
     setDialogOpen(true);
@@ -22,6 +36,15 @@ const AddPlantDialog = () => {
     setDialogOpen(false);
   };
 
+  const handleInputChange = (e) => {
+    setNewPlant({ ...newPlant, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    dispatch(createPlant(newPlant));
+    handleCloseDialog();
+  };
+
   return (
     <Box sx={{
       display: 'flex',
@@ -29,7 +52,7 @@ const AddPlantDialog = () => {
       justifyContent: 'center',
       p: 4
     }}>
-       <Button
+      <Button
          variant="contained"
          color="secondary"
          onClick={handleClickOpenDialog}
@@ -52,8 +75,10 @@ const AddPlantDialog = () => {
         <DialogTitle>
           <Typography variant='h5' color="secondary" sx={{ fontWeight: 500}}>
             New Plant
-          </Typography></DialogTitle>
-          <DialogContent>
+          </Typography>
+        </DialogTitle>
+
+        <DialogContent>
             <DialogContentText sx={{ paddingBottom: 1 }}>
               To add a plant care guide to this page, fill out the form below.
             </DialogContentText>
@@ -61,6 +86,8 @@ const AddPlantDialog = () => {
             <TextField // common name
               id="commonName"
               label="Common Name"
+              onChange={handleInputChange}
+              value={newPlant.commonName}
               autoFocus
               required
               fullWidth
@@ -74,6 +101,8 @@ const AddPlantDialog = () => {
             <TextField // scientific name
               id="scientificName"
               label="Scientific Name"
+              onChange={handleInputChange}
+              value={newPlant.scientificName}
               autoFocus
               required
               fullWidth
@@ -87,6 +116,8 @@ const AddPlantDialog = () => {
             <TextField // imageUrl
               id="imageUrl"
               label="Image URL"
+              onChange={handleInputChange}
+              value={newPlant.imageUrl}
               autoFocus
               fullWidth
               margin="dense"
@@ -98,6 +129,8 @@ const AddPlantDialog = () => {
             <TextField // description
               id="description"
               label="Description"
+              onChange={handleInputChange}
+              value={newPlant.description}
               autoFocus
               multiline
               fullWidth
@@ -112,6 +145,8 @@ const AddPlantDialog = () => {
             <TextField // care guide
               id="careGuide"
               label="Care Guide"
+              onChange={handleInputChange}
+              value={newPlant.careGuide}
               autoFocus
               multiline
               fullWidth
@@ -123,11 +158,11 @@ const AddPlantDialog = () => {
               size="small"
             />
         </DialogContent>
+
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
           <Button onClick={handleCloseDialog}>Save</Button>
-          <Button onClick={handleCloseDialog}>Submit</Button>
-
+          <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
     </Box>

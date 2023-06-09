@@ -1,38 +1,60 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getPlants } from '../../lib/apiClient';
+import { getPlants as apiGetPlants } from '../../lib/apiClient';
+import {createPlant as apiCreatePlant} from '../../lib/apiClient';
 
-export const fetchPlants = createAsyncThunk(
-  'plants/fetchPlants',
+export const getPlants = createAsyncThunk(
+  'plants/getPlants',
   async() => {
-    const response = await getPlants();
-    return response.data;
+    const response = await apiGetPlants();
+    return response;
   }
 );
 
-const plantSlice = createSlice({
+export const createPlant = createAsyncThunk(
+  'plants/createPlant',
+  async(newPlant) => {
+    const response = await apiCreatePlant(newPlant);
+    return response;
+  }
+)
+
+const plantsSlice = createSlice({
   name: 'plants',
   initialState: {
     loading: false,
-    plantsList: [],
-    error: null
+    plants: getPlants(),
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPlants.pending, (state) => {
+      .addCase(getPlants.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchPlants.fulfilled, (state, action) => {
+      .addCase(getPlants.fulfilled, (state, action) => {
         state.loading = false;
-        state.plantsList = action.payload;
+        state.plants = action.payload;
         state.error = null;
       })
-      .addCase(fetchPlants.rejected, (state, action) => {
+      .addCase(getPlants.rejected, (state, action) => {
         state.loading = false;
-        state.plantsList = [];
-        state.error = action.error.code.message;
+        state.plants = [];
+        state.error = action.error.code;
+      })
+      .addCase(createPlant.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(createPlant.fulfilled, (state, action) => {
+        state.loading = false;
+        state.plants = [...state.plants, action.payload]
+        state.error = null;
+      })
+      .addCase(createPlant.rejected, (state, action) => {
+        state.loading = false;
+        state.plants = [...state];
+        state.error = action.error.code;
       });
   }
 });
 
-export default plantSlice.reducer;
+export default plantsSlice.reducer;

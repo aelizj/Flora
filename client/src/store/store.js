@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import plantsReducer from './reducers/plantsReducer';
+import plantsReducer from './features/plants';
 
 const store = configureStore({
   reducer: {

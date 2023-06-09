@@ -19,6 +19,7 @@
     "rules": {
         "no-console": "off",
         "import/no-extraneous-dependencies": "warn",
-        "no-underscore-dangle": "off"
+        "no-underscore-dangle": "off",
+        "import/extensions": "off"
     }
 }

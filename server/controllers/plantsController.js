@@ -1,10 +1,10 @@
-import HttpError from '../utils/httpError';
-import Plant from '../models/plant';
+import HttpError from '../utils/httpError.js';
+import Plant from '../models/plant.js';
 
 // Fetches all plant guides from the database
 const getPlants = async (req, res, next) => {
   try {
-    const plants = await Plant.find({});
+    const plants = await Plant.find({}, 'commonName _id scientificName imageUrl createdAt updatedAt');
     res.json({ plants });
   } catch (err) {
     next(new HttpError('Failed to fetch plants', 500));
