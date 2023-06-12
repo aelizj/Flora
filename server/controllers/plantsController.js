@@ -29,11 +29,11 @@ const getPlantById = async (req, res, next) => {
   try {
     const plant = await Plant.findById(id);
     if (!plant) {
-      return next(new HttpError('Could not find plant with the provided id.', 404));
+      next(new HttpError('Could not find plant with the provided id.', 404));
     }
-    return res.json({ plant });
+    res.json({ plant });
   } catch (err) {
-    return next(new HttpError('Something went wrong, please try again', 500));
+    next(new HttpError('Something went wrong, please try again', 500));
   }
 };
 
