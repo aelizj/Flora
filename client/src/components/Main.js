@@ -1,16 +1,17 @@
-import { drawerWidth } from '../constants/UiValues';
 import React from 'react';
-import { styled } from '@mui/material/styles';
 import { Routes, Route } from 'react-router-dom';
-import Container from '@mui/material/Container';
+import { drawerWidth } from '../constants/UiValues';
+import { styled } from '@mui/material/styles';
+import Container    from '@mui/material/Container';
+import Community    from './pages/Community/Community';
 import DrawerHeader from './ui/DrawerHeader';
-import Home from './pages/Home/Home';
-import Profile from './pages/Profile/Profile';
-import PlantList from './pages/PlantList/PlantList';
-import PlantInfo from './pages/PlantInfo/PlantInfo';
-import Community from './pages/Community/Community';
-import Events from './pages/Events/Events';
-import Footer from './ui/Footer';
+import Events       from './pages/Events/Events';
+import Footer       from './ui/Footer';
+import Home         from './pages/Home/Home';
+import PlantInfo    from './pages/PlantInfo/PlantInfo';
+import PlantList    from './pages/PlantList/PlantList';
+import Plant        from './pages/PlantList/Plant';
+import Profile      from './pages/Profile/Profile';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -36,12 +37,13 @@ const MainComponent = ({ drawerOpen, theme }) => (
     <DrawerHeader />
     <Container maxWidth="100%" disableGutters >
       <Routes>
-        <Route path="/"          element={<Home />} />
-        <Route path="/profile"   element={<Profile />} />
-        <Route path="/plants"    element={<PlantList />} />
-        <Route path="/basics"    element={<PlantInfo />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/events"    element={<Events />} />
+        <Route path="/"           element={<Home />} />
+        <Route path="/community"  element={<Community />} />
+        <Route path="/events"     element={<Events />} />
+        <Route path="/basics"     element={<PlantInfo />} />
+        <Route path="/plants"     element={<PlantList />} />
+        <Route path="/plants/:id" element={<Plant />} />
+        <Route path="/profile"    element={<Profile />} />
       </Routes>
       <Footer />
     </Container>
