@@ -28,8 +28,8 @@ const createPlant = async (newPlant) => {
 
 const getPlantById = async (id) => {
   try {
-    const response = await apiClient.get(`/plants/${id}`);
-    return response.data.Plant;
+    const response = await apiClient.get(`${PLANTS_INDEX_URL}/${id}`);
+    return response.data.plant;
   } catch (err) {
     throw(err);
   }
