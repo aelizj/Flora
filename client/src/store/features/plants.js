@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getPlants as apiGetPlants } from '../../lib/apiClient';
-import {createPlant as apiCreatePlant} from '../../lib/apiClient';
+import { createPlant as apiCreatePlant } from '../../lib/apiClient';
 
 export const getPlants = createAsyncThunk(
   'plants/getPlants',
@@ -16,7 +16,7 @@ export const createPlant = createAsyncThunk(
     const response = await apiCreatePlant(newPlant);
     return response;
   }
-)
+);
 
 const plantsSlice = createSlice({
   name: 'plants',
