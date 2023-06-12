@@ -23,4 +23,18 @@ const createPlant = async (req, res, next) => {
   }
 };
 
-export { getPlants, createPlant };
+// Fetches a single plant guide from the database by id
+const getPlantById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const plant = await Plant.findById(id);
+    if (!plant) {
+      return next(new HttpError('Could not find plant with the provided id.', 404));
+    }
+    return res.json({ plant });
+  } catch (err) {
+    return next(new HttpError('Something went wrong, please try again', 500));
+  }
+};
+
+export { getPlants, createPlant, getPlantById };
