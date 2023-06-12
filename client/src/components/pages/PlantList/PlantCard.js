@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -21,7 +22,7 @@ const PlantCard = ({ plant }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 500 }}>
-            {plant.commonName}
+            <Link to={`/plants/${plant._id}`}>{plant.commonName}</Link>
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
             {plant.scientificName}

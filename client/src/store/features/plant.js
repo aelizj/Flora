@@ -13,7 +13,7 @@ const plantSlice = createSlice({
   name: 'plant',
   initialState: {
     loading: false,
-    plantObj: {},
+    plant: {},
     error: null,
   },
   reducers: {},
@@ -24,12 +24,12 @@ const plantSlice = createSlice({
       })
       .addCase(getPlantById.fulfilled, (state, action) => {
         state.loading = false;
-        state.plantObj = action.payload;
+        state.plant = action.payload;
         state.error = null;
       })
       .addCase(getPlantById.rejected, (state, action) => {
         state.loading = false;
-        state.plantObj = {};
+        state.plant = {};
         state.error = action.error.code;
       });
   }
