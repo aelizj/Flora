@@ -6,7 +6,7 @@ const PlantInfo = () => {
   return (
     <Container sx={{ p: 2 }}>
       <Typography variant="h2" color="secondary">
-        Profile
+        Plant Basics
       </Typography>
     </Container>
   );

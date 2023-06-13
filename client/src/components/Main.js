@@ -33,7 +33,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 );
 
 const MainComponent = ({ drawerOpen, theme }) => (
-  <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}  >
+  <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}>
     <DrawerHeader />
     <Container maxWidth="100%" disableGutters >
       <Routes>
