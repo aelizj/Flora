@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
   plantCollection: {
     type: Array,
     default: [],
-    required : false,
+    required: false,
   },
   wishlist: {
     type: Array,
