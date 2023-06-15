@@ -1,10 +1,14 @@
 import express from 'express';
+
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import passport from 'passport';
+import passportJWT, { ExtractJwt } from 'passport-jwt';
 import apiRoutes from './routes/api.js';
+import User from './models/user.js';
 
 dotenv.config();
 
@@ -12,6 +16,26 @@ const app = express();
 const port = process.env.PORT || 5001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+app.use(passport.initialize());
+
+const JwtStrategy = passportJWT.Strategy;
+
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = process.env.JWT_SECRET;
+
+passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
+  User.findOne({ id: jwtPayload.sub }, (err, user) => {
+    if (err) {
+      return done(err, false);
+    }
+    if (user) {
+      return done(null, user);
+    }
+    return done(null, false);
+  });
+}));
 
 app.use(cors());
 app.use(express.static(`${__dirname}/public`));
@@ -33,10 +57,9 @@ mongoose
 app.use((err, req, res, next) => {
   console.error(err);
   if (res.headersSent) {
-    next(err);
-    return;
+    return next(err);
   }
-  res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
+  return res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
 });
 
 app.listen(port, () => {
