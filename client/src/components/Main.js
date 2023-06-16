@@ -8,9 +8,11 @@ import DrawerHeader from './ui/DrawerHeader';
 import Events       from './pages/Events/Events';
 import Footer       from './ui/Footer';
 import Home         from './pages/Home/Home';
+import Login        from './ui/Login';
 import PlantInfo    from './pages/PlantInfo/PlantInfo';
 import PlantList    from './pages/PlantList/PlantList';
 import Plant        from './pages/PlantList/Plant';
+import PrivateRoute from './ui/PrivateRoute';
 import Profile      from './pages/Profile/Profile';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -38,12 +40,16 @@ const MainComponent = ({ drawerOpen, theme }) => (
     <Container maxWidth="100%" disableGutters >
       <Routes>
         <Route path="/"           element={<Home />} />
-        <Route path="/community"  element={<Community />} />
-        <Route path="/events"     element={<Events />} />
+        <Route path="login"       element={<Login />} />
         <Route path="/basics"     element={<PlantInfo />} />
         <Route path="/plants"     element={<PlantList />} />
         <Route path="/plants/:id" element={<Plant />} />
-        <Route path="/profile"    element={<Profile />} />
+        <Route path="/events"     element={<Events />} />
+        <Route path="/community"  element={<Community />} />
+
+        <Route path="/profile" element={<PrivateRoute />} >
+          <Route index element={<Profile />} />
+        </Route>
       </Routes>
       <Footer />
     </Container>

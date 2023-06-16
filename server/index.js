@@ -20,7 +20,6 @@ const __dirname = dirname(__filename);
 app.use(passport.initialize());
 
 const JwtStrategy = passportJWT.Strategy;
-
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWT_SECRET;
