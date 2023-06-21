@@ -1,4 +1,6 @@
-import * as React from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../store/features/auth';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,13 +15,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 
 export default function Login() {
+  const dispatch = useDispatch();
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get('username'),
+    const loginData = {
+      email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    dispatch(loginUser(loginData));
   };
 
   return (
@@ -60,10 +67,10 @@ export default function Login() {
                 margin="normal"
                 required
                 fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
                 autoFocus
               />
               <TextField
