@@ -2,9 +2,11 @@ import jwt from 'jsonwebtoken';
 import HttpError from './httpError.js';
 
 const createTokenAndSetCookie = async (user, res, next) => {
-  try {
-    const payload = { id: user.id, name: user.name };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 });
+  const payload = { id: user._id };
+  jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+    if (err) {
+      return next(new HttpError('Error creating token', 500));
+    }
 
     res.cookie('token', token, {
       httpOnly: true,
@@ -12,10 +14,8 @@ const createTokenAndSetCookie = async (user, res, next) => {
       maxAge: 3600000,
     });
 
-    return res.json({ success: true });
-  } catch (err) {
-    return next(new HttpError('Error occurred during token creation.', 500));
-  }
+    return res.json({ success: true, userId: user._id });
+  });
 };
 
 export default createTokenAndSetCookie;
