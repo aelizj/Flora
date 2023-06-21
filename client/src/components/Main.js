@@ -39,14 +39,20 @@ const MainComponent = ({ drawerOpen, theme }) => (
     <DrawerHeader />
     <Container maxWidth="100%" disableGutters >
       <Routes>
+        {/* Unprotected routes */}
         <Route path="/"           element={<Home />} />
         <Route path="login"       element={<Login />} />
         <Route path="/basics"     element={<PlantInfo />} />
         <Route path="/plants"     element={<PlantList />} />
         <Route path="/plants/:id" element={<Plant />} />
-        <Route path="/events"     element={<Events />} />
-        <Route path="/community"  element={<Community />} />
 
+        {/* Protected routes */}
+        <Route path="/events"     element={<PrivateRoute />} >
+          <Route index element={<Events />} />
+        </Route>
+        <Route path="/community"  element={<PrivateRoute />} >
+          <Route index element={<Community />} />
+        </Route>
         <Route path="/profile" element={<PrivateRoute />} >
           <Route index element={<Profile />} />
         </Route>
