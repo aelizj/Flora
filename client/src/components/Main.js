@@ -4,16 +4,16 @@ import { drawerWidth } from '../constants/UiValues';
 import { styled } from '@mui/material/styles';
 import Container    from '@mui/material/Container';
 import Community    from './pages/Community/Community';
-import DrawerHeader from './ui/DrawerHeader';
 import Events       from './pages/Events/Events';
-import Footer       from './ui/Footer';
 import Home         from './pages/Home/Home';
-import Login        from './ui/Login';
 import PlantInfo    from './pages/PlantInfo/PlantInfo';
 import PlantList    from './pages/PlantList/PlantList';
 import Plant        from './pages/PlantList/Plant';
-import PrivateRoute from './ui/PrivateRoute';
 import Profile      from './pages/Profile/Profile';
+import DrawerHeader from './ui/DrawerHeader';
+import Footer       from './ui/Footer';
+import Login        from './ui/Login';
+import PrivateRoute from './ui/PrivateRoute';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -44,9 +44,11 @@ const MainComponent = ({ drawerOpen, theme }) => (
         <Route path="login"       element={<Login />} />
         <Route path="/basics"     element={<PlantInfo />} />
         <Route path="/plants"     element={<PlantList />} />
-        <Route path="/plants/:id" element={<Plant />} />
 
         {/* Protected routes */}
+        <Route path="/plants/:id" element={<PrivateRoute />} >
+          <Route index element={<Plant />} />
+        </Route>
         <Route path="/events"     element={<PrivateRoute />} >
           <Route index element={<Events />} />
         </Route>
