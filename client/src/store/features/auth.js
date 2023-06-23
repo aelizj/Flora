@@ -1,18 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginUser as apiLoginUser, registerUser as apiRegisterUser } from '../../lib/apiClient';
-import jwt_decode from 'jwt-decode';
+import { loginUser as apiLoginUser, registerUser as apiRegisterUser, validateToken as apiValidateToken } from '../../lib/apiClient';
 
 export function loadAuthState() {
-  return (dispatch) => {
-    const isAuthenticated = document.cookie
+  return async (dispatch) => {
+    const authCookie = document.cookie
       .split('; ')
-      .find((row) => row.startsWith('isAuthenticated'))
-      .split('=')[1];
+      .find((row) => row.startsWith('isAuthenticated'));
 
-    if (isAuthenticated) {
-      dispatch(setCurrentUser());
+    if (authCookie) {
+      const isAuthenticated = authCookie.split('=')[1];
+      if (isAuthenticated) {
+        try {
+          const response = await apiValidateToken();
+          console.log(response);
+          dispatch(setCurrentUser(response));
+        } catch (error) {
+          console.log('Error validating token', error);
+        }
+      }
     }
-  }
+  };
 }
 
 export const loginUser = createAsyncThunk(
@@ -63,10 +70,9 @@ export const authSlice = createSlice({
        state.error = null;
      })
      .addCase(loginUser.fulfilled, (state, action) => {
-      const { token } = action.payload;
-      const decoded = jwt_decode(token);
+      const { user } = action.payload;
+      state.user = user;
       state.isAuthenticated = true;
-      state.user = decoded;
       state.loading = false;
       state.error = null;
      })
@@ -80,11 +86,9 @@ export const authSlice = createSlice({
       state.error = null;
      })
      .addCase(registerUser.fulfilled, (state, action) => {
-      const { token } = action.payload;
-      localStorage.setItem('jwtToken', token);
-      const decoded = jwt_decode(token);
+      const { user } = action.payload;
+      state.user = user;
       state.isAuthenticated = true;
-      state.user = decoded;
       state.loading = false;
       state.error = null;
      })
@@ -97,5 +101,4 @@ export const authSlice = createSlice({
 });
 
 export const { setCurrentUser, logoutUser } = authSlice.actions;
-
 export default authSlice.reducer;

@@ -1,11 +1,20 @@
 import axios from "axios";
-import { LOGIN_USER_URL, REGISTER_USER_URL, PLANTS_INDEX_URL } from "../constants/ApiRoutes";
+import { VALIDATE_TOKEN_URL, LOGIN_USER_URL, REGISTER_USER_URL, PLANTS_INDEX_URL } from "../constants/ApiRoutes";
 
 const API_BASE_URL = 'http://localhost:5001';
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
 });
+
+const validateToken = async () => {
+  try {
+    const response = await apiClient.get(VALIDATE_TOKEN_URL);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 const loginUser = async (loginData) => {
   try {
@@ -52,4 +61,4 @@ const getPlantById = async (id) => {
   }
 };
 
-export { loginUser, registerUser, getPlants, createPlant, getPlantById };
+export { validateToken, loginUser, registerUser, getPlants, createPlant, getPlantById };

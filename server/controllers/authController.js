@@ -1,7 +1,30 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
+
+// Validates user token
+const validateToken = async (req, res, next) => {
+  const { token } = req.cookies;
+
+  if (!token) {
+    return next(new HttpError('No token provided', 401));
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return res.json(user);
+  } catch (error) {
+    return next(new HttpError('Invalid token', 401));
+  }
+};
 
 // Adds new user to database
 const registerUser = async (req, res, next) => {
@@ -56,4 +79,4 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-export { registerUser, loginUser };
+export { validateToken, registerUser, loginUser };
