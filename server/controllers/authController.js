@@ -6,13 +6,15 @@ import createTokenAndSetCookie from '../utils/jwtHelper.js';
 
 // Validates user token
 const validateToken = async (req, res, next) => {
-  const { token } = req.cookies;
+  console.log('Inside validateToken function');
+  const token = req.cookies;
+  console.log(token);
 
   if (!token) {
     return next(new HttpError('No token provided', 401));
   }
-
   try {
+    console.log('Inside try block of validateToken');
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id);
 
@@ -28,6 +30,8 @@ const validateToken = async (req, res, next) => {
 
 // Adds new user to database
 const registerUser = async (req, res, next) => {
+  console.log('Inside registerUser function');
+
   const existingUser = await User.findOne({ email: req.body.email });
   if (existingUser) return next(new HttpError('That email is already in use.', 409));
 
@@ -58,7 +62,10 @@ const registerUser = async (req, res, next) => {
 
 // Validates entered user credentials
 const loginUser = async (req, res, next) => {
+  console.log('Inside loginUser function');
+
   const { email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (!user) return next(new HttpError('No account associated with this email address exists.', 404));

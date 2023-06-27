@@ -8,8 +8,11 @@ const apiClient = axios.create({
 });
 
 const validateToken = async () => {
+  console.log('inside client validateToken function')
+
   try {
     const response = await apiClient.get(VALIDATE_TOKEN_URL);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;
@@ -17,6 +20,8 @@ const validateToken = async () => {
 };
 
 const loginUser = async (loginData) => {
+  console.log('inside client loginUser function')
+
   try {
     const response = await apiClient.post(LOGIN_USER_URL, loginData);
     return response.data;
@@ -35,6 +40,8 @@ const registerUser = async (userData) => {
 };
 
 const getPlants = async () => {
+  console.log('inside client getPlants function')
+
   try {
     const response = await apiClient.get(PLANTS_INDEX_URL);
     return response.data.plants;
@@ -53,6 +60,7 @@ const createPlant = async (newPlant) => {
 };
 
 const getPlantById = async (id) => {
+  console.log('inside client getPlantById function')
   try {
     const response = await apiClient.get(`${PLANTS_INDEX_URL}/${id}`);
     return response.data.plant;

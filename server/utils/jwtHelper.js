@@ -2,8 +2,10 @@ import jwt from 'jsonwebtoken';
 import HttpError from './httpError.js';
 
 const createTokenAndSetCookie = async (user, res, next) => {
+  console.log('Inside createTokenAndSetCookie function');
   const payload = { id: user._id };
   jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+    console.log(token);
     if (err) {
       return next(new HttpError('Error creating token', 500));
     }

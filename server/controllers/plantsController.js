@@ -3,6 +3,7 @@ import Plant from '../models/plant.js';
 
 // Fetches all plant guides from the database
 const getPlants = async (req, res, next) => {
+  console.log('Inside getPlants function');
   try {
     const plants = await Plant.find({}, 'commonName _id scientificName imageUrl createdAt updatedAt');
     res.json({ plants });
@@ -13,6 +14,7 @@ const getPlants = async (req, res, next) => {
 
 // Creates a new plant guide
 const createPlant = async (req, res, next) => {
+  console.log('Inside createPlants function');
   try {
     const plant = await Plant.create(req.body.plant);
     await Plant.find({ _id: plant._id }, 'commonName scientificName _id createdAt updatedAt')
@@ -25,6 +27,7 @@ const createPlant = async (req, res, next) => {
 
 // Fetches a single plant guide from the database by id
 const getPlantById = async (req, res, next) => {
+  console.log('Inside getPlantById function');
   const { id } = req.params;
   try {
     const plant = await Plant.findById(id);

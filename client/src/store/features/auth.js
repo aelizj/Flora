@@ -2,13 +2,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { loginUser as apiLoginUser, registerUser as apiRegisterUser, validateToken as apiValidateToken } from '../../lib/apiClient';
 
 export function loadAuthState() {
+  console.log('Inside loadAuthState function');
+
   return async (dispatch) => {
     const authCookie = document.cookie
       .split('; ')
       .find((row) => row.startsWith('isAuthenticated'));
+      console.log('has AuthCookie? ' + authCookie)
 
     if (authCookie) {
       const isAuthenticated = authCookie.split('=')[1];
+      console.log('isAuthenticated? ' + isAuthenticated)
       if (isAuthenticated) {
         try {
           const response = await apiValidateToken();
