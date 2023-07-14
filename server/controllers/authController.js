@@ -50,13 +50,6 @@ const registerUser = async (req, res, next) => {
 
   const user = await newUser.save();
 
-  res.cookie('isAuthenticated', 'true', {
-    maxAge: 86400000,
-    httpOnly: false,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-  });
-
   return createTokenAndSetCookie(user, res, next);
 };
 
@@ -72,13 +65,6 @@ const loginUser = async (req, res, next) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new HttpError('Incorrect password.', 400));
-
-    res.cookie('isAuthenticated', 'true', {
-      maxAge: 86400000,
-      httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-    });
 
     return createTokenAndSetCookie(user, res, next);
   } catch (err) {

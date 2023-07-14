@@ -16,7 +16,14 @@ const createTokenAndSetCookie = async (user, res, next) => {
       maxAge: 3600000,
     });
 
-    return res.json({ success: true, user: { id: user._id, username: user.username } });
+    res.cookie('isAuthenticated', 'true', {
+      maxAge: 86400000,
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+    });
+
+    return res.json({ success: true, user: { id: user._id }, token });
   });
 };
 
