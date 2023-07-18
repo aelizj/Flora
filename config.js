@@ -2,6 +2,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
+  cors: {
+    origin: 'http://localhost:3000/',
+    credentials: true
+  },
   jwt: {
     secretOrPublicKey: process.env.JWT_SECRET || 'SetSecretInDotEnv',
     options: {
