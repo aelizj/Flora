@@ -55,7 +55,7 @@ passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
     return done(null, false);
     // or you could create a new account
   } catch (error) {
-    console.err(error);
+    return console.err(error);
   }
 }));
 
