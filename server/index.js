@@ -6,10 +6,11 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import passport from 'passport';
-import passportJwtCookieCombo from 'passport-jwt-cookiecombo';
-// import passportJWT, { ExtractJwt } from 'passport-jwt';
+// import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
+import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
+import config from '../config';
 import apiRoutes from './routes/api.js';
-import User from './models/user.js';
+// import User from './models/user.js';
 
 dotenv.config();
 
@@ -18,14 +19,19 @@ const port = process.env.PORT || 5001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// const cookieExtractor = (req) => {
+//   const token = null;
+//   if (req && req.cookies) {
+//     token = req.cookies['jwt'];
+//   }
 
-// const JwtStrategy = passportJWT.Strategy;
+//   return token;
+// }
 // const opts = {};
-// opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+// opts.jwtFromRequest = cookieExtractor;
 // opts.secretOrKey = process.env.JWT_SECRET;
 
 // passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
-//   console.log(jwtPayload);
 //   User.findOne({ id: jwtPayload.sub }, (err, user) => {
 //     if (err) {
 //       return done(err, false);
@@ -33,9 +39,19 @@ const __dirname = dirname(__filename);
 //     if (user) {
 //       return done(null, user);
 //     }
+
 //     return done(null, false);
+//     // or you could create a new account
 //   });
 // }));
+
+passport.use(new PassportJwtCookieCombo({
+  secretOrPublicKey: config.jwt.secretOrPublicKey,
+  jwtCookieName: 'jwt',
+}, (payload, done) => {
+  console.log(payload);
+  return done(null, payload.user);
+}));
 
 app.use(cookieParser());
 app.use(passport.initialize());
