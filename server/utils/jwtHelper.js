@@ -14,7 +14,6 @@ const createTokenAndSetCookie = async (user, res, next) => {
     res.cookie('jwt', token, config.jwt.jwtCookie);
     res.cookie('isAuthenticated', 'true', config.jwt.isAuthedCookie);
 
-    console.log(res);
     return res.json({ success: true, user: { _id: user._id }, jwt: token });
   });
 };

@@ -6,11 +6,11 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import passport from 'passport';
-// import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
+import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
 import config from '../config.js';
 import apiRoutes from './routes/api.js';
-// import User from './models/user.js';
+import User from './models/user.js';
 
 dotenv.config();
 
@@ -19,31 +19,40 @@ const port = process.env.PORT || 5001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// const cookieExtractor = (req) => {
-//   const token = null;
-//   if (req && req.cookies) {
-//     token = req.cookies['jwt'];
-//   }
+const cookieExtractor = (req) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies['jwt'];
+  }
 
-//   return token;
-// }
-// const opts = {};
-// opts.jwtFromRequest = cookieExtractor;
-// opts.secretOrKey = process.env.JWT_SECRET;
+  return token;
+};
 
-// passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
-//   User.findOne({ id: jwtPayload.sub }, (err, user) => {
-//     if (err) {
-//       return done(err, false);
-//     }
-//     if (user) {
-//       return done(null, user);
-//     }
+const opts = {};
+opts.jwtFromRequest = cookieExtractor;
+opts.secretOrKey = process.env.JWT_SECRET;
 
-//     return done(null, false);
-//     // or you could create a new account
-//   });
-// }));
+passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
+  console.log('using jwtStrat');
+  console.log(jwtPayload);
+
+  try {
+    const user = async () => {
+      const u = await User.findOne({ _id: jwtPayload.sub });
+      console.log(u);
+      return u;
+    };
+
+    if (user) {
+      return done(null, user);
+    }
+
+    return done(null, false);
+    // or you could create a new account
+  } catch (error) {
+    console.err(error);
+  }
+}));
 
 passport.use(new PassportJwtCookieCombo({
   secretOrPublicKey: config.jwt.secretOrPublicKey,
@@ -82,12 +91,4 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
-});
-
-app.get('/', (req) => {
-  // Cookies that have not been signed
-  console.log('Cookies: ', req.cookies);
-
-  // Cookies that have been signed
-  console.log('Signed Cookies: ', req.signedCookies);
 });
