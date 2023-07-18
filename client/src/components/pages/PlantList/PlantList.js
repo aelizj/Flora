@@ -25,8 +25,8 @@ const PlantList = () => {
         <Grid container spacing={0}>
             {plantsArray && plantsArray.map(p => (
               <Grid item xs={4} key={p.id}>
-                <PlantCard plant={p}/>
-              </Grid>
+                  <PlantCard plant={p}/>
+                </Grid>
             ))}
         </Grid>
       </div>

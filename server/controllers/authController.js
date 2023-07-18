@@ -1,10 +1,46 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import config from '../../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
 
+// Validates user token
+const validateToken = async (req, res, next) => {
+  console.log('Inside validateToken function');
+
+  const token = req.cookies['jwt'];
+  if (!token) {
+    return next(new HttpError('No token provided', 401));
+  }
+  try {
+    let decoded;
+    try {
+      decoded = jwt.verify(token, config.jwt.secretOrPublicKey, {
+        ignoreExpiration: true,
+      });
+      console.log('decoded: ', decoded);
+    } catch (error) {
+      console.error('Token decode error: ', error);
+    }
+
+    const user = decoded ? await User.findById(decoded._id) : null;
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    console.log(user);
+    return res.json(user);
+  } catch (error) {
+    console.error('Token verification error: ', error);
+    return next(new HttpError('Invalid token', 401));
+  }
+};
+
 // Adds new user to database
 const registerUser = async (req, res, next) => {
+  console.log('Inside registerUser function');
+
   const existingUser = await User.findOne({ email: req.body.email });
   if (existingUser) return next(new HttpError('That email is already in use.', 409));
 
@@ -22,12 +58,16 @@ const registerUser = async (req, res, next) => {
   newUser.password = await bcrypt.hash(newUser.password, salt);
 
   const user = await newUser.save();
+
   return createTokenAndSetCookie(user, res, next);
 };
 
 // Validates entered user credentials
 const loginUser = async (req, res, next) => {
+  console.log('Inside loginUser function');
+
   const { email, password } = req.body;
+
   try {
     const user = await User.findOne({ email });
     if (!user) return next(new HttpError('No account associated with this email address exists.', 404));
@@ -41,4 +81,4 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-export { registerUser, loginUser };
+export { validateToken, registerUser, loginUser };

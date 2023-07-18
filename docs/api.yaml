@@ -1,0 +1,116 @@
+openapi: '3.0.0'
+
+info:
+  version: '0.0.1'
+  title: 'Flora'
+  description: 'API for Flora - a community for plant lovers.'
+
+servers:
+  - url: http://localhost:5001/api
+
+paths:
+  /plants:
+    summary: Represents a collection of plant guides
+    get:
+      operationId: getPlants
+      summary: Get all plant guides
+      responses:
+        '200':
+          description: A dictionary with a `plants` property that contains an array of plant guide objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  plants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Plant'
+        '500':
+          description: Could not fetch plants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      operationId: addPlant
+      summary: Adds a new plant guide
+      responses:
+        '201':
+          description: New plant guide is returned as a JSON object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plant'
+        '503':
+          description: Creation of plant guide failed
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Error'
+
+  /plants/{id}:
+    parameters:
+       - name: id
+         in: path
+         description: Unique identifier of the plant guide
+         required: true
+         schema:
+           $ref: '#/components/schemas/PlantId'
+    get:
+      operationId: getPlant
+      summary: Get a specific plant guide
+      description:
+        This resource represents an individual plant guide in the system.
+        Each plant guide is identified by an alphanumeric `id`.
+      responses:
+        '200':
+          description: Plant guide object with specified `id` is returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plant'
+
+components:
+  schemas:
+    PlantId:
+      description: Unique alphanumeric identifier of a plant guide
+      type: string
+    Plant:
+      type: object
+      required:
+        - _id
+        - commonName
+        - scientificName
+      properties:
+        _id:
+          $ref: '#/components/schemas/PlantId'
+        commonName:
+          type: string
+        scientificName:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        description:
+          type: string
+        careGuide:
+          type: string
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          description: A human readable error message
+          type: string
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+
+security:
+  - ApiKey: []

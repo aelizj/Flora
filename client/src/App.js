@@ -1,5 +1,7 @@
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { loadAuthState } from './store/features/auth';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,6 +16,12 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadAuthState());
+  }, [dispatch]);
+
   const theme = useTheme();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
