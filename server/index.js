@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import passport from 'passport';
-import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
+import { Strategy as JwtStrategy } from 'passport-jwt';
 import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
 import config from '../config.js';
 import apiRoutes from './routes/api.js';
@@ -15,6 +15,11 @@ import User from './models/user.js';
 dotenv.config();
 
 const app = express();
+app.use(cookieParser());
+app.use((req, res, next) => {
+  console.log('Cookies: ', req.cookies);
+  next();
+});
 const port = process.env.PORT || 5001;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -30,16 +35,16 @@ const cookieExtractor = (req) => {
 
 const opts = {};
 opts.jwtFromRequest = cookieExtractor;
-opts.secretOrKey = process.env.JWT_SECRET;
+opts.secretOrKey = config.jwt.secretOrPublicKey;
 
 passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
   console.log('using jwtStrat');
-  console.log(jwtPayload);
+  console.log('jwtPayload: ', jwtPayload);
 
   try {
     const user = async () => {
       const u = await User.findOne({ _id: jwtPayload.sub });
-      console.log(u);
+      console.log('user: ', user);
       return u;
     };
 
@@ -58,13 +63,12 @@ passport.use(new PassportJwtCookieCombo({
   secretOrPublicKey: config.jwt.secretOrPublicKey,
   jwtCookieName: 'jwt',
 }, (payload, done) => {
-  console.log(payload);
+  console.log('payload: ', payload);
   return done(null, payload.user);
 }));
 
-app.use(cookieParser());
 app.use(passport.initialize());
-app.use(cors());
+app.use(cors(config.cors));
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use('/api', apiRoutes);

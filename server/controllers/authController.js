@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import config from '../../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
@@ -7,23 +8,31 @@ import createTokenAndSetCookie from '../utils/jwtHelper.js';
 // Validates user token
 const validateToken = async (req, res, next) => {
   console.log('Inside validateToken function');
-  const token = req.cookies;
-  console.log(token);
 
+  const token = req.cookies['jwt'];
   if (!token) {
     return next(new HttpError('No token provided', 401));
   }
   try {
-    console.log('Inside try block of validateToken');
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findById(decoded.id);
+    let decoded;
+    try {
+      decoded = jwt.verify(token, config.jwt.secretOrPublicKey, {
+        ignoreExpiration: true,
+      });
+      console.log('decoded: ', decoded);
+    } catch (error) {
+      console.error('Token decode error: ', error);
+    }
 
+    const user = decoded ? await User.findById(decoded._id) : null;
     if (!user) {
       throw new Error('User not found');
     }
 
+    console.log(user);
     return res.json(user);
   } catch (error) {
+    console.error('Token verification error: ', error);
     return next(new HttpError('Invalid token', 401));
   }
 };
