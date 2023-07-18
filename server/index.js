@@ -8,7 +8,7 @@ import { dirname } from 'path';
 import passport from 'passport';
 // import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt';
 import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
-import config from '../config';
+import config from '../config.js';
 import apiRoutes from './routes/api.js';
 // import User from './models/user.js';
 
@@ -82,4 +82,12 @@ app.use((err, req, res, next) => {
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
+});
+
+app.get('/', (req) => {
+  // Cookies that have not been signed
+  console.log('Cookies: ', req.cookies);
+
+  // Cookies that have been signed
+  console.log('Signed Cookies: ', req.signedCookies);
 });

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import config from '../../config';
+import config from '../../config.js';
 import HttpError from './httpError.js';
 
 const createTokenAndSetCookie = async (user, res, next) => {

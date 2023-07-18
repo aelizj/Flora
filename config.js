@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-module.exports = {
+const config = {
   jwt: {
     secretOrPublicKey: process.env.JWT_SECRET || 'SetSecretInDotEnv',
     options: {
@@ -20,4 +20,6 @@ module.exports = {
       sameSite: 'lax',
     },
   },
-}
+};
+
+export default config;
