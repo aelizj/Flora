@@ -9,7 +9,7 @@ import createTokenAndSetCookie from '../utils/jwtHelper.js';
 const validateToken = async (req, res, next) => {
   console.log('Inside validateToken function');
 
-  const token = req.cookies['jwt'];
+  const token = req.cookies.jwt;
   if (!token) {
     return next(new HttpError('No token provided', 401));
   }
@@ -19,7 +19,6 @@ const validateToken = async (req, res, next) => {
       decoded = jwt.verify(token, config.jwt.secretOrPublicKey, {
         ignoreExpiration: true,
       });
-      console.log('decoded: ', decoded);
     } catch (error) {
       console.error('Token decode error: ', error);
     }
@@ -64,10 +63,7 @@ const registerUser = async (req, res, next) => {
 
 // Validates entered user credentials
 const loginUser = async (req, res, next) => {
-  console.log('Inside loginUser function');
-
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ email });
     if (!user) return next(new HttpError('No account associated with this email address exists.', 404));

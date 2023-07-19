@@ -16,7 +16,6 @@ export function loadAuthState() {
       if (isAuthenticated) {
         try {
           const response = await apiValidateToken();
-          console.log(response);
           dispatch(setCurrentUser(response));
         } catch (error) {
           console.log('Error validating token', error);
