@@ -1,22 +1,22 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../store/features/auth";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
-import { FormControl, InputLabel, InputAdornment, FilledInput, IconButton} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { loginUser } from "../../store/features/auth";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -29,6 +29,7 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
     const loginData = {
       email: data.get("email"),
@@ -72,22 +73,28 @@ export default function Login() {
               Sign in
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                id="email"
+                label="Email"
+                name="email"
+                autoComplete="email"
+                required
+                fullWidth
+                autoFocus
+                margin="normal"
+              />
 
-              <FormControl fullWidth required margin="normal" variant="filled">
-                <InputLabel htmlFor="email">Email</InputLabel>
-                <FilledInput
-                  id="email"
-                  type="email"
-                  autoComplete="off"
-                />
-              </FormControl>
-
-              <FormControl fullWidth required margin="normal" variant="filled" >
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <FilledInput
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  endAdornment={
+              <TextField
+                id="password"
+                name="password"
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                required
+                fullWidth
+                margin="normal"
+                InputProps={{
+                  endAdornment:
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
@@ -97,19 +104,14 @@ export default function Login() {
                       >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
+                    </InputAdornment>,
+                }}
+              />
 
-              <FormGroup>
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" size="medium"/>}
-                  label="Remember me"
-                  labelPlacement="end"
-                  aria-label="Remember me"
-                />
-              </FormGroup>
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
 
               <Button
                 type="submit"
@@ -120,6 +122,7 @@ export default function Login() {
               >
                 Sign In
               </Button>
+
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
