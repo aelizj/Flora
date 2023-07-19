@@ -22,7 +22,7 @@ const PlantCard = ({ plant }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 500 }}>
-            <Link to={`/plants/${plant._id}`}>{plant.commonName}</Link>
+            <Link to={`/plants/${plant._id}`} style={{ textDecoration: 'none', color: 'dimgrey' }}>{plant.commonName}</Link>
           </Typography>
           <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
             {plant.scientificName}
