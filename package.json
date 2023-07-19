@@ -39,6 +39,7 @@
     "passport-jwt-cookiecombo": "^1.0.5"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object":"7.21.11",
     "concurrently": "^8.1.0",
     "eslint": "^8.40.0",
     "eslint-config-airbnb": "^19.0.4",
