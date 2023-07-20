@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { drawerWidth } from '../constants/UiValues';
 import { styled } from '@mui/material/styles';
@@ -14,6 +15,7 @@ import DrawerHeader from './ui/DrawerHeader';
 import Footer       from './ui/Footer';
 import Login        from './ui/Login';
 import PrivateRoute from './ui/PrivateRoute';
+import Register     from './ui/Register';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -34,34 +36,39 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   }),
 );
 
-const MainComponent = ({ drawerOpen, theme }) => (
-  <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}>
-    <DrawerHeader />
-    <Container maxWidth="100%" disableGutters >
-      <Routes>
-        {/* Unprotected routes */}
-        <Route path="/"           element={<Home />} />
-        <Route path="login"       element={<Login />} />
-        <Route path="/basics"     element={<PlantInfo />} />
-        <Route path="/plants"     element={<PlantList />} />
+const MainComponent = ({ drawerOpen, theme }) => {
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-        {/* Protected routes */}
-        <Route path="/plants/:id" element={<PrivateRoute />} >
-          <Route index element={<Plant />} />
-        </Route>
-        <Route path="/events"     element={<PrivateRoute />} >
-          <Route index element={<Events />} />
-        </Route>
-        <Route path="/community"  element={<PrivateRoute />} >
-          <Route index element={<Community />} />
-        </Route>
-        <Route path="/profile" element={<PrivateRoute />} >
-          <Route index element={<Profile />} />
-        </Route>
-      </Routes>
-      <Footer />
-    </Container>
-  </Main>
-);
+  return (
+    <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}>
+      <DrawerHeader />
+      <Container maxWidth="100%" disableGutters >
+        <Routes>
+          {/* Unprotected routes */}
+          <Route path="/"           element={<Home />} />
+          <Route path="/login"      element={isAuthenticated ? <Home /> : <Login />} />
+          <Route path="/register"   element={isAuthenticated ? <Home /> : <Register />} />
+          <Route path="/basics"     element={<PlantInfo />} />
+          <Route path="/plants"     element={<PlantList />} />
+
+          {/* Protected routes */}
+          <Route path="/plants/:id" element={<PrivateRoute />} >
+            <Route index element={<Plant />} />
+          </Route>
+          <Route path="/events"     element={<PrivateRoute />} >
+            <Route index element={<Events />} />
+          </Route>
+          <Route path="/community"  element={<PrivateRoute />} >
+            <Route index element={<Community />} />
+          </Route>
+          <Route path="/profile" element={<PrivateRoute />} >
+            <Route index element={<Profile />} />
+          </Route>
+        </Routes>
+        <Footer />
+      </Container>
+    </Main>
+  );
+}
 
 export default MainComponent;
