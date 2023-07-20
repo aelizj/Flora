@@ -4,14 +4,17 @@ import { Link as RouterLink } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { Avatar, Grid, TextField, FormControlLabel, Button, Checkbox, Link} from '@mui/material';
+import { Avatar, Grid, TextField, FormControlLabel, Button, Checkbox, Link, InputAdornment, IconButton} from '@mui/material';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { registerUser } from "../../store/features/auth";
-
-
 
 const Register = () => {
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleMouseDownPassword = (event) => event.preventDefault();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,10 +23,12 @@ const Register = () => {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
       email: data.get("email"),
+      username: data.get("username"),
       password: data.get("password"),
     };
 
-    dispatch(registerUser(userData));
+    console.log(userData)
+    // dispatch(registerUser(userData));
   };
 
   return (
@@ -79,13 +84,34 @@ const Register = () => {
                 <TextField
                   required
                   fullWidth
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   name="password"
                   label="Password"
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
-
-
                   autoComplete="new-password"
+                  InputProps={{
+                    endAdornment:
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>,
+                  }}
                 />
               </Grid>
               {/* <Grid item xs={12}>
@@ -105,11 +131,9 @@ const Register = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                  <RouterLink to="/login" >
-                    <Link to="/login"  variant="body1" color="text.secondary">
-                      Already have an account? Sign in
-                    </Link>
-                  </RouterLink>
+                <Link href="/login" underline='hover' variant="body1" color="text.secondary">
+                  Already have an account? Sign in
+                </Link>
               </Grid>
             </Grid>
           </Box>

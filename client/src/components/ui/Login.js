@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -10,6 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
+import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -131,10 +131,9 @@ export default function Login() {
                 </RouterLink> */}
               </Grid>
               <Grid item>
-                <RouterLink to="/register" variant="body2">
+                <Link href="/register" underline='hover' variant="body1" color="text.secondary">
                   {"Don't have an account? Sign Up"}
-
-                </RouterLink>
+                </Link>
               </Grid>
             </Grid>
           </Box>
