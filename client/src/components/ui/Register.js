@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link as RouterLink } from "react-router-dom";
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -104,9 +105,11 @@ const Register = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+                  <RouterLink to="/login" >
+                    <Link to="/login"  variant="body1" color="text.secondary">
+                      Already have an account? Sign in
+                    </Link>
+                  </RouterLink>
               </Grid>
             </Grid>
           </Box>

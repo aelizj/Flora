@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -106,31 +106,35 @@ export default function Login() {
               }}
             />
 
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
 
             <Button
               type="submit"
               fullWidth
               color="primary"
               variant="contained"
-              sx={{ mt: 1, mb: 2 }}
+              sx={{ mt: 2, mb: 2, fontWeight: 600 }}
             >
+              <Typography variant="button">
               Sign In
+
+              </Typography>
             </Button>
 
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                {/* <RouterLink href="#" variant="body2">
                   Forgot password?
-                </Link>
+                </RouterLink> */}
               </Grid>
               <Grid item>
-                <Link to="/register" variant="body2">
+                <RouterLink to="/register" variant="body2">
                   {"Don't have an account? Sign Up"}
-                </Link>
+
+                </RouterLink>
               </Grid>
             </Grid>
           </Box>

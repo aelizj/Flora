@@ -9,6 +9,24 @@ import "@fontsource/unbounded/700.css";
 const testTheme = createTheme({
   typography: {
     htmlFontSize: 16,
+    fontFamily: [
+      '"Instrument Sans"',
+      'sans-serif',
+      'Roboto',
+      'Arial',
+      '"Helvetica Neue"',
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    button: {
+      textTransform: 'none',
+      fontSize: 16,
+      fontWeight: 600
+    },
     drawerLink: {
       fontFamily: '"Unbounded"',
       fontWeight: 400,
@@ -49,20 +67,6 @@ const testTheme = createTheme({
         '"Unbounded"',
       ].join(','),
     },
-    fontFamily: [
-      '"Instrument Sans"',
-      'sans-serif',
-      'Roboto',
-      'Arial',
-      '"Helvetica Neue"',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
-    fontSize: 12,
   },
    palette: {
      primary: {
