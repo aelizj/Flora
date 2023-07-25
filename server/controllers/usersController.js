@@ -38,7 +38,7 @@ const deleteUserById = async (req, res, next) => {
     user.deleteOne();
     return ('User successfully deleted.');
   } catch (err) {
-    next(new HttpError('Something went wrong, please try again', 500));
+    return next(new HttpError('Something went wrong, please try again', 500));
   }
 };
 

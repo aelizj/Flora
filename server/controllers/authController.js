@@ -105,12 +105,17 @@ const logoutUser = async (req, res, next) => {
   }
 
   try {
-
-
+    res.clearCookie('jwt');
+    res.clearCookie('isAuthenticated');
+    return res.send('Successfully logged out!');
   } catch (err) {
     return next(new HttpError(`Error occured during logout: ${err}`, 500));
   }
 };
 
-
-export { validateToken, registerUser, loginUser };
+export {
+  validateToken,
+  registerUser,
+  loginUser,
+  logoutUser,
+};
