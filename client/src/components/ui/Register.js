@@ -28,11 +28,11 @@ const Register = () => {
     };
 
     console.log(userData)
-    // dispatch(registerUser(userData));
+    dispatch(registerUser(userData));
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
         <Box
           sx={{
             marginTop: 8,
@@ -51,53 +51,52 @@ const Register = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  id="firstName"
+                  label="First Name"
                   autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  required
-                  fullWidth
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  required
+                  fullWidth
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  required
+                  fullWidth
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
                   id="username"
                   label="Username"
                   name="username"
                   autoComplete="username"
+                  required
+                  fullWidth
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  required
-                  fullWidth
+                  id="password"
                   name="password"
                   label="Password"
+                  required
+                  fullWidth
                   type={showPassword ? 'text' : 'password'}
-                  id="password"
                   autoComplete="new-password"
                   InputProps={{
                     endAdornment:
