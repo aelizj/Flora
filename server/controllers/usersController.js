@@ -27,16 +27,12 @@ const getUserById = async (req, res, next) => {
 };
 
 const deleteUserById = async (req, res, next) => {
-  console.log('Inside deleteUserById function');
+  console.log('deleting user');
   const { id } = req.params;
-  try {
-    const user = await User.findById(id);
-    if (!user) {
-      next(new HttpError('Could not find user with the provided id.', 404));
-    }
 
-    user.deleteOne();
-    return ('User successfully deleted.');
+  try {
+    await User.findByIdAndDelete(id);
+    return res.send('User successfully deleted!');
   } catch (err) {
     return next(new HttpError('Something went wrong, please try again', 500));
   }

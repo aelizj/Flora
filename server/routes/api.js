@@ -22,6 +22,6 @@ router.get('/plants', getPlants);
 
 router.get('/users/:id', getUserById);
 router.get('/users', getUsers);
-router.delete('users/{id}', deleteUserById);
+router.delete('/users/:id', deleteUserById);
 
 export default router;
