@@ -1,21 +1,170 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 
 info:
-  version: '0.0.1'
-  title: 'Flora'
-  description: 'API for Flora - a community for plant lovers.'
+  version: "0.0.1"
+  title: "Flora"
+  description: "API for Flora - a community for plant lovers."
 
 servers:
   - url: http://localhost:5001/api
 
 paths:
+  /register:
+    post:
+      operationId: registerUser
+      summary: Registers in a user
+      description: If entered credentials are valid, the ne user is saved to the database, a token is provided to the user, and a cookie is set
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistrationForm"
+      responses:
+        "200":
+          description: Token and user id are returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad request. User must fill out all fields to submit form.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Email or username are already in use
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: An error occurred during registration.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /login:
+    post:
+      operationId: loginUser
+      summary: Logs in a user
+      description: If entered credentials are valid, a token is provided to the user and a cookie is set
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginForm"
+      responses:
+        "200":
+          description: Token and user id are returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad request. User must fill out all fields to submit form.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Incorrect password.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: No account associated with this email exists.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: An error occurred during login.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /users/{id}:
+    summary: Represents a specific user
+    parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          $ref: "#/components/schemas/UserId"
+    get:
+      operationId: getUser
+      summary: Get a specific user
+      description: This resource represents an individual user in the system.
+        Each user is identified by an alphanumeric `id`.
+      responses:
+        "200":
+          description: User object with specified `id` is returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+  /users:
+    summary: Represents a collection of users
+    get:
+      operationId: getUsers
+      summary: Get all users
+      responses:
+        "200":
+          description: A dictionary with a 'users' property that contains an array of user objects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/User"
+        "500":
+          description: Could not fetch users
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /plants/{id}:
+    summary: Represents a specific plant guide
+    parameters:
+      - name: id
+        in: path
+        description: Plant guide id
+        required: true
+        schema:
+          $ref: "#/components/schemas/PlantId"
+    get:
+      operationId: getPlant
+      summary: Get a specific plant guide
+      description:
+        This resource represents an individual plant guide in the system.
+        Each plant guide is identified by an alphanumeric `id`.
+      responses:
+        "200":
+          description: Plant guide object with specified `id` is returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Plant"
+
   /plants:
     summary: Represents a collection of plant guides
     get:
       operationId: getPlants
       summary: Get all plant guides
       responses:
-        '200':
+        "200":
           description: A dictionary with a `plants` property that contains an array of plant guide objects.
           content:
             application/json:
@@ -25,79 +174,58 @@ paths:
                   plants:
                     type: array
                     items:
-                      $ref: '#/components/schemas/Plant'
-        '500':
+                      $ref: "#/components/schemas/Plant"
+        "500":
           description: Could not fetch plants
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     post:
       operationId: addPlant
       summary: Adds a new plant guide
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlantForm"
       responses:
-        '201':
+        "201":
           description: New plant guide is returned as a JSON object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Plant'
-        '503':
+                $ref: "#/components/schemas/Plant"
+        "503":
           description: Creation of plant guide failed
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
-  /plants/{id}:
-    parameters:
-       - name: id
-         in: path
-         description: Unique identifier of the plant guide
-         required: true
-         schema:
-           $ref: '#/components/schemas/PlantId'
+  /validate-token:
     get:
-      operationId: getPlant
-      summary: Get a specific plant guide
-      description:
-        This resource represents an individual plant guide in the system.
-        Each plant guide is identified by an alphanumeric `id`.
+      operationId: validateToken
+      summary: Validate a user's token
+      description: This endpoint determines whether a user possesses a token and if so, confirms the validity of that token
       responses:
-        '200':
-          description: Plant guide object with specified `id` is returned
+        "200":
+          description: User object is returned
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Plant'
+                $ref: "#/components/schemas/User"
+        "401":
+          description: No token provided - user's cookies do not contain a valid token
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
-    PlantId:
-      description: Unique alphanumeric identifier of a plant guide
-      type: string
-    Plant:
-      type: object
-      required:
-        - _id
-        - commonName
-        - scientificName
-      properties:
-        _id:
-          $ref: '#/components/schemas/PlantId'
-        commonName:
-          type: string
-        scientificName:
-          type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
-        description:
-          type: string
-        careGuide:
-          type: string
     Error:
       type: object
       required:
@@ -106,11 +234,158 @@ components:
         message:
           description: A human readable error message
           type: string
-  securitySchemes:
-    ApiKey:
-      type: apiKey
-      in: header
-      name: X-Api-Key
 
-security:
-  - ApiKey: []
+    LoginForm:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          example: 'jdoe@example.com'
+        password:
+          type: string
+          example: '<hashed-password>'
+
+    Plant:
+      type: object
+      required:
+        - _id
+        - commonName
+        - scientificName
+      properties:
+        _id:
+          $ref: "#/components/schemas/PlantId"
+        commonName:
+          type: string
+          example: 'String of pearls'
+        scientificName:
+          type: string
+          example: 'Senecio rowleyanus'
+        createdAt:
+          type: string
+          example: '1686285384039'
+        updatedAt:
+          type: string
+          example: '1686285384040'
+        imageUrl:
+          type: string
+          example: 'www.plantPics.com/string-of-pearls'
+        description:
+          type: string
+          example: "A succulent with a ditinctive trailing form."
+        careGuide:
+          type: string
+          example: "Likes bright indirect sunlight."
+
+    PlantForm:
+      type: object
+      required:
+        - commonName
+        - scientificName
+      properties:
+        commonName:
+          type: string
+          example: 'String of pearls'
+        scientificName:
+          type: string
+          example: 'Senecio rowleyanus'
+        imageUrl:
+          type: string
+          example: 'www.plantPics.com/string-of-pearls'
+        description:
+          type: string
+          example: "A succulent with a ditinctive trailing form."
+        careGuide:
+          type: string
+          example: "Likes bright indirect sunlight."
+
+    PlantId:
+      description: Unique alphanumeric identifier of a plant guide
+      type: string
+      example: '6482ac48854da730b4aa9742'
+
+    RegistrationForm:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - username
+        - email
+        - password
+      properties:
+        firstName:
+          type: string
+          example: 'Jane'
+        lastName:
+          type: string
+          example: 'Doe'
+        username:
+          type: string
+          example: 'jdoe'
+        email:
+          type: string
+          example: 'jdoe@example.com'
+        password:
+          type: string
+          example: '<hashed-password>'
+
+    User:
+      type: object
+      required:
+        - _id
+        - firstName
+        - lastName
+        - email
+        - password
+      properties:
+        _id:
+          $ref: "#/components/schemas/UserId"
+        firstName:
+          type: string
+          example: 'Jane'
+        lastName:
+          type: string
+          example: 'Doe'
+        username:
+          type: string
+          example: 'jdoe'
+        email:
+          type: string
+          example: 'jdoe@example.com'
+        date:
+          type: string
+        interests:
+          type: array
+          items:
+            type: string
+        achievevements:
+          type: array
+          items:
+            type: string
+        plantCollection:
+          type: array
+          items:
+            type: string
+        wishlist:
+          type: array
+          items:
+            type: string
+        password:
+          type: string
+          example: '<hashed-password>'
+
+    UserId:
+      description: Unique alphanumeric identifier of a user
+      type: string
+
+#   securitySchemes:
+#     Token:
+#       type: token
+#       in: cookies
+#       name: jwt
+
+# security:
+#   - Token:
+#     type: string
