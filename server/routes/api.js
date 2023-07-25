@@ -1,10 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import {
-  validateToken,
-  registerUser,
-  loginUser,
-  logoutUser,
+  validateToken, registerUser, loginUser, logoutUser,
 } from '../controllers/authController.js';
 import { getPlants, createPlant, getPlantById } from '../controllers/plantsController.js';
 import { getUsers, getUserById, deleteUserById } from '../controllers/usersController.js';
