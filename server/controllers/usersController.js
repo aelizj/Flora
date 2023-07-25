@@ -32,6 +32,8 @@ const deleteUserById = async (req, res, next) => {
 
   try {
     await User.findByIdAndDelete(id);
+    res.clearCookie('jwt');
+    res.clearCookie('isAuthenticated');
     return res.send('User successfully deleted!');
   } catch (err) {
     return next(new HttpError('Something went wrong, please try again', 500));
