@@ -29,7 +29,7 @@ const PlantSchema = new mongoose.Schema({
   updatedAt: {
     type: String,
     default: Date.now,
-    required: [true, 'A timestamp for createdAt is needed to submit.'],
+    required: [true, 'A timestamp for updatedAt is needed to submit.'],
   },
 });
 
