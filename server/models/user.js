@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
     default: [],
     required: false,
   },
-  plantCollection: {
+  plants: {
     type: Array,
     default: [],
     required: false,
