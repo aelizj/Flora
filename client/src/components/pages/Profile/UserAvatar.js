@@ -1,5 +1,5 @@
 import { Box, Avatar } from '@mui/material';
-import { amber } from '@mui/material/colors';
+import { lightGreen } from '@mui/material/colors';
 
 const UserAvatar = ({ avatar }) => {
   return (
@@ -13,7 +13,7 @@ const UserAvatar = ({ avatar }) => {
     >
       <Avatar
         sx={{
-          bgcolor: amber[500],
+          bgcolor: lightGreen[400],
           height: { xs: 56, sm: 80 },
           width: { xs: 56, sm: 80 }
         }}
