@@ -24,13 +24,19 @@ const PlantCard = ({ plant }) => {
           <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 500 }}>
             <Link to={`/plants/${plant._id}`} style={{ textDecoration: 'none', color: 'dimgrey' }}>{plant.commonName}</Link>
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
+          <Typography component="body1" variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
             {plant.scientificName}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="">Share</Button>
-          <Button size="">Learn More</Button>
+          {/* <Button size="small">Share</Button> */}
+          <Button size="small">
+            <Link to={`/plants/${plant._id}`} style={{ textDecoration: 'none', color: '#59920D' }}>
+              <Typography textDecoration="none" textTransform="uppercase" variant="body2" sx={{ textAlign: 'right', fontWeight: '600' }}>
+                Learn More
+              </Typography>
+            </Link>
+          </Button>
         </CardActions>
       </Card>
 
