@@ -26,7 +26,7 @@ const UserInfo = ({ name, email, location }) => {
         variant="body2"
         sx={{ display: 'flex', alignItems: 'center', mt: 1 }}
       >
-        <LocationOnIcon fontSize="small" />
+        { location ? <LocationOnIcon fontSize="small" /> : <></> }
         {location}
       </Typography>
     </>
