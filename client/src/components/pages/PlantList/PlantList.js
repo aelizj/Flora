@@ -18,7 +18,7 @@ const PlantList = () => {
 
   return (
     <Container sx={{ p: 2 }}>
-      <Typography variant="h2" color="secondary">
+      <Typography component="h1" variant="h2" color="secondary">
         Plants
       </Typography>
       <div className="plant-grid">

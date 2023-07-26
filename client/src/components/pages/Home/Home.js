@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 const Home = () => {
   return (
     <Container sx={{ p: 2 }}>
-      <Typography variant="h2" color="secondary">
+      <Typography component="h1" variant="h2" color="secondary">
         Welcome to Flora!
       </Typography>
       <Divider sx={{ p: 1 }}/>

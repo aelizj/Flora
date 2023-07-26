@@ -119,8 +119,7 @@ export default function Login() {
               sx={{ mt: 2, mb: 2, fontWeight: 600 }}
             >
               <Typography variant="button">
-              Sign In
-
+                Sign In
               </Typography>
             </Button>
 

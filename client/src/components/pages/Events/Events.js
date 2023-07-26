@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 const Events = () => {
   return (
     <Container sx={{ p: 2 }}>
-      <Typography variant="h2" color="secondary">
+      <Typography component="h1" variant="h2" color="secondary">
         Events
       </Typography>
       <div>
