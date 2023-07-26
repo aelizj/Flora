@@ -30,7 +30,7 @@ const loginUser = async (loginData) => {
 
 const logoutUser = async () => {
   try {
-    const response = await apiClient.post(LOGOUT_USER_URL);
+    const response = await apiClient.get(LOGOUT_USER_URL);
     return response.data;
   } catch (err) {
     throw err;
