@@ -1,4 +1,5 @@
 import { drawerWidth } from '../../constants/UiValues';
+import { useSelector, useDispatch } from 'react-redux';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
@@ -9,6 +10,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { logoutUser } from '../../store/features/auth';
+
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -28,11 +31,20 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleLoginLogout = (event) => {
+    event.preventDefault();
+    if (isAuthenticated) {
+      dispatch(logoutUser())
+    }
+  }
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -87,9 +99,8 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Login</MenuItem>
+            <MenuItem onClick={handleClose}>{isAuthenticated ? 'Profile' : 'Home'}</MenuItem>
+            <MenuItem onClick={handleLoginLogout}>{isAuthenticated ? 'Logout' : 'Login'}</MenuItem>
           </Menu>
         </div>
       </Toolbar>

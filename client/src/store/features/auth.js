@@ -1,24 +1,20 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginUser as apiLoginUser, registerUser as apiRegisterUser, validateToken as apiValidateToken } from '../../lib/apiClient';
+import { loginUser as apiLoginUser, registerUser as apiRegisterUser, validateToken as apiValidateToken, logoutUser as apiLogoutUser } from '../../lib/apiClient';
 
 export function loadAuthState() {
-  console.log('Inside loadAuthState function');
-
   return async (dispatch) => {
     const authCookie = document.cookie
       .split('; ')
       .find((row) => row.startsWith('isAuthenticated'));
-      console.log('has AuthCookie? ' + authCookie)
 
     if (authCookie) {
       const isAuthenticated = authCookie.split('=')[1];
-      console.log('isAuthenticated? ' + isAuthenticated)
       if (isAuthenticated) {
         try {
           const response = await apiValidateToken();
           dispatch(setCurrentUser(response));
         } catch (error) {
-          console.log('Error validating token', error);
+          console.error('Error validating token', error);
         }
       }
     }
@@ -30,6 +26,18 @@ export const loginUser = createAsyncThunk(
   async(loginData, thunkAPI) => {
     try {
       const response = await apiLoginUser(loginData);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async(thunkAPI) => {
+    try {
+      const response = await apiLogoutUser();
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -58,13 +66,10 @@ export const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    setCurrentUser: (state) => {
+    setCurrentUser: (state, response) => {
       state.isAuthenticated = true;
+      state.user = response.payload;
     },
-    logoutUser: (state) => {
-      state.isAuthenticated = false;
-      state.user = {};
-    }
   },
   extraReducers : (builder) => {
     builder
@@ -99,9 +104,21 @@ export const authSlice = createSlice({
       state.loading = false;
       state.isAuthenticated = false;
       state.error = action.error.code;
-     });
+     })
+     .addCase(logoutUser.fulfilled, (state, action) => {
+      state.isAuthenticated = false;
+      state.user = {};
+    })
+    .addCase(logoutUser.pending, (state, action) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(logoutUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.code;
+    })
   }
 });
 
-export const { setCurrentUser, logoutUser } = authSlice.actions;
+export const { setCurrentUser } = authSlice.actions;
 export default authSlice.reducer;
