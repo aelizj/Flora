@@ -1,15 +1,31 @@
-import { Paper, Typography, Stack, Chip } from '@mui/material';
+import { Box, Fab, Paper, Typography, Stack, Chip } from '@mui/material';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
-const UserCard = ({ category, items }) => {
+const UserCard = ({ category, items, handleClickAdd, handleDelete }) => {
   if (items) {
     return (
       <Paper elevation={2} sx={{ padding: 2 }}>
-        <Typography variant="h6">{category}</Typography>
-        <Stack direction="row" spacing={1} mt={1} flexWrap="wrap">
+        <Box component="span">
+          <Typography variant="h6" marginBottom={1}>{category}</Typography>
+        </Box>
+
+        <Stack direction="row" useFlexGap spacing={1} my={1} flexWrap="wrap">
           {items.map((item, i) => (
-            <Chip key={i} label={item} color="primary" sx={{ mb:1, fontWeight: 600 }}/>
+            <Chip
+              key={i}
+              label={item}
+              color="secondary"
+              sx={{ fontWeight: 600 }}
+              onDelete={handleDelete}
+            />
           ))}
         </Stack>
+
+        <Box sx={{ '& > :not(style)': { m: 1 } }} >
+          <Fab color="grey" aria-label="add" size="small" onClick={handleClickAdd}>
+            <AddRoundedIcon />
+          </Fab>
+        </Box>
       </Paper>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Box, Container, Grid, Button } from '@mui/material';
 import UserAvatar from './UserAvatar.js';
 import UserInfo from './UserInfo';
@@ -19,8 +19,18 @@ import CoverPhoto from './CoverPhoto.js';
 //   achievements: ["100 Days Streak", "Plant Master", "Top Contributor"],
 // };
 
+
 const ProfilePage = () => {
   const userData = useSelector((state) => state.auth.user)
+
+  const handleChipDelete = () => {
+    console.log("Chip delete clicked")
+  }
+
+  const handleClickAdd = (event) => {
+    event.preventDefault();
+    console.log(`Clicked add button in ${event.target}`);
+  }
 
   return (
     <div sx={{padding: 0}}>
@@ -33,7 +43,6 @@ const ProfilePage = () => {
             flexDirection: 'column',
             alignItems: 'center',
             minHeight: 'fit-content',
-            padding: 2,
           }}
         >
           <UserAvatar avatar={userData.avatar} />
@@ -47,18 +56,12 @@ const ProfilePage = () => {
           >
             {[ 'Plants', 'Interests', 'Wishlist'].map((category, index) => (
               <Grid item xs={12} sm={4} key={index}>
-                <UserCard category={category} items={userData[category.toLowerCase()]} />
+                <UserCard category={category} items={userData[category.toLowerCase()]} handleAdd={handleClickAdd} handleDelete={handleChipDelete}/>
               </Grid>
             ))}
           </Grid>
           <UserAchievements achievements={userData.achievements} />
-          <Button
-            sx={{
-              mt: 2,
-              fontSize: { xs: 'body2.fontSize', sm: 'body1.fontSize' },
-            }}
-            variant="outlined"
-          >
+          <Button sx={{ mt: 2, fontSize: { xs: 'body2.fontSize', sm: 'body1.fontSize' } }} variant="outlined">
             Edit Profile
           </Button>
         </Box>
