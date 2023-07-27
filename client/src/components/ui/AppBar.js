@@ -1,6 +1,7 @@
 import { drawerWidth } from '../../constants/UiValues';
 import { useSelector, useDispatch } from 'react-redux';
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -32,6 +33,7 @@ const AppBar = styled(MuiAppBar, {
 
 const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -43,6 +45,8 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
     event.preventDefault();
     if (isAuthenticated) {
       dispatch(logoutUser())
+    } else {
+      navigate('/login');
     }
   }
 
