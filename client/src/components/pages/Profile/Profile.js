@@ -1,12 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Box, Card, CardMedia, Container, Grid, Button } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { Box, Container, Grid, Button } from '@mui/material';
 import UserAvatar from './UserAvatar.js';
 import UserInfo from './UserInfo';
 import UserCard from './UserCard';
 import UserAchievements from './UserAchievements';
 import CoverPhoto from './CoverPhoto.js';
-
 
 // const userData = {
 //   name: "John Doe",
@@ -23,7 +22,6 @@ import CoverPhoto from './CoverPhoto.js';
 const ProfilePage = () => {
   const userData = useSelector((state) => state.auth.user)
 
-  console.log("USER: ", userData)
   return (
     <div sx={{padding: 0}}>
       {userData.cover ? <CoverPhoto/> : <Box sx={{ p:4 }}/>}

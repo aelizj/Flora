@@ -4,15 +4,12 @@ import config from '../../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
+import registrationFormInputsCompleted from '../utils/registrationHelper.js';
 
 // Validates user token
 const validateToken = async (req, res, next) => {
-  console.log('Inside validateToken function');
-
   const token = req.cookies.jwt;
-  if (!token) {
-    return next(new HttpError('No token provided', 401));
-  }
+  if (!token) return next(new HttpError('No token provided', 401));
   try {
     let decoded;
     try {
@@ -22,13 +19,8 @@ const validateToken = async (req, res, next) => {
     } catch (error) {
       console.error('Token decode error: ', error);
     }
-
     const user = decoded ? await User.findById(decoded._id) : null;
-    if (!user) {
-      throw new Error('User not found');
-    }
-
-    console.log(user);
+    if (!user) throw new Error('User not found');
     return res.json(user);
   } catch (error) {
     console.error('Token verification error: ', error);
@@ -38,15 +30,7 @@ const validateToken = async (req, res, next) => {
 
 // Adds new user to database
 const registerUser = async (req, res, next) => {
-  console.log('Inside registerUser function');
-
-  if (
-    !req.body.firstName
-    || !req.body.lastName
-    || !req.body.username
-    || !req.body.email
-    || !req.body.password
-  ) {
+  if (!registrationFormInputsCompleted(req)) {
     return next(new HttpError('All fields are required for submission.', 400));
   }
 
@@ -67,15 +51,13 @@ const registerUser = async (req, res, next) => {
   const salt = await bcrypt.genSalt(10);
   newUser.password = await bcrypt.hash(newUser.password, salt);
 
-  let user;
-
   try {
-    user = await newUser.save();
+    await newUser.save();
   } catch (err) {
     return next(new HttpError(`Error occurred during registration: ${err}`, 500));
   }
 
-  return createTokenAndSetCookie(user, res, next);
+  return createTokenAndSetCookie(newUser, res, next);
 };
 
 // Validates entered user credentials
@@ -91,7 +73,6 @@ const loginUser = async (req, res, next) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new HttpError('Incorrect password.', 403));
-
     return createTokenAndSetCookie(user, res, next);
   } catch (err) {
     return next(new HttpError(`Error occured during login: ${err}`, 500));
