@@ -50,6 +50,15 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
     }
   }
 
+  const handleProfileHome = (event) => {
+    event.preventDefault();
+    if (isAuthenticated) {
+      navigate('/profile');
+    } else {
+      navigate('/');
+    }
+  }
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -103,7 +112,7 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>{isAuthenticated ? 'Profile' : 'Home'}</MenuItem>
+            <MenuItem onClick={handleProfileHome}>{isAuthenticated ? 'Profile' : 'Home'}</MenuItem>
             <MenuItem onClick={handleLoginLogout}>{isAuthenticated ? 'Logout' : 'Login'}</MenuItem>
           </Menu>
         </div>
