@@ -73,7 +73,7 @@ const testTheme = createTheme({
        main: '#739e47',
      },
      secondary: {
-       main: '#59920D',
+       main: '#477335',
      },
    },
    components: {
