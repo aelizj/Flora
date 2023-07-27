@@ -89,7 +89,6 @@ const AddPlantDialog = () => {
             required
             fullWidth
             margin='dense'
-            variant='filled'
             color='primary'
             size='small'
             helperText="Plant's colloquial name; i.e. Chinese money plant"
@@ -104,7 +103,6 @@ const AddPlantDialog = () => {
             required
             fullWidth
             margin='dense'
-            variant='filled'
             color='primary'
             size='small'
             helperText="Plant's binomial scientific name; i.e. Pilea peperomioides"
@@ -118,7 +116,6 @@ const AddPlantDialog = () => {
             autoFocus
             fullWidth
             margin='dense'
-            variant='filled'
             color='primary'
             size='small'
           />
@@ -132,7 +129,6 @@ const AddPlantDialog = () => {
             multiline
             fullWidth
             margin='dense'
-            variant='filled'
             color='primary'
             minRows={2}
             maxRows={4}
@@ -148,7 +144,6 @@ const AddPlantDialog = () => {
             multiline
             fullWidth
             margin='dense'
-            variant='filled'
             color='primary'
             minRows={4}
             maxRows={8}
@@ -158,7 +153,7 @@ const AddPlantDialog = () => {
 
         <DialogActions>
           <Button onClick={handleCloseDialog}>Cancel</Button>
-          <Button onClick={handleCloseDialog}>Save</Button>
+          {/* <Button onClick={handleCloseDialog}>Save</Button> */}
           <Button onClick={handleSubmit}>Submit</Button>
         </DialogActions>
       </Dialog>
