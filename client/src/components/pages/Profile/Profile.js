@@ -52,7 +52,7 @@ const ProfilePage = () => {
             direction="row"
             justifyContent="space-between"
             spacing={2}
-            sx={{ mt: 2, width: '100%' }}
+            sx={{ my: 2, width: '100%' }}
           >
             {[ 'Plants', 'Interests', 'Wishlist'].map((category, index) => (
               <Grid item xs={12} sm={4} key={index}>
@@ -61,7 +61,7 @@ const ProfilePage = () => {
             ))}
           </Grid>
           <UserAchievements achievements={userData.achievements} />
-          <Button sx={{ mt: 2, fontSize: { xs: 'body2.fontSize', sm: 'body1.fontSize' } }} variant="outlined">
+          <Button variant="outlined">
             Edit Profile
           </Button>
         </Box>

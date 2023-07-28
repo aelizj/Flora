@@ -1,5 +1,5 @@
-import { Box, Fab, Paper, Typography, Stack, Chip } from '@mui/material';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import { Box, IconButton, Paper, Typography, Stack, Chip } from '@mui/material';
+import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
 
 const UserCard = ({ category, items, handleClickAdd, handleDelete }) => {
   if (items) {
@@ -21,10 +21,10 @@ const UserCard = ({ category, items, handleClickAdd, handleDelete }) => {
           ))}
         </Stack>
 
-        <Box sx={{ '& > :not(style)': { m: 1 } }} >
-          <Fab color="grey" aria-label="add" size="small" onClick={handleClickAdd}>
-            <AddRoundedIcon />
-          </Fab>
+        <Box>
+          <IconButton aria-label="add" size="small" onClick={handleClickAdd}>
+            <AddCircleOutlineRoundedIcon />
+          </IconButton>
         </Box>
       </Paper>
     );

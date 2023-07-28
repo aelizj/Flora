@@ -12,6 +12,9 @@ import {
   TextField,
   Typography,
  } from '@mui/material';
+ import AddRoundedIcon from '@mui/icons-material/AddRounded';
+ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+ import FlatButton from '../../ui/FlatButton';
 
 const AddPlantDialog = () => {
   const dispatch = useDispatch();
@@ -54,9 +57,7 @@ const AddPlantDialog = () => {
          color='secondary'
          onClick={handleClickOpenDialog}
        >
-        <Typography variant='h5'>
           Add a Plant
-        </Typography>
       </Button>
 
       <Dialog
@@ -71,7 +72,7 @@ const AddPlantDialog = () => {
       >
         <DialogTitle>
           <Typography variant='h5' color='secondary' sx={{ fontWeight: 500}}>
-            New Plant
+            Add a plant guide
           </Typography>
         </DialogTitle>
 
@@ -152,9 +153,8 @@ const AddPlantDialog = () => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleCloseDialog}>Cancel</Button>
-          {/* <Button onClick={handleCloseDialog}>Save</Button> */}
-          <Button onClick={handleSubmit}>Submit</Button>
+          <FlatButton size="small" variant="outlined" onClick={handleCloseDialog} startIcon={<DeleteRoundedIcon/>}>Cancel</FlatButton>
+          <FlatButton color="success" size="small" variant="contained" onClick={handleSubmit} endIcon={<AddRoundedIcon/>}>Add</FlatButton>
         </DialogActions>
       </Dialog>
     </Box>
