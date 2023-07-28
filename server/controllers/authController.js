@@ -4,7 +4,6 @@ import config from '../../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
-import registrationFormInputsCompleted from '../utils/registrationHelper.js';
 
 // Validates user token
 const validateToken = async (req, res, next) => {
@@ -30,10 +29,6 @@ const validateToken = async (req, res, next) => {
 
 // Adds new user to database
 const registerUser = async (req, res, next) => {
-  if (!registrationFormInputsCompleted(req)) {
-    return next(new HttpError('All fields are required for submission.', 400));
-  }
-
   const existingUser = await User.findOne({ email: req.body.email });
   if (existingUser) return next(new HttpError('That email is already in use.', 409));
 
