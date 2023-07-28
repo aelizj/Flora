@@ -63,7 +63,7 @@ const ProfilePage = () => {
           </Grid>
           <UserAchievements achievements={userData.achievements} />
 
-          <EditProfileDialog />
+          <EditProfileDialog user={userData}/>
         </Box>
       </Container>
 
