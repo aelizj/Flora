@@ -23,7 +23,7 @@ const testTheme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
     button: {
-      textTransform: 'none',
+      textTransform: 'uppercase',
       fontSize: 16,
       fontWeight: 600
     },
