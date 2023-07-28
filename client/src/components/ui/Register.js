@@ -1,34 +1,27 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { Link as RouterLink } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import { Avatar, Grid, TextField, FormControlLabel, Button, Checkbox, Link, InputAdornment, IconButton} from '@mui/material';
+import { Avatar, Box,Container, Typography, Grid, TextField, Button, Link, InputAdornment, IconButton} from '@mui/material';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useForm } from 'react-hook-form';
 import { registerUser } from "../../store/features/auth";
+import { VALID_EMAIL_PATTERN } from '../../constants/Validation';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const userData = {
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      username: data.get("username"),
-      password: data.get("password"),
-    };
-
-    console.log(userData)
-    dispatch(registerUser(userData));
+  const onSubmit = (data) => {
+    dispatch(registerUser(data));
   };
 
   return (
@@ -47,50 +40,69 @@ const Register = () => {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  {...register("firstName", {required: "First name is required", minLength: 2, maxLength: 140})}
                   id="firstName"
                   label="First Name"
                   autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
+                  error={!!errors.firstName}
+                  helperText={errors.firstName?.message}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  {...register("lastName", {required: "Last name is required", minLength: 2, maxLength: 140})}
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
                   required
                   fullWidth
+                  error={!!errors.lastName}
+                  helperText={errors.lastName?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...register("email", {
+                    required: "Email address is required",
+                    pattern: {
+                      value: VALID_EMAIL_PATTERN,
+                      message: 'Must enter a valid email address'
+                    }
+                  })}
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
                   required
                   fullWidth
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...register("username", {required: "Username is required", minLength: 2, maxLength: 140})}
                   id="username"
                   label="Username"
                   name="username"
                   autoComplete="username"
                   required
                   fullWidth
+                  error={!!errors.username}
+                  helperText={errors.username?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...register("password", {required: "Password is required", minLength: 2, maxLength: 140})}
                   id="password"
                   name="password"
                   label="Password"
@@ -98,6 +110,8 @@ const Register = () => {
                   fullWidth
                   type={showPassword ? 'text' : 'password'}
                   autoComplete="new-password"
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
                   InputProps={{
                     endAdornment:
                       <InputAdornment position="end">
@@ -113,12 +127,6 @@ const Register = () => {
                   }}
                 />
               </Grid>
-              {/* <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid> */}
             </Grid>
             <Button
               type="submit"
