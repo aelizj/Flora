@@ -3,9 +3,7 @@ import { useDispatch } from "react-redux";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
 import CssBaseline from "@mui/material/CssBaseline";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -16,23 +14,24 @@ import Typography from "@mui/material/Typography";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useForm } from 'react-hook-form';
+import { VALID_EMAIL_PATTERN } from "../../constants/Validation";
 import { loginUser } from "../../store/features/auth";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
+
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (event) => event.preventDefault();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const loginData = {
-      email: data.get("email"),
-      password: data.get("password"),
-    };
-
-    dispatch(loginUser(loginData));
+  const onSubmit = (data) => {
+    dispatch(loginUser(data));
   };
 
   return (
@@ -70,8 +69,15 @@ export default function Login() {
             Sign in
           </Typography>
 
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 1 }}>
             <TextField
+              {...register("email", {
+                required: "Email address is required",
+                pattern: {
+                  value: VALID_EMAIL_PATTERN,
+                  message: 'Must enter a valid email address'
+                }
+              })}
               id="email"
               label="Email"
               name="email"
@@ -80,9 +86,12 @@ export default function Login() {
               fullWidth
               autoFocus
               margin="normal"
+              error={!!errors.email}
+              helperText={errors.email?.message}
             />
 
             <TextField
+              {...register("password", {required: "Password is required", minLength: 2, maxLength: 140})}
               id="password"
               name="password"
               label="Password"
@@ -91,6 +100,8 @@ export default function Login() {
               required
               fullWidth
               margin="normal"
+              error={!!errors.password}
+              helperText={errors.password?.message}
               InputProps={{
                 endAdornment:
                   <InputAdornment position="end">
@@ -104,11 +115,6 @@ export default function Login() {
                     </IconButton>
                   </InputAdornment>,
               }}
-            />
-
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
 
             <Button
@@ -125,9 +131,6 @@ export default function Login() {
 
             <Grid container>
               <Grid item xs>
-                {/* <RouterLink href="#" variant="body2">
-                  Forgot password?
-                </RouterLink> */}
               </Grid>
               <Grid item>
                 <Link href="/register" underline='hover' variant="body1" color="text.secondary">
