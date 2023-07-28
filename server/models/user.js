@@ -27,6 +27,16 @@ const UserSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  bio: {
+    type: String,
+    default: '',
+    required: 'false',
+  },
+  location: {
+    type: String,
+    default: '',
+    required: 'false',
+  },
   interests: {
     type: Array,
     default: [],

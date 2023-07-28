@@ -6,6 +6,7 @@ import UserInfo from './UserInfo';
 import UserCard from './UserCard';
 import UserAchievements from './UserAchievements';
 import CoverPhoto from './CoverPhoto.js';
+import EditProfileDialog from './EditProfileDialog.js';
 
 // const userData = {
 //   name: "John Doe",
@@ -61,9 +62,8 @@ const ProfilePage = () => {
             ))}
           </Grid>
           <UserAchievements achievements={userData.achievements} />
-          <Button variant="outlined">
-            Edit Profile
-          </Button>
+
+          <EditProfileDialog />
         </Box>
       </Container>
 
