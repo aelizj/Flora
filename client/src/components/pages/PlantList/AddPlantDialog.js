@@ -17,7 +17,6 @@ import {
  import FlatButton from '../../ui/FlatButton';
 import { useForm } from 'react-hook-form';
 
-
 const AddPlantDialog = () => {
   const dispatch = useDispatch();
   const [dialogOpen, setDialogOpen] = React.useState(false);
