@@ -11,7 +11,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { logoutUser } from '../../store/features/auth';
+import { logoutUser } from '../../store/features/user';
 
 
 const AppBar = styled(MuiAppBar, {
@@ -34,7 +34,7 @@ const AppBar = styled(MuiAppBar, {
 const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleMenu = (event) => {

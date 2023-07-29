@@ -37,7 +37,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 );
 
 const MainComponent = ({ drawerOpen, theme }) => {
-  const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
   return (
     <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}>

@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./features/auth";
+import userReducer from "./features/user";
 import plantsReducer from './features/plants';
 import plantReducer from './features/plant';
 
 const store = configureStore({
   reducer: {
-    auth: authReducer,
+    user: userReducer,
     plants: plantsReducer,
     plant: plantReducer,
   }});

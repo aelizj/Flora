@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { loginUser as apiLoginUser, registerUser as apiRegisterUser, validateToken as apiValidateToken, logoutUser as apiLogoutUser } from '../../lib/apiClient';
+import {
+  loginUser as apiLoginUser,
+  registerUser as apiRegisterUser,
+  validateToken as apiValidateToken,
+  logoutUser as apiLogoutUser,
+  patchUser as apiPatchUser,
+} from '../../lib/apiClient';
 
 export function loadAuthState() {
   return async (dispatch) => {
@@ -19,13 +25,25 @@ export function loadAuthState() {
       }
     }
   };
-}
+};
+
+export const patchUser = createAsyncThunk(
+  'user/patchUser',
+  async(data, thunkAPI) => {
+    try {
+      const response = await apiPatchUser(data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message })
+    }
+  }
+);
 
 export const loginUser = createAsyncThunk(
-  'auth/loginUser',
-  async(loginData, thunkAPI) => {
+  'user/loginUser',
+  async(data, thunkAPI) => {
     try {
-      const response = await apiLoginUser(loginData);
+      const response = await apiLoginUser(data);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -34,7 +52,7 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk(
-  'auth/logoutUser',
+  'user/logoutUser',
   async(thunkAPI) => {
     try {
       const response = await apiLogoutUser();
@@ -46,10 +64,10 @@ export const logoutUser = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  'auth/registerUser',
-  async(userData, thunkAPI) => {
+  'user/registerUser',
+  async(data, thunkAPI) => {
     try {
-      const response = await apiRegisterUser(userData);
+      const response = await apiRegisterUser(data);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -57,8 +75,8 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const userSlice = createSlice({
+  name: 'user',
   initialState: {
     loading: false,
     isAuthenticated: false,
@@ -117,8 +135,22 @@ export const authSlice = createSlice({
       state.loading = false;
       state.error = action.error.code;
     })
+    .addCase(patchUser.fulfilled, (state, action) => {
+      const { user } = action.payload;
+      state.user = user;
+      state.loading = false;
+      state.error = null;
+    })
+    .addCase(patchUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+     })
+     .addCase(patchUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.code;
+     })
   }
 });
 
-export const { setCurrentUser } = authSlice.actions;
-export default authSlice.reducer;
+export const { setCurrentUser } = userSlice.actions;
+export default userSlice.reducer;

@@ -14,7 +14,7 @@ import {
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
 import FlatButton from '../../ui/FlatButton';
-import { editProfile } from '../../../store/features/user';
+import { patchUser } from '../../../store/features/user';
 import { VALID_EMAIL_PATTERN } from '../../../constants/Validation.js';
 
 const EditProfileDialog = ({ user }) => {
@@ -35,7 +35,7 @@ const EditProfileDialog = ({ user }) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(editProfile(data));
+    dispatch(patchUser(data));
     handleCloseDialog();
   };
 
