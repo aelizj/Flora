@@ -19,7 +19,7 @@ import {
 
 const AddPlantDialog = () => {
   const dispatch = useDispatch();
-  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const {
     register,
     handleSubmit,
