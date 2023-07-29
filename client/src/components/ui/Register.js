@@ -1,12 +1,23 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { Avatar, Box,Container, Typography, Grid, TextField, Button, Link, InputAdornment, IconButton} from '@mui/material';
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { registerUser } from "../../store/features/user";
 import { VALID_EMAIL_PATTERN } from '../../constants/Validation';
+import {
+  Avatar,
+  Box,
+  Container,
+  Typography,
+  Grid,
+  TextField,
+  Button,
+  Link,
+  InputAdornment,
+  IconButton
+} from '@mui/material';
 
 const Register = () => {
   const dispatch = useDispatch();

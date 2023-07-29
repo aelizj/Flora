@@ -1,12 +1,24 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { useForm } from 'react-hook-form';
-import { Avatar, Box, Button, CssBaseline, Grid, IconButton, InputAdornment, Link, Paper, TextField, Typography } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { VALID_EMAIL_PATTERN } from "../../constants/Validation";
 import { loginUser } from "../../store/features/user";
+import {
+  Avatar,
+  Box,
+  Button,
+  CssBaseline,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Link,
+  Paper,
+  TextField,
+  Typography
+} from "@mui/material";
 
 export default function Login() {
   const dispatch = useDispatch();

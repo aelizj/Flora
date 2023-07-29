@@ -3,7 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
 import { getPlantById } from '../../../store/features/plant';
-import { Box, Breadcrumbs, Card, CardMedia, Container, Grid, Typography } from '@mui/material';
+import {
+  Box,
+  Breadcrumbs,
+  Card,
+  CardMedia,
+  Container,
+  Grid,
+  Typography
+} from '@mui/material';
 
 const Plant = () => {
   const { id } = useParams();
@@ -77,10 +85,7 @@ const Plant = () => {
           </Grid>
         </Box>
       </Container>
-
-
     </Container>
-
   );
 };
 

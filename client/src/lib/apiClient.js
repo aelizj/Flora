@@ -1,5 +1,12 @@
 import axios from "axios";
-import { VALIDATE_TOKEN_URL, LOGIN_USER_URL, LOGOUT_USER_URL, REGISTER_USER_URL, PLANTS_INDEX_URL, USERS_INDEX_URL } from "../constants/ApiRoutes";
+import {
+  VALIDATE_TOKEN_URL,
+  LOGIN_USER_URL,
+  LOGOUT_USER_URL,
+  REGISTER_USER_URL,
+  PLANTS_INDEX_URL,
+  USERS_INDEX_URL
+} from "../constants/ApiRoutes";
 
 const API_BASE_URL = 'http://localhost:5001';
 axios.defaults.withCredentials = true;

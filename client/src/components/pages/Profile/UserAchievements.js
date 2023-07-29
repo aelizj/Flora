@@ -1,5 +1,10 @@
-import { Box, Typography, Stack, Chip } from '@mui/material';
 import { teal } from '@mui/material/colors';
+import {
+  Box,
+  Typography,
+  Stack,
+  Chip
+} from '@mui/material';
 
 const UserAchievements = ({ achievements }) => {
   if (achievements && achievements.length > 0) {

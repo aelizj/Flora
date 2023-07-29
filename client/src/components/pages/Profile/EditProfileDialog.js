@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
+import FlatButton from '../../ui/FlatButton';
+import { patchUser } from '../../../store/features/user';
+import { VALID_EMAIL_PATTERN } from '../../../constants/Validation.js';
 import {
   Box,
   Button,
@@ -11,11 +16,6 @@ import {
   TextField,
   Typography,
  } from '@mui/material';
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
-import FlatButton from '../../ui/FlatButton';
-import { patchUser } from '../../../store/features/user';
-import { VALID_EMAIL_PATTERN } from '../../../constants/Validation.js';
 
 const EditProfileDialog = ({ user }) => {
   const dispatch = useDispatch();

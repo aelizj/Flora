@@ -1,12 +1,22 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { styled } from '@mui/material/styles';
-import { Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { drawerWidth, mainColor } from '../../constants/UiValues';
 import NavLinks from '../../constants/NavLinks';
 import DrawerHeader from './DrawerHeader';
+import {
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography
+} from '@mui/material';
+
 
 const StyledNavLink = styled(NavLink)({
   textDecoration: 'none',

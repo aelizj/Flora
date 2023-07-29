@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Container, Grid } from '@mui/material';
-import UserAvatar from './UserAvatar.js';
-import UserInfo from './UserInfo';
-import UserCard from './UserCard';
-import UserAchievements from './UserAchievements';
-import CoverPhoto from './CoverPhoto.js';
+import UserAvatar        from './UserAvatar.js';
+import UserInfo          from './UserInfo';
+import UserCard          from './UserCard';
+import UserAchievements  from './UserAchievements';
+import CoverPhoto        from './CoverPhoto.js';
 import EditProfileDialog from './EditProfileDialog.js';
 
 const ProfilePage = () => {

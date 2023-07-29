@@ -1,5 +1,12 @@
-import { Box, IconButton, Paper, Typography, Stack, Chip } from '@mui/material';
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
+import {
+  Box,
+  IconButton,
+  Paper,
+  Typography,
+  Stack,
+  Chip
+} from '@mui/material';
 
 const UserCard = ({ category, items, handleClickAdd, handleDelete }) => {
   if (items) {

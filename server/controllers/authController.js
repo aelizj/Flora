@@ -48,8 +48,8 @@ const registerUser = async (req, res, next) => {
 
   try {
     await newUser.save();
-  } catch (err) {
-    return next(new HttpError(`Error occurred during registration: ${err}`, 500));
+  } catch (error) {
+    return next(new HttpError(`Error occurred during registration: ${error}`, 500));
   }
 
   return createTokenAndSetCookie(newUser, res, next);
@@ -69,8 +69,8 @@ const loginUser = async (req, res, next) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new HttpError('Incorrect password.', 403));
     return createTokenAndSetCookie(user, res, next);
-  } catch (err) {
-    return next(new HttpError(`Error occured during login: ${err}`, 500));
+  } catch (error) {
+    return next(new HttpError(`Error occured during login: ${error}`, 500));
   }
 };
 
@@ -84,8 +84,8 @@ const logoutUser = async (req, res, next) => {
     res.clearCookie('jwt');
     res.clearCookie('isAuthenticated');
     return res.send('Successfully logged out!');
-  } catch (err) {
-    return next(new HttpError(`Error occured during logout: ${err}`, 500));
+  } catch (error) {
+    return next(new HttpError(`Error occured during logout: ${error}`, 500));
   }
 };
 

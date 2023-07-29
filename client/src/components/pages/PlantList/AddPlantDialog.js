@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { createPlant } from '../../../store/features/plants';
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import FlatButton from '../../ui/FlatButton';
 import {
   Box,
   Button,
@@ -12,10 +16,6 @@ import {
   TextField,
   Typography,
  } from '@mui/material';
- import AddRoundedIcon from '@mui/icons-material/AddRounded';
- import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
- import FlatButton from '../../ui/FlatButton';
-import { useForm } from 'react-hook-form';
 
 const AddPlantDialog = () => {
   const dispatch = useDispatch();
@@ -75,7 +75,7 @@ const AddPlantDialog = () => {
             To add a plant care guide to this page, fill out the form below.
           </DialogContentText>
 
-          <TextField // common name
+          <TextField
             {...register('commonName', {
               required: 'Common name is required',
               maxLength: {
@@ -95,7 +95,7 @@ const AddPlantDialog = () => {
             helperText={errors.commonName? errors.commonName.message : "Plant's colloquial name; i.e. Chinese money plant"}
           />
 
-          <TextField // scientific name
+          <TextField
             {...register('scientificName', {
               required: 'Scientific name is required',
               maxLength: {
@@ -115,7 +115,7 @@ const AddPlantDialog = () => {
             helperText={errors.scientificName? errors.scientificName.message : "Plant's binomial scientific name; i.e. Pilea peperomioides"}
           />
 
-         <TextField // imageUrl
+         <TextField
             {...register('imageUrl', {
               maxLength: {
                 value: 250,
@@ -134,7 +134,7 @@ const AddPlantDialog = () => {
 
           />
 
-          <TextField // description
+          <TextField
             {...register('description', {
               maxLength: {
                 value: 2500,
@@ -155,7 +155,7 @@ const AddPlantDialog = () => {
             helperText={errors.description?.message}
           />
 
-          <TextField // care guide
+          <TextField
             {...register('careGuide', {
               maxLength: {
                 value: 10000,
