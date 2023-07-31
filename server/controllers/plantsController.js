@@ -2,7 +2,6 @@ import HttpError from '../utils/httpError.js';
 import Plant from '../models/plant.js';
 
 const getPlants = async (req, res, next) => {
-  console.log('Inside getPlants function');
   try {
     const plants = await Plant.find({}, 'commonName _id scientificName imageUrl createdAt updatedAt');
     res.json({ plants });
@@ -12,7 +11,6 @@ const getPlants = async (req, res, next) => {
 };
 
 const createPlant = async (req, res, next) => {
-  console.log('Inside createPlants function');
   try {
     const plant = await Plant.create(req.body.plant);
     await Plant.find({ _id: plant._id }, 'commonName scientificName _id createdAt updatedAt')
@@ -24,7 +22,6 @@ const createPlant = async (req, res, next) => {
 };
 
 const getPlantById = async (req, res, next) => {
-  console.log('Inside getPlantById function');
   const { id } = req.params;
   try {
     const plant = await Plant.findById(id);

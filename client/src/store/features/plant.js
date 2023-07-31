@@ -5,7 +5,6 @@ export const getPlantById = createAsyncThunk(
   'plant/getPlantById',
   async(id) => {
     const response = await apiGetPlantById(id);
-    console.log(response)
     return response;
   }
 );

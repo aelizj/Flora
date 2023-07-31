@@ -19,7 +19,6 @@ const apiClient = axios.create({
 const validateToken = async () => {
   try {
     const response = await apiClient.get(VALIDATE_TOKEN_URL);
-    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;

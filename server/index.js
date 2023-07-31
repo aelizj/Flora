@@ -17,7 +17,6 @@ dotenv.config();
 const app = express();
 app.use(cookieParser());
 app.use((req, res, next) => {
-  console.log('Cookies: ', req.cookies);
   next();
 });
 const port = process.env.PORT || 5001;
@@ -38,14 +37,10 @@ opts.jwtFromRequest = cookieExtractor;
 opts.secretOrKey = config.jwt.secretOrPublicKey;
 
 passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
-  console.log('using jwtStrat');
-  console.log('jwtPayload: ', jwtPayload);
-
   try {
     const user = async () => {
-      const u = await User.findOne({ _id: jwtPayload.sub });
-      console.log('user: ', user);
-      return u;
+      const currentUser = await User.findOne({ _id: jwtPayload.sub });
+      return currentUser;
     };
 
     if (user) {
@@ -62,10 +57,7 @@ passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
 passport.use(new PassportJwtCookieCombo({
   secretOrPublicKey: config.jwt.secretOrPublicKey,
   jwtCookieName: 'jwt',
-}, (payload, done) => {
-  console.log('payload: ', payload);
-  return done(null, payload.user);
-}));
+}, (payload, done) => done(null, payload.user)));
 
 app.use(passport.initialize());
 app.use(cors(config.cors));
