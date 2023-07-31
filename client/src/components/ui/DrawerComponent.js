@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -17,49 +17,63 @@ import {
   Typography
 } from '@mui/material';
 
-
 const StyledNavLink = styled(NavLink)({
   textDecoration: 'none',
   color: 'inherit',
 });
 
-const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) => (
-  <Drawer
-    sx={{
-      width: drawerWidth,
-      flexShrink: 0,
-      '& .MuiDrawer-paper': {
+const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) => {
+  const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+  }
+  return (
+    <Drawer
+      sx={{
         width: drawerWidth,
-        boxSizing: 'border-box',
-      },
-    }}
-    variant="persistent"
-    anchor="left"
-    open={drawerOpen}
-  >
-    <DrawerHeader theme={theme}>
-      <IconButton onClick={handleDrawerClose}>
-        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-      </IconButton>
-    </DrawerHeader>
-    <List>
-      {NavLinks.map((link, index) => (
-        <StyledNavLink to={link.path} key={index}>
-          <ListItem key={link.path} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-              {React.createElement(linkIcons[index], { style: { color: mainColor } })}
-              </ListItemIcon>
-              <ListItemText primary={
-                <Typography variant="drawerLink" color="primary">
-                  {link.name}
-                </Typography>} />
-            </ListItemButton>
-          </ListItem>
-        </StyledNavLink>
-      ))}
-    </List>
-  </Drawer>
-);
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: drawerWidth,
+          boxSizing: 'border-box',
+        },
+      }}
+      variant="persistent"
+      anchor="left"
+      open={drawerOpen}
+    >
+      <DrawerHeader theme={theme}>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+        </IconButton>
+      </DrawerHeader>
+      <List>
+        {NavLinks.map((link, index) => (
+          <StyledNavLink
+            to={link.path}
+            key={index}
+          >
+            <ListItem key={link.path} disablePadding>
+              <ListItemButton
+                selected={selectedIndex === index}
+                onClick={(event) => handleListItemClick(event, index)}
+                disableRipple
+              >
+                <ListItemIcon>
+                {React.createElement(linkIcons[index], { style: { color: mainColor } })}
+                </ListItemIcon>
+                <ListItemText primary={
+                  <Typography variant="drawerLink" color="primary">
+                    {link.name}
+                  </Typography>} />
+              </ListItemButton>
+            </ListItem>
+          </StyledNavLink>
+        ))}
+      </List>
+    </Drawer>
+  );
+}
+
 
 export default DrawerComponent;
