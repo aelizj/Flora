@@ -31,7 +31,8 @@ export const patchUser = createAsyncThunk(
   'user/patchUser',
   async(data, thunkAPI) => {
     try {
-      const response = await apiPatchUser(data);
+      const id = data.id;
+      const response = await apiPatchUser(id, data);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message })

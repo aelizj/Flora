@@ -38,11 +38,11 @@ const deleteUserById = async (req, res, next) => {
 const patchUserById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const user = await User.findById(id);
+    const user = await User.findByIdAndUpdate(id, req.body, { new: true });
     if (!user) {
       next(new HttpError('Could not find user with the provided id.', 404));
     }
-    return console.log('FOUND USER: ', user._id);
+    return res.json({ user });
   } catch (error) {
     return next(new HttpError('Something went wrong, please try again', 500));
   }

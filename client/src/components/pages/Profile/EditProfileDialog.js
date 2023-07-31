@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import SaveRoundedIcon from '@mui/icons-material/SaveRounded';
@@ -19,6 +19,7 @@ import {
 
 const EditProfileDialog = ({ user }) => {
   const dispatch = useDispatch();
+  const id = useSelector((state) => state.user.user._id)
   const [dialogOpen, setDialogOpen] = useState(false);
   const {
     register,
@@ -35,6 +36,7 @@ const EditProfileDialog = ({ user }) => {
   };
 
   const onSubmit = (data) => {
+    data.id = id;
     dispatch(patchUser(data));
     handleCloseDialog();
   };
@@ -149,7 +151,7 @@ const EditProfileDialog = ({ user }) => {
           />
 
           <TextField
-             {...register('location', {
+             {...register('bio', {
               maxLength: {
                 value: 2500,
                 message: "Bio may not be longer than 2,500 characters"

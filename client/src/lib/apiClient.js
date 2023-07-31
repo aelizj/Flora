@@ -71,10 +71,9 @@ const getUserById = async (id) => {
   }
 };
 
-const patchUser = async (data) => {
+const patchUser = async (id, data) => {
   try{
-    const id = data._id
-    const response = await apiClient.patch(`${USERS_INDEX_URL}/${id}`);
+    const response = await apiClient.patch(`${USERS_INDEX_URL}/${id}`, data);
     return response.data;
   } catch (error) {
     throw error;
