@@ -14,7 +14,6 @@ import Profile      from './pages/Profile/Profile';
 import DrawerHeader from './ui/DrawerHeader';
 import Footer       from './ui/Footer';
 import Login        from './ui/Login';
-import PrivateRoute from './ui/PrivateRoute';
 import Register     from './ui/Register';
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -38,6 +37,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 
 const MainComponent = ({ drawerOpen, theme }) => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  console.log(isAuthenticated)
 
   return (
     <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}>
@@ -46,24 +46,16 @@ const MainComponent = ({ drawerOpen, theme }) => {
         <Routes>
           {/* Unprotected routes */}
           <Route path="/"           element={<Home />} />
-          <Route path="/login"      element={isAuthenticated ? <Home /> : <Login />} />
-          <Route path="/register"   element={isAuthenticated ? <Home /> : <Register />} />
           <Route path="/basics"     element={<PlantInfo />} />
           <Route path="/plants"     element={<PlantList />} />
 
           {/* Protected routes */}
-          <Route path="/plants/:id" element={<PrivateRoute />} >
-            <Route index element={<Plant />} />
-          </Route>
-          <Route path="/events"     element={<PrivateRoute />} >
-            <Route index element={<Events />} />
-          </Route>
-          <Route path="/community"  element={<PrivateRoute />} >
-            <Route index element={<Community />} />
-          </Route>
-          <Route path="/profile" element={<PrivateRoute />} >
-            <Route index element={<Profile />} />
-          </Route>
+          <Route path="/login"      element={isAuthenticated ? <Home /> : <Login />} />
+          <Route path="/register"   element={isAuthenticated ? <Home /> : <Register />} />
+          <Route path="/plants/:id" element={isAuthenticated ? <Plant /> : <Login />} />
+          <Route path="/events"     element={isAuthenticated ? <Events /> : <Login />} />
+          <Route path="/community"  element={isAuthenticated ? <Community /> : <Login />}/>
+          <Route path="/profile"    element={isAuthenticated ? <Profile /> : <Login />}  />
         </Routes>
         <Footer />
       </Container>
