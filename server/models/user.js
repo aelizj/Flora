@@ -57,6 +57,16 @@ const UserSchema = new mongoose.Schema({
     default: [],
     required: false,
   },
+  profileImageUrl: {
+    type: String,
+    default: '',
+    required: false,
+  },
+  coverImageUrl: {
+    type: String,
+    default: '',
+    required: false,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);

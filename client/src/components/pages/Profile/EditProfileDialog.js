@@ -46,7 +46,6 @@ const EditProfileDialog = ({ user }) => {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
-      p: 4
     }}>
       <Button variant="outlined" onClick={handleClickOpenDialog}>
         Edit Profile
@@ -70,11 +69,11 @@ const EditProfileDialog = ({ user }) => {
 
         <DialogContent>
           <TextField
-             {...register('firstName', {
+            {...register('firstName', {
               required: 'First name is required',
               maxLength: {
                 value: 140,
-                message: "First name may not be longer than 140 characters"
+                message: "First name may not be longer than 140 characters",
               }
             })}
             id='firstName'
@@ -90,11 +89,11 @@ const EditProfileDialog = ({ user }) => {
           />
 
           <TextField
-             {...register('lastName', {
+            {...register('lastName', {
               required: 'Last name is required',
               maxLength: {
                 value: 140,
-                message: "Last name may not be longer than 140 characters"
+                message: "Last name may not be longer than 140 characters",
               }
             })}
             id='lastName'
@@ -114,7 +113,7 @@ const EditProfileDialog = ({ user }) => {
               required: "Email address is required",
               pattern: {
                 value: VALID_EMAIL_PATTERN,
-                message: 'Must enter a valid email address'
+                message: 'Must enter a valid email address',
               }
             })}
             id='email'
@@ -130,10 +129,50 @@ const EditProfileDialog = ({ user }) => {
           />
 
           <TextField
-             {...register('location', {
+            {...register('profileImageUrl', {
+              maxLength: {
+                value: 500,
+                message: "Url may not be longer than 500 characters",
+              }
+            })}
+            id='profileImageUrl'
+            label='Profile Image URL'
+            autoFocus
+            multiline
+            fullWidth
+            margin='dense'
+            color='primary'
+            size='small'
+            defaultValue={user.profileImageUrl ? user.profileImageUrl : ''}
+            error={!!errors.profileImageUrl}
+            helperText={errors.bio?.profileImageUrl}
+          />
+
+          <TextField
+            {...register('coverImageUrl', {
+              maxLength: {
+                value: 500,
+                message: "Url may not be longer than 500 characters",
+              }
+            })}
+            id='coverImageUrl'
+            label='Cover Image URL'
+            autoFocus
+            multiline
+            fullWidth
+            margin='dense'
+            color='primary'
+            size='small'
+            defaultValue={user.coverImageUrl ? user.coverImageUrl : ''}
+            error={!!errors.coverImageUrl}
+            helperText={errors.bio?.coverImageUrl}
+          />
+
+          <TextField
+            {...register('location', {
               maxLength: {
                 value: 140,
-                message: "Location may not be longer than 140 characters"
+                message: "Location may not be longer than 140 characters",
               }
             })}
             id='location'
@@ -151,10 +190,10 @@ const EditProfileDialog = ({ user }) => {
           />
 
           <TextField
-             {...register('bio', {
+            {...register('bio', {
               maxLength: {
                 value: 2500,
-                message: "Bio may not be longer than 2,500 characters"
+                message: "Bio may not be longer than 2,500 characters",
               }
             })}
             id='bio'

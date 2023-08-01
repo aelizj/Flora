@@ -5,15 +5,12 @@ const UserInfo = ({ name, email, location }) => {
   return (
     <>
       <Typography
-        sx={{
-          mt: 1,
-          fontWeight: 'bold',
-          fontSize: { xs: 'h6.fontSize', sm: 'h4.fontSize' }
-        }}
+        sx={{ fontWeight: 'bold', fontSize: { xs: 'h6.fontSize', sm: 'h4.fontSize' } }}
         variant="h5"
       >
         {name}
       </Typography>
+
       <Typography
         color="textSecondary"
         variant="body1"
@@ -21,10 +18,11 @@ const UserInfo = ({ name, email, location }) => {
       >
         {email}
       </Typography>
+
       <Typography
         color="textSecondary"
         variant="body2"
-        sx={{ display: 'flex', alignItems: 'center', mt: 1 }}
+        sx={{ display: 'flex', alignItems: 'center', my: 1 }}
       >
         { location ? <LocationOnIcon fontSize="small" /> : <></> }
         {location}
