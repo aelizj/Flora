@@ -11,7 +11,7 @@ import {
 const UserCard = ({ category, items, handleClickAdd, handleDelete }) => {
   if (items) {
     return (
-      <Paper elevation={2} sx={{ padding: 2 }}>
+      <Paper elevation={3} sx={{ p: 2 }}>
         <Box component="span">
           <Typography variant="h6" marginBottom={1}>{category}</Typography>
         </Box>
