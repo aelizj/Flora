@@ -19,7 +19,7 @@ import {
 
 const EditProfileDialog = ({ user }) => {
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user.user._id)
+  const id = useSelector((state) => state.user.user._id);
   const [dialogOpen, setDialogOpen] = useState(false);
   const {
     register,
@@ -52,9 +52,6 @@ const EditProfileDialog = ({ user }) => {
       </Button>
 
       <Dialog
-        sx={{
-          backdropFilter: 'blur(5px)',
-        }}
         keepMounted
         fullWidth
         onClose={handleCloseDialog}
@@ -220,7 +217,7 @@ const EditProfileDialog = ({ user }) => {
       </Dialog>
     </Box>
 
-  )
+  );
 };
 
 export default EditProfileDialog;

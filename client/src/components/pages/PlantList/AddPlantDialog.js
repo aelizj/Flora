@@ -55,9 +55,6 @@ const AddPlantDialog = () => {
       </Button>
 
       <Dialog
-        sx={{
-          backdropFilter: 'blur(5px)',
-        }}
         keepMounted
         fullWidth
         onClose={handleCloseDialog}
