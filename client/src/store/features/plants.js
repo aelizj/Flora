@@ -46,7 +46,7 @@ const plantsSlice = createSlice({
       })
       .addCase(createPlant.fulfilled, (state, action) => {
         state.loading = false;
-        state.plantsArray = [...state.plantsArray, action.payload];
+        state.plantsArray = [...state.plantsArray, action.payload[0]];
       })
       .addCase(createPlant.rejected, (state, action) => {
         state.loading = false;
