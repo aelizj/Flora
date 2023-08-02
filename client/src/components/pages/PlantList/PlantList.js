@@ -19,7 +19,7 @@ const PlantList = () => {
   return (
     <Container sx={{ p: 2 }}>
       <Typography component="h1" variant="h2" color="secondary">
-        Plants
+        Plant Guides
       </Typography>
       <div className="plant-grid">
         <Grid container spacing={0}>

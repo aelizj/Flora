@@ -62,7 +62,7 @@ const Plant = () => {
                   <ReactMarkdown>{plant.description}</ReactMarkdown>
                 </Typography>
                 <Typography component="h3" variant="h5" color="grey">
-                  Caring for {plant.commonName}s
+                  Caring for {plant.commonName}
                 </Typography>
                 <Typography variant="body1" color="black">
                   <ReactMarkdown>{plant.careGuide}</ReactMarkdown>
