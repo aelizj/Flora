@@ -34,4 +34,19 @@ const getPlantById = async (req, res, next) => {
   }
 };
 
-export { getPlants, createPlant, getPlantById };
+const deletePlantById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await Plant.findByIdAndDelete(id);
+    return res.send('Plant guide successfully deleted!');
+  } catch (error) {
+    return next(new HttpError('Something went wrong, please try again', 500));
+  }
+};
+
+export {
+  getPlants,
+  createPlant,
+  getPlantById,
+  deletePlantById,
+};

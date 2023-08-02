@@ -10,6 +10,7 @@ import {
   getPlants,
   createPlant,
   getPlantById,
+  deletePlantById,
 } from '../controllers/plantsController.js';
 import {
   getUsers,
@@ -31,6 +32,7 @@ router.delete('/users/:id', deleteUserById);
 router.get('/users', getUsers);
 
 router.get('/plants/:id', passport.authenticate('jwt', { session: false }), getPlantById);
+router.delete('/plants/:id', deletePlantById)
 router.post('/plants', passport.authenticate('jwt', { session: false }), createPlant);
 router.get('/plants', getPlants);
 
