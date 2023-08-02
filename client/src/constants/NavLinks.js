@@ -12,18 +12,18 @@ const NavLinks = [
     name: 'Plant Guides',
     path: 'plants',
   },
-  {
-    name: 'Plant Basics',
-    path: '/basics',
-  },
-  {
-    name: 'Community',
-    path: '/community',
-  },
-  {
-    name: 'Events',
-    path: '/events',
-  },
+  // {
+  //   name: 'Plant Basics',
+  //   path: '/basics',
+  // },
+  // {
+  //   name: 'Community',
+  //   path: '/community',
+  // },
+  // {
+  //   name: 'Events',
+  //   path: '/events',
+  // },
 
 ];
 
