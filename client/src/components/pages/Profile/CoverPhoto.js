@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardMedia } from '@mui/material';
 
 const CoverPhoto = ({ userData }) => {
-  console.log(userData)
   return (
     <Card sx={{ width: '100%', objectFit: 'cover' }}>
       <CardMedia
