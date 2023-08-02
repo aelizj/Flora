@@ -10,18 +10,7 @@ import EditProfileDialog from './EditProfileDialog.js';
 import UserBio from './UserBio.js';
 
 const ProfilePage = () => {
-  const userData = useSelector((state) => state.user.user)
-  console.log(userData)
-
-  const handleChipDelete = () => {
-    console.log("Chip delete clicked")
-  }
-
-  const handleClickAdd = (event) => {
-    event.preventDefault();
-    console.log(`Clicked add button in ${event.target}`);
-  }
-
+  const userData = useSelector((state) => state.user.user);
   return (
     <div>
       {userData.coverImageUrl ? <CoverPhoto userData={userData}/> : <Box sx={{ padding: 4 }}/>}
@@ -43,9 +32,12 @@ const ProfilePage = () => {
             sx={{ my: 2, width: '100%' }}
           >
             {userData.bio ? <UserBio userData={userData} /> : <></>}
-            {[ 'Plants', 'Interests', 'Wishlist'].map((category, index) => (
+            {[ 'plants', 'interests', 'wishlist'].map((category, index) => (
               <Grid item xs={12} sm={4} key={index}>
-                <UserCard category={category} items={userData[category.toLowerCase()]} handleAdd={handleClickAdd} handleDelete={handleChipDelete}/>
+                <UserCard
+                  userData={userData}
+                  category={category}
+                />
               </Grid>
             ))}
           </Grid>
