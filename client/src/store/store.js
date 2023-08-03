@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./features/user";
-import plantsReducer from './features/plants';
-import plantReducer from './features/plant';
+import plantGuidesReducer from './features/plantGuides';
+import plantGuideReducer from './features/plantGuide';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    plants: plantsReducer,
-    plant: plantReducer,
+    plantGuides: plantGuidesReducer,
+    plantGuide: plantGuideReducer,
   }});
 
 export default store;

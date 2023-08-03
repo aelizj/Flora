@@ -24,10 +24,10 @@ const StyledNavLink = styled(NavLink)({
 
 const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) => {
   const [selectedIndex, setSelectedIndex] = useState(null);
-
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-  }
+  };
+
   return (
     <Drawer
       sx={{
@@ -73,7 +73,6 @@ const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) =>
       </List>
     </Drawer>
   );
-}
-
+};
 
 export default DrawerComponent;

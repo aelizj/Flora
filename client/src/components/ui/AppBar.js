@@ -13,7 +13,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { logoutUser } from '../../store/features/user';
 
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -119,7 +118,6 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
       </Toolbar>
     </AppBar>
   );
-
 };
 
 export default FloraAppBar;

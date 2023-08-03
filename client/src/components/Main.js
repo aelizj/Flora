@@ -60,6 +60,6 @@ const MainComponent = ({ drawerOpen, theme }) => {
       </Container>
     </Main>
   );
-}
+};
 
 export default MainComponent;
