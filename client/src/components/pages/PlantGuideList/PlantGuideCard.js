@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 const PlantGuideCard = ({ plantGuide }) => {
+  console.log(plantGuide)
   return (
     <Box sx={{p: 2}} >
       <Card sx={{maxWidth: 450}}>

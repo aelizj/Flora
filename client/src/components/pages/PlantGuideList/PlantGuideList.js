@@ -23,9 +23,9 @@ const PlantGuideList = () => {
       </Typography>
       <div className="plant-grid">
         <Grid container spacing={0}>
-            {plantGuidesArray && plantGuidesArray.map(p => (
-              <Grid item xs={4} key={p.id}>
-                  <PlantGuideCard plant={p}/>
+            {plantGuidesArray && plantGuidesArray.map(plantGuide => (
+              <Grid item xs={4} key={plantGuide.id}>
+                  <PlantGuideCard plantGuide={plantGuide}/>
                 </Grid>
             ))}
         </Grid>
