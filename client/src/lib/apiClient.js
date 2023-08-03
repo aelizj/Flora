@@ -79,28 +79,28 @@ const patchUser = async (id, data) => {
   }
 };
 
-const getPlants = async () => {
+const getPlantGuides = async () => {
   try {
     const response = await apiClient.get(PLANTS_INDEX_URL);
-    return response.data.plants;
+    return response.data.plantGuides;
   } catch (error) {
     throw error;
   }
 };
 
-const createPlant = async (newPlant) => {
+const createPlantGuide = async (newPlantGuide) => {
   try {
-    const response = await apiClient.post(PLANTS_INDEX_URL, { plant: newPlant });
+    const response = await apiClient.post(PLANTS_INDEX_URL, { plantGuide: newPlantGuide });
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-const getPlantById = async (id) => {
+const getPlantGuideById = async (id) => {
   try {
     const response = await apiClient.get(`${PLANTS_INDEX_URL}/${id}`);
-    return response.data.plant;
+    return response.data.plantGuide;
   } catch (error) {
     throw error;
   }
@@ -114,7 +114,7 @@ export {
   getUsers,
   getUserById,
   patchUser,
-  getPlants,
-  createPlant,
-  getPlantById,
+  getPlantGuides,
+  createPlantGuide,
+  getPlantGuideById,
 };

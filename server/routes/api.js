@@ -7,11 +7,11 @@ import {
   logoutUser,
 } from '../controllers/authController.js';
 import {
-  getPlants,
-  createPlant,
-  getPlantById,
-  deletePlantById,
-} from '../controllers/plantsController.js';
+  getPlantGuides,
+  createPlantGuide,
+  getPlantGuideById,
+  deletePlantGuideById,
+} from '../controllers/plantGuidesController.js';
 import {
   getUsers,
   getUserById,
@@ -31,9 +31,9 @@ router.patch('/users/:id', patchUserById);
 router.delete('/users/:id', deleteUserById);
 router.get('/users', getUsers);
 
-router.get('/plants/:id', passport.authenticate('jwt', { session: false }), getPlantById);
-router.delete('/plants/:id', deletePlantById)
-router.post('/plants', passport.authenticate('jwt', { session: false }), createPlant);
-router.get('/plants', getPlants);
+router.get('/plant-guides/:id', passport.authenticate('jwt', { session: false }), getPlantGuideById);
+router.delete('/plant-guides/:id', deletePlantGuideById);
+router.post('/plant-guides', passport.authenticate('jwt', { session: false }), createPlantGuide);
+router.get('/plant-guides', getPlantGuides);
 
 export default router;

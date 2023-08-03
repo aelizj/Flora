@@ -10,7 +10,7 @@ const NavLinks = [
   },
   {
     name: 'Plant Guides',
-    path: 'plants',
+    path: 'plant-guides',
   },
   // {
   //   name: 'Plant Basics',
