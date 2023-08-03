@@ -1,19 +1,19 @@
 import HttpError from '../utils/httpError.js';
-import Plant from '../models/plant.js';
+import PlantGuide from '../models/plantGuide.js';
 
-const getPlants = async (req, res, next) => {
+const getPlantGuides = async (req, res, next) => {
   try {
-    const plants = await Plant.find({}, 'commonName _id scientificName imageUrl createdAt updatedAt');
-    res.json({ plants });
+    const plantGuides = await PlantGuide.find({}, 'commonName _id scientificName imageUrl createdAt updatedAt');
+    res.json({ plantGuides });
   } catch (error) {
     next(new HttpError('Failed to fetch plants', 500));
   }
 };
 
-const createPlant = async (req, res, next) => {
+const createPlantGuide = async (req, res, next) => {
   try {
-    const plant = await Plant.create(req.body.plant);
-    await Plant.find({ _id: plant._id }, 'commonName scientificName _id createdAt updatedAt')
+    const plantGuide = await PlantGuide.create(req.body.plantGuide);
+    await PlantGuide.find({ _id: plantGuide._id }, 'commonName scientificName _id createdAt updatedAt')
       .then((result) => res.json(result))
       .catch((error) => next(new HttpError(`Error retrieving the newly created plant: ${error.message}`, 500)));
   } catch (error) {
@@ -21,23 +21,23 @@ const createPlant = async (req, res, next) => {
   }
 };
 
-const getPlantById = async (req, res, next) => {
+const getPlantGuideById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const plant = await Plant.findById(id);
-    if (!plant) {
+    const plantGuide = await PlantGuide.findById(id);
+    if (!plantGuide) {
       next(new HttpError('Could not find plant with the provided id.', 404));
     }
-    res.json({ plant });
+    res.json({ plantGuide });
   } catch (error) {
     next(new HttpError('Something went wrong, please try again', 500));
   }
 };
 
-const deletePlantById = async (req, res, next) => {
+const deletePlantGuideById = async (req, res, next) => {
   const { id } = req.params;
   try {
-    await Plant.findByIdAndDelete(id);
+    await PlantGuide.findByIdAndDelete(id);
     return res.send('Plant guide successfully deleted!');
   } catch (error) {
     return next(new HttpError('Something went wrong, please try again', 500));
@@ -45,8 +45,8 @@ const deletePlantById = async (req, res, next) => {
 };
 
 export {
-  getPlants,
-  createPlant,
-  getPlantById,
-  deletePlantById,
+  getPlantGuides,
+  createPlantGuide,
+  getPlantGuideById,
+  deletePlantGuideById,
 };

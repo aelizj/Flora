@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import { createPlant } from '../../../store/features/plants';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import FlatButton from '../../ui/FlatButton';
+import { createPlantGuide } from '../../../store/features/plantGuides';
 import {
   Box,
   Button,
@@ -17,7 +17,7 @@ import {
   Typography,
  } from '@mui/material';
 
-const AddPlantDialog = () => {
+const AddPlantGuideDialog = () => {
   const dispatch = useDispatch();
   const [dialogOpen, setDialogOpen] = useState(false);
   const {
@@ -35,7 +35,7 @@ const AddPlantDialog = () => {
   };
 
   const onSubmit = (data) => {
-    dispatch(createPlant(data));
+    dispatch(createPlantGuide(data));
     handleCloseDialog();
   };
 
@@ -53,7 +53,6 @@ const AddPlantDialog = () => {
        >
           Add a Plant
       </Button>
-
       <Dialog
         keepMounted
         fullWidth
@@ -66,12 +65,10 @@ const AddPlantDialog = () => {
             Add a plant guide
           </Typography>
         </DialogTitle>
-
         <DialogContent>
           <DialogContentText sx={{ paddingBottom: 1 }}>
             To add a plant care guide to this page, fill out the form below.
           </DialogContentText>
-
           <TextField
             {...register('commonName', {
               required: 'Common name is required',
@@ -91,7 +88,6 @@ const AddPlantDialog = () => {
             error={!!errors.commonName}
             helperText={errors.commonName? errors.commonName.message : "Plant's colloquial name; i.e. Chinese money plant"}
           />
-
           <TextField
             {...register('scientificName', {
               required: 'Scientific name is required',
@@ -111,8 +107,7 @@ const AddPlantDialog = () => {
             error={!!errors.scientificName}
             helperText={errors.scientificName? errors.scientificName.message : "Plant's binomial scientific name; i.e. Pilea peperomioides"}
           />
-
-         <TextField
+          <TextField
             {...register('imageUrl', {
               maxLength: {
                 value: 250,
@@ -128,9 +123,7 @@ const AddPlantDialog = () => {
             size='small'
             error={!!errors.imageUrl}
             helperText={errors.imageUrl?.message}
-
           />
-
           <TextField
             {...register('description', {
               maxLength: {
@@ -151,7 +144,6 @@ const AddPlantDialog = () => {
             error={!!errors.description}
             helperText={errors.description?.message}
           />
-
           <TextField
             {...register('careGuide', {
               maxLength: {
@@ -173,7 +165,6 @@ const AddPlantDialog = () => {
             helperText={errors.careGuide?.message}
           />
         </DialogContent>
-
         <DialogActions>
           <FlatButton size="small" variant="outlined" onClick={handleCloseDialog} startIcon={<DeleteRoundedIcon/>}>Cancel</FlatButton>
           <FlatButton color="success" size="small" variant="contained" onClick={handleSubmit(onSubmit)} endIcon={<AddRoundedIcon/>}>Add</FlatButton>
@@ -183,4 +174,4 @@ const AddPlantDialog = () => {
   );
 };
 
-export default AddPlantDialog;
+export default AddPlantGuideDialog;

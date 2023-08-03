@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlants } from '../../../store/features/plants';
-import AddPlantDialog from './AddPlantDialog';
-import PlantCard from './PlantCard';
 import { Container, Grid, Typography } from '@mui/material';
+import { getPlantGuides } from '../../../store/features/plantGuides';
+import AddPlantGuideDialog from './AddPlantGuideDialog';
+import PlantGuideCard from './PlantGuideCard';
 
-const PlantList = () => {
+const PlantGuideList = () => {
   const dispatch = useDispatch();
-  const { loading, plantsArray, error } = useSelector(state => state.plants);
+  const { loading, plantGuidesArray, error } = useSelector(state => state.plantGuidesArray);
 
   useEffect(() => {
-    dispatch(getPlants());
+    dispatch(getPlantGuides());
   }, [dispatch]);
 
   if (loading) return <p>Loading...</p>;
@@ -23,16 +23,16 @@ const PlantList = () => {
       </Typography>
       <div className="plant-grid">
         <Grid container spacing={0}>
-            {plantsArray && plantsArray.map(p => (
+            {plantGuidesArray && plantGuidesArray.map(p => (
               <Grid item xs={4} key={p.id}>
-                  <PlantCard plant={p}/>
+                  <PlantGuideCard plant={p}/>
                 </Grid>
             ))}
         </Grid>
       </div>
-      <AddPlantDialog />
+      <AddPlantGuideDialog />
     </Container>
   );
 };
 
-export default PlantList;
+export default PlantGuideList;

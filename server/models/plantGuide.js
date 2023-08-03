@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PlantSchema = new mongoose.Schema({
+const PlantGuideSchema = new mongoose.Schema({
   commonName: {
     type: String,
     required: [true, 'A common name is required'],
@@ -33,5 +33,5 @@ const PlantSchema = new mongoose.Schema({
   },
 });
 
-const Plant = mongoose.model('Plant', PlantSchema);
-export default Plant;
+const PlantGuide = mongoose.model('PlantGuide', PlantGuideSchema);
+export default PlantGuide;

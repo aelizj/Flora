@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
-import { getPlantById } from '../../../store/features/plant';
+import { getPlantGuideById } from '../../../store/features/plantGuide';
 import {
   Box,
   Breadcrumbs,
@@ -13,18 +13,18 @@ import {
   Typography
 } from '@mui/material';
 
-const Plant = () => {
+const PlantGuide = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { loading, plant, error } = useSelector(state => state.plant);
+  const { loading, plantGuide, error } = useSelector(state => state.plantGuide);
 
   useEffect(() => {
-    dispatch(getPlantById(id));
+    dispatch(getPlantGuideById(id));
   }, [dispatch, id]);
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
-  if (!plant) return <p>No plant data!</p>
+  if (!plantGuide) return <p>No plant data!</p>
 
   return (
     <Container maxWidth="100%" disableGutters>
@@ -37,20 +37,18 @@ const Plant = () => {
               Plant Guides
             </Typography>
           </Link>
-          <Typography color="text.primary">{plant.commonName}</Typography>
+          <Typography color="text.primary">{plantGuide.commonName}</Typography>
         </Breadcrumbs>
       </Box>
-
       <Container sx={{ p:2 }} className='plantGuide'>
         <Box div className='plant-guide-header'>
           <Typography component="h1" variant="h2" color="primary">
-            {plant.commonName}
+            {plantGuide.commonName}
           </Typography>
           <Typography component="h2" variant="h5" color="secondary" sx={{ fontStyle: 'italic' }}>
-            ({plant.scientificName})
+            ({plantGuide.scientificName})
           </Typography>
         </Box>
-
         <Box div className='plant-guide-content'>
           <Grid container spacing={6} sx={{ mt: 1 }}>
             <Grid item xs="6">
@@ -59,25 +57,24 @@ const Plant = () => {
                   Description
                 </Typography>
                 <Typography variant="body" color="black">
-                  <ReactMarkdown>{plant.description}</ReactMarkdown>
+                  <ReactMarkdown>{plantGuide.description}</ReactMarkdown>
                 </Typography>
                 <Typography component="h3" variant="h5" color="grey">
-                  Caring for {plant.commonName}
+                  Caring for {plantGuide.commonName}
                 </Typography>
                 <Typography variant="body1" color="black">
-                  <ReactMarkdown>{plant.careGuide}</ReactMarkdown>
+                  <ReactMarkdown>{plantGuide.careGuide}</ReactMarkdown>
                 </Typography>
               </Box>
             </Grid>
-
             <Grid item xs={6}>
               <Box>
                 <Card>
                   <CardMedia
                     component="img"
-                    alt={'Picture of ' + plant.commonName}
+                    alt={'Picture of ' + plantGuide.commonName}
                     sx={{ width: '100%', height: 'auto'}}
-                    image={plant.imageUrl}
+                    image={plantGuide.imageUrl}
                   />
                 </Card>
               </Box>
@@ -89,4 +86,4 @@ const Plant = () => {
   );
 };
 
-export default Plant;
+export default PlantGuide;
