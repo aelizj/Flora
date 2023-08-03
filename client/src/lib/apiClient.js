@@ -90,7 +90,7 @@ const getPlantGuides = async () => {
 
 const createPlantGuide = async (newPlantGuide) => {
   try {
-    const response = await apiClient.post(PLANTS_INDEX_URL, { plantGuide: newPlantGuide });
+    const response = await apiClient.post(PLANTS_INDEX_URL, { plant: newPlantGuide });
     return response.data;
   } catch (error) {
     throw error;

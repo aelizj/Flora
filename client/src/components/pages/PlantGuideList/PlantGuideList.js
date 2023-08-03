@@ -7,7 +7,7 @@ import PlantGuideCard from './PlantGuideCard';
 
 const PlantGuideList = () => {
   const dispatch = useDispatch();
-  const { loading, plantGuidesArray, error } = useSelector(state => state.plantGuidesArray);
+  const { loading, plantGuidesArray, error } = useSelector(state => state.plantGuides);
 
   useEffect(() => {
     dispatch(getPlantGuides());
