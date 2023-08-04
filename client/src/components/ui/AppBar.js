@@ -1,10 +1,10 @@
 import { drawerWidth } from '../../constants/UiValues';
 import { useSelector, useDispatch } from 'react-redux';
 import * as React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
-import { Toolbar, Typography, IconButton, MenuItem }  from '@mui/material';
+import { Toolbar, Link, Typography, IconButton, MenuItem }  from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
@@ -78,7 +78,7 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }}>
-          <Link to={HOME_PAGE_URL} style={{ textDecoration: 'none', color: 'white' }}>
+          <Link href={HOME_PAGE_URL} color='#fff' underline='none'>
             Flora
           </Link>
         </Typography>
