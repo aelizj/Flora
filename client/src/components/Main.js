@@ -46,7 +46,7 @@ const MainComponent = ({ drawerOpen, theme }) => {
           {/* Unprotected routes */}
           <Route path="/"                 element={<Home />} />
           <Route path="/basics"           element={<PlantInfo />} />
-          <Route path="/plant-guides"     element={<PlantGuideList />} />
+          <Route path="/plant-guides"     element={<PlantGuideList isAuthenticated={isAuthenticated} />} />
 
           {/* Protected routes */}
           <Route path="/login"            element={isAuthenticated ? <Home /> : <Login />} />

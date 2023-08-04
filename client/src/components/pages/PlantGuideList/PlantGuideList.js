@@ -5,7 +5,7 @@ import { getPlantGuides } from '../../../store/features/plantGuides';
 import AddPlantGuideDialog from './AddPlantGuideDialog';
 import PlantGuideCard from './PlantGuideCard';
 
-const PlantGuideList = () => {
+const PlantGuideList = ({ isAuthenticated }) => {
   const dispatch = useDispatch();
   const { loading, plantGuidesArray, error } = useSelector(state => state.plantGuides);
 
@@ -30,7 +30,7 @@ const PlantGuideList = () => {
             ))}
         </Grid>
       </div>
-      <AddPlantGuideDialog />
+      {isAuthenticated ? <AddPlantGuideDialog /> : <></>}
     </Container>
   );
 };
