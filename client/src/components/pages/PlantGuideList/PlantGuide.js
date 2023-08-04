@@ -4,6 +4,7 @@ import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
 import { getPlantGuideById } from '../../../store/features/plantGuide';
 import { PLANT_GUIDES_INDEX_URL } from '../../../constants/Routes';
+import PlantIcon from '../../../assets/images/PlantIcon.svg';
 import {
   Box,
   Breadcrumbs,
@@ -73,7 +74,7 @@ const PlantGuide = () => {
                     component="img"
                     alt={'Picture of ' + plantGuide.commonName}
                     sx={{ width: '100%', height: 'auto'}}
-                    image={plantGuide.imageUrl}
+                    image={plantGuide.imageUrl ? plantGuide.imageUrl : PlantIcon }
                   />
                 </Card>
               </Box>

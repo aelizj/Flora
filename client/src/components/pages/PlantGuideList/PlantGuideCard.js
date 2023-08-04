@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { PLANT_GUIDES_INDEX_URL } from "../../../constants/Routes";
+import PlantIcon from '../../../assets/images/PlantIcon.svg';
 import {
   Box,
   Button,
@@ -19,8 +20,9 @@ const PlantGuideCard = ({ plantGuide }) => {
           component="img"
           alt={'Picture of ' + plantGuide.commonName}
           height="140"
-          image={plantGuide.imageUrl}
+          image={plantGuide.imageUrl ? plantGuide.imageUrl : PlantIcon }
         />
+
         <CardContent>
           <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 500 }}>
             <Link to={`${PLANT_GUIDES_INDEX_URL}/${plantGuide._id}`} style={{ textDecoration: 'none', color: 'dimgrey' }}>{plantGuide.commonName}</Link>
