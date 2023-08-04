@@ -17,7 +17,7 @@ const createPlantGuide = async (req, res, next) => {
       .then((result) => res.json(result))
       .catch((error) => next(new HttpError(`Error retrieving the newly created plant: ${error.message}`, 500)));
   } catch (error) {
-    next(new HttpError('Creating plant failed, please try again', 503));
+    next(new HttpError('Creating plant failed, please try again', 500));
   }
 };
 

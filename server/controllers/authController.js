@@ -30,10 +30,10 @@ const validateToken = async (req, res, next) => {
 // Adds new user to database
 const registerUser = async (req, res, next) => {
   const existingUser = await User.findOne({ email: req.body.email });
-  if (existingUser) return next(new HttpError('That email is already in use.', 409));
+  if (existingUser) return next(new HttpError('That email is already in use.', 400)); // Feels like 409 conflict but operation doesn't retry
 
   const usernameInUse = await User.findOne({ username: req.body.username });
-  if (usernameInUse) return next(new HttpError('That username is already in use', 409));
+  if (usernameInUse) return next(new HttpError('That username is already in use', 400)); // Feels like 409 conflict but operation doesn't retry
 
   const newUser = new User({
     firstName: req.body.firstName,
