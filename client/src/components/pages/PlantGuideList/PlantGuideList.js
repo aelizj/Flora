@@ -21,12 +21,12 @@ const PlantGuideList = ({ isAuthenticated }) => {
       <Typography component="h1" variant="h2" color="secondary">
         Plant Guides
       </Typography>
-      <div className="plant-grid">
+      <div>
         <Grid container spacing={0}>
             {plantGuidesArray && plantGuidesArray.map(plantGuide => (
               <Grid item xs={4} key={plantGuide.id}>
-                  <PlantGuideCard plantGuide={plantGuide}/>
-                </Grid>
+                <PlantGuideCard plantGuide={plantGuide}/>
+              </Grid>
             ))}
         </Grid>
       </div>
