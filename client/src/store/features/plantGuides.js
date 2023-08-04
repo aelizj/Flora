@@ -12,8 +12,8 @@ export const getPlantGuides = createAsyncThunk(
 
 export const createPlantGuide = createAsyncThunk(
   'plantGuides/createPlantGuide',
-  async(newPlantGuide) => {
-    const response = await apiCreatePlantGuide(newPlantGuide);
+  async(data) => {
+    const response = await apiCreatePlantGuide(data);
     return response;
   }
 );
