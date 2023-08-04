@@ -6,6 +6,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { VALID_EMAIL_PATTERN } from "../../constants/Validation";
 import { loginUser } from "../../store/features/user";
+import { REGISTER_USER_URL } from "../../constants/Routes";
 import {
   Avatar,
   Box,
@@ -135,7 +136,7 @@ export default function Login() {
               <Grid item xs>
               </Grid>
               <Grid item>
-                <Link href="/register" underline='hover' variant="body1" color="text.secondary">
+                <Link href={REGISTER_USER_URL} underline='hover' variant="body1" color="text.secondary">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

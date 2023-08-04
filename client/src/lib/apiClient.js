@@ -1,14 +1,14 @@
 import axios from "axios";
 import {
-  VALIDATE_TOKEN_URL,
-  LOGIN_USER_URL,
-  LOGOUT_USER_URL,
-  REGISTER_USER_URL,
-  PLANTS_INDEX_URL,
-  USERS_INDEX_URL
-} from "../constants/ApiRoutes";
+  API_BASE_URL,
+  API_VALIDATE_TOKEN_URL,
+  API_LOGIN_USER_URL,
+  API_LOGOUT_USER_URL,
+  API_REGISTER_USER_URL,
+  API_PLANT_GUIDES_INDEX_URL,
+  API_USERS_INDEX_URL
+} from "../constants/Routes";
 
-const API_BASE_URL = 'http://localhost:5001';
 axios.defaults.withCredentials = true;
 
 const apiClient = axios.create({
@@ -18,7 +18,7 @@ const apiClient = axios.create({
 
 const validateToken = async () => {
   try {
-    const response = await apiClient.get(VALIDATE_TOKEN_URL);
+    const response = await apiClient.get(API_VALIDATE_TOKEN_URL);
     return response.data;
   } catch (error) {
     throw error;
@@ -27,7 +27,7 @@ const validateToken = async () => {
 
 const loginUser = async (data) => {
   try {
-    const response = await apiClient.post(LOGIN_USER_URL, data);
+    const response = await apiClient.post(API_LOGIN_USER_URL, data);
     return response.data;
   } catch (error) {
     throw error;
@@ -36,7 +36,7 @@ const loginUser = async (data) => {
 
 const logoutUser = async () => {
   try {
-    const response = await apiClient.get(LOGOUT_USER_URL);
+    const response = await apiClient.get(API_LOGOUT_USER_URL);
     return response.data;
   } catch (error) {
     throw error;
@@ -45,7 +45,7 @@ const logoutUser = async () => {
 
 const registerUser = async (data) => {
   try {
-    const response = await apiClient.post(REGISTER_USER_URL, data);
+    const response = await apiClient.post(API_REGISTER_USER_URL, data);
     return response.data;
   } catch (error) {
     throw error;
@@ -54,7 +54,7 @@ const registerUser = async (data) => {
 
 const getUsers = async () => {
   try {
-    const response = await apiClient.get(USERS_INDEX_URL);
+    const response = await apiClient.get(API_USERS_INDEX_URL);
     return response.data.users;
   } catch (error) {
     throw error;
@@ -63,7 +63,7 @@ const getUsers = async () => {
 
 const getUserById = async (id) => {
   try {
-    const response = await apiClient.get(`${USERS_INDEX_URL}/${id}`);
+    const response = await apiClient.get(`${API_USERS_INDEX_URL}/${id}`);
     return response.data.user;
   } catch (error) {
     throw error;
@@ -72,7 +72,7 @@ const getUserById = async (id) => {
 
 const patchUser = async (id, data) => {
   try{
-    const response = await apiClient.patch(`${USERS_INDEX_URL}/${id}`, data);
+    const response = await apiClient.patch(`${API_USERS_INDEX_URL}/${id}`, data);
     return response.data;
   } catch (error) {
     throw error;
@@ -81,7 +81,7 @@ const patchUser = async (id, data) => {
 
 const getPlantGuides = async () => {
   try {
-    const response = await apiClient.get(PLANTS_INDEX_URL);
+    const response = await apiClient.get(API_PLANT_GUIDES_INDEX_URL);
     return response.data.plantGuides;
   } catch (error) {
     throw error;
@@ -90,7 +90,7 @@ const getPlantGuides = async () => {
 
 const createPlantGuide = async (newPlantGuide) => {
   try {
-    const response = await apiClient.post(PLANTS_INDEX_URL, { plant: newPlantGuide });
+    const response = await apiClient.post(API_PLANT_GUIDES_INDEX_URL, { plant: newPlantGuide });
     return response.data;
   } catch (error) {
     throw error;
@@ -99,7 +99,7 @@ const createPlantGuide = async (newPlantGuide) => {
 
 const getPlantGuideById = async (id) => {
   try {
-    const response = await apiClient.get(`${PLANTS_INDEX_URL}/${id}`);
+    const response = await apiClient.get(`${API_PLANT_GUIDES_INDEX_URL}/${id}`);
     return response.data.plantGuide;
   } catch (error) {
     throw error;

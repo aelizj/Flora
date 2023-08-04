@@ -1,28 +1,37 @@
+import {
+  HOME_PAGE_URL,
+  PROFILE_PAGE_URL,
+  PLANT_GUIDES_INDEX_URL,
+  // PLANT_BASICS_URL,
+  // COMMUNITY_PAGE_URL,
+  // EVENTS_PAGE_URL,
+} from './Routes';
+
 const NavLinks = [
   {
     name: 'Home',
-    path: '/',
+    path: HOME_PAGE_URL,
   },
   {
     name: 'Profile',
-    path: 'profile',
+    path: PROFILE_PAGE_URL,
 
   },
   {
     name: 'Plant Guides',
-    path: 'plant-guides',
+    path: PLANT_GUIDES_INDEX_URL,
   },
   // {
   //   name: 'Plant Basics',
-  //   path: '/basics',
+  //   path: PLANT_BASICS_URL,
   // },
   // {
   //   name: 'Community',
-  //   path: '/community',
+  //   path: COMMUNITY_PAGE_URL,
   // },
   // {
   //   name: 'Events',
-  //   path: '/events',
+  //   path: EVENTS_PAGE_URL,
   // },
 
 ];

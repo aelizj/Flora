@@ -1,17 +1,19 @@
 import { drawerWidth } from '../../constants/UiValues';
 import { useSelector, useDispatch } from 'react-redux';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { Toolbar, Typography, IconButton, MenuItem }  from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { logoutUser } from '../../store/features/user';
+import {
+  HOME_PAGE_URL,
+  LOGIN_USER_URL,
+  PROFILE_PAGE_URL
+} from '../../constants/Routes';
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -45,16 +47,16 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
     if (isAuthenticated) {
       dispatch(logoutUser())
     } else {
-      navigate('/login');
+      navigate(LOGIN_USER_URL);
     }
   }
 
   const handleProfileHome = (event) => {
     event.preventDefault();
     if (isAuthenticated) {
-      navigate('/profile');
+      navigate(PROFILE_PAGE_URL);
     } else {
-      navigate('/');
+      navigate(HOME_PAGE_URL);
     }
   }
 
@@ -75,13 +77,10 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography
-          variant="h5"
-          noWrap
-          component="div"
-          sx={{ flexGrow: 1 }}
-        >
-          Flora
+        <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }}>
+          <Link to={HOME_PAGE_URL} style={{ textDecoration: 'none', color: 'white' }}>
+            Flora
+          </Link>
         </Typography>
         <div id="account-menu">
           <IconButton

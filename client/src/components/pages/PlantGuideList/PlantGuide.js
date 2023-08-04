@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
 import { getPlantGuideById } from '../../../store/features/plantGuide';
+import { PLANT_GUIDES_INDEX_URL } from '../../../constants/Routes';
 import {
   Box,
   Breadcrumbs,
@@ -30,9 +31,7 @@ const PlantGuide = () => {
     <Container maxWidth="100%" disableGutters>
       <Box span className="back-button" sx={{ p:5 }}>
         <Breadcrumbs aria-label="breadcrumb">
-          <Link
-            to="/plants"
-          >
+          <Link to={PLANT_GUIDES_INDEX_URL} >
             <Typography color="dimgrey">
               Plant Guides
             </Typography>

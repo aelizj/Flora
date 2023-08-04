@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { PLANT_GUIDES_INDEX_URL } from "../../../constants/Routes";
 import {
   Box,
   Button,
@@ -22,7 +23,7 @@ const PlantGuideCard = ({ plantGuide }) => {
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div" sx={{ fontWeight: 500 }}>
-            <Link to={`/plants/${plantGuide._id}`} style={{ textDecoration: 'none', color: 'dimgrey' }}>{plantGuide.commonName}</Link>
+            <Link to={`${PLANT_GUIDES_INDEX_URL}/${plantGuide._id}`} style={{ textDecoration: 'none', color: 'dimgrey' }}>{plantGuide.commonName}</Link>
           </Typography>
           <Typography component="body1" variant="body2" color="text.secondary" sx={{ fontStyle: 'italic' }}>
             {plantGuide.scientificName}
@@ -31,7 +32,7 @@ const PlantGuideCard = ({ plantGuide }) => {
         <CardActions>
           {/* <Button size="small">Share</Button> */}
           <Button size="small">
-            <Link to={`/plants/${plantGuide._id}`} style={{ textDecoration: 'none', color: '#59920D' }}>
+            <Link to={`${PLANT_GUIDES_INDEX_URL}/${plantGuide._id}`} style={{ textDecoration: 'none', color: '#59920D' }}>
               <Typography textDecoration="none" textTransform="uppercase" variant="body2" sx={{ textAlign: 'right', fontWeight: '600' }}>
                 Learn More
               </Typography>
