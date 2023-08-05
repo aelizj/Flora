@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
@@ -19,6 +19,7 @@ import {
 
 const AddPlantGuideDialog = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector(state => state.user);
   const [dialogOpen, setDialogOpen] = useState(false);
   const {
     register,
@@ -35,6 +36,8 @@ const AddPlantGuideDialog = () => {
   };
 
   const onSubmit = (data) => {
+    const author = { id: user._id, username: user.username }
+    data.author = author;
     dispatch(createPlantGuide(data));
     handleCloseDialog();
   };
