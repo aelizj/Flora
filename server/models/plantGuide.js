@@ -1,5 +1,18 @@
 import mongoose from 'mongoose';
 
+const Author = new mongoose.Schema({
+  id: {
+    type: String,
+    default: '',
+    required: true,
+  },
+  username: {
+    type: String,
+    default: '',
+    required: true,
+  },
+});
+
 const PlantGuideSchema = new mongoose.Schema({
   commonName: {
     type: String,
@@ -30,6 +43,10 @@ const PlantGuideSchema = new mongoose.Schema({
     type: String,
     default: Date.now,
     required: [true, 'A timestamp for updatedAt is needed to submit.'],
+  },
+  author: {
+    type: Author,
+    required: true,
   },
 });
 
