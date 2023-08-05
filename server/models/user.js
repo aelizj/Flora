@@ -67,6 +67,11 @@ const UserSchema = new mongoose.Schema({
     default: '',
     required: false,
   },
+  authoredPlantGuides: {
+    type: Array,
+    default: [],
+    required: false,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);
