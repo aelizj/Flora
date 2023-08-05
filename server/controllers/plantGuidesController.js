@@ -1,5 +1,6 @@
 import HttpError from '../utils/httpError.js';
 import PlantGuide from '../models/plantGuide.js';
+import User from '../models/user.js';
 
 const getPlantGuides = async (req, res, next) => {
   try {
@@ -13,10 +14,14 @@ const getPlantGuides = async (req, res, next) => {
 const createPlantGuide = async (req, res, next) => {
   try {
     const plantGuide = await PlantGuide.create(req.body.plantGuide);
+    const user = await User.findById(plantGuide.author.id);
+    user.authoredPlantGuides.push(plantGuide._id);
+    await user.save();
     await PlantGuide.find({ _id: plantGuide._id }, 'commonName scientificName _id createdAt updatedAt')
       .then((result) => res.json(result))
       .catch((error) => next(new HttpError(`Error retrieving the newly created plant: ${error.message}`, 500)));
   } catch (error) {
+    console.error(error);
     next(new HttpError('Creating plant failed, please try again', 500));
   }
 };
