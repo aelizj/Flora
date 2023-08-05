@@ -20,11 +20,11 @@ import {
 import FlatButton from '../../ui/FlatButton';
 import { patchUser } from '../../../store/features/user';
 
-const UserCard = ({ userData, category }) => {
+const UserCard = ({ user, category }) => {
   const dispatch = useDispatch();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const id = userData._id
-  const items = userData[category]
+  const id = user._id
+  const items = user[category]
   const {
     register,
     handleSubmit,
@@ -40,13 +40,13 @@ const UserCard = ({ userData, category }) => {
   };
 
   const handleAddChip = (data) => {
-    const updatedCategory = [...userData[category], data.plantName];
+    const updatedCategory = [...user[category], data.plantName];
     dispatch(patchUser({ id, [category]: updatedCategory }));
     handleCloseDialog();
   };
 
   const handleChipDelete = (category, item) => {
-    const updatedCategory = userData[category.toLowerCase()].filter(chip => chip !== item);
+    const updatedCategory = user[category.toLowerCase()].filter(chip => chip !== item);
     dispatch(patchUser({ id, [category.toLowerCase()]: updatedCategory }));
   };
 

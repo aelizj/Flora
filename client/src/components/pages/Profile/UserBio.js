@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Box, Paper, Typography } from "@mui/material";
 
-const UserBio = ({ userData }) => {
+const UserBio = ({ user }) => {
   return (
       <Grid item xs={12} sm={12}sx={{ pb: 2}}>
         <Paper elevation={3} sx={{ p: 2 }}>
@@ -10,7 +10,7 @@ const UserBio = ({ userData }) => {
           </Box>
           <Box>
             <Typography variant="body2">
-              {userData.bio}
+              {user.bio}
             </Typography>
           </Box>
         </Paper>
