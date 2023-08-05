@@ -92,64 +92,64 @@ export const userSlice = createSlice({
   },
   extraReducers : (builder) => {
     builder
-     .addCase(loginUser.pending, (state) => {
-       state.loading = true;
-       state.error = null;
-     })
-     .addCase(loginUser.fulfilled, (state, action) => {
-      const { user } = action.payload;
-      state.user = user;
-      state.isAuthenticated = true;
-      state.loading = false;
-      state.error = null;
-     })
-     .addCase(loginUser.rejected, (state, action) => {
-      state.loading = false;
-      state.isAuthenticated = false;
-      state.error = action.error.code;
-     })
-     .addCase(registerUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-     })
-     .addCase(registerUser.fulfilled, (state, action) => {
-      const { user } = action.payload;
-      state.user = user;
-      state.isAuthenticated = true;
-      state.loading = false;
-      state.error = null;
-     })
-     .addCase(registerUser.rejected, (state, action) => {
-      state.loading = false;
-      state.isAuthenticated = false;
-      state.error = action.error.code;
-     })
-     .addCase(logoutUser.fulfilled, (state, action) => {
-      state.isAuthenticated = false;
-      state.user = {};
-    })
-    .addCase(logoutUser.pending, (state, action) => {
-      state.loading = true;
-      state.error = null;
-    })
-    .addCase(logoutUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.code;
-    })
-    .addCase(patchUser.fulfilled, (state, action) => {
-      const { user } = action.payload;
-      state.user = user;
-      state.loading = false;
-      state.error = null;
-    })
-    .addCase(patchUser.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-     })
-     .addCase(patchUser.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.code;
-     })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        const { user } = action.payload;
+        state.user = user;
+        state.isAuthenticated = true;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.error = action.error.code;
+      })
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        const { user } = action.payload;
+        state.user = user;
+        state.isAuthenticated = true;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.error = action.error.code;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.isAuthenticated = false;
+        state.user = {};
+      })
+      .addCase(logoutUser.pending, (state, action) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.code;
+      })
+      .addCase(patchUser.fulfilled, (state, action) => {
+        const { user } = action.payload;
+        state.user = user;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(patchUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(patchUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.code;
+      })
   }
 });
 
