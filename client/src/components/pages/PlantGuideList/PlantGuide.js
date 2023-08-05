@@ -24,6 +24,10 @@ const PlantGuide = () => {
     dispatch(getPlantGuideById(id));
   }, [dispatch, id]);
 
+  const guideHasDescription = !!(plantGuide.description);
+  const guideHasCareGuide = !!(plantGuide.careGuide);
+  const guideHasAuthor = !!(plantGuide.author);
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
   if (!plantGuide) return <p>No plant data!</p>
@@ -45,8 +49,8 @@ const PlantGuide = () => {
           <Typography component="h1" variant="h2" color="primary">
             {plantGuide.commonName}
           </Typography>
-          <Typography component="h2" variant="h5" color="secondary" sx={{ fontStyle: 'italic' }}>
-            ({plantGuide.scientificName})
+          <Typography component="h2" variant="body1" color="secondary" sx={{ fontStyle: 'italic' }}>
+            {guideHasAuthor ? `by ${plantGuide.author.username}` : ''}
           </Typography>
         </Box>
         <Box div className='plant-guide-content'>
@@ -54,16 +58,16 @@ const PlantGuide = () => {
             <Grid item xs="6">
               <Box sx={{}}>
                 <Typography component="h3" variant="h5" color="grey">
-                  Description
+                  {guideHasDescription ? 'Description' : ''}
                 </Typography>
                 <Typography variant="body" color="black">
-                  <ReactMarkdown>{plantGuide.description}</ReactMarkdown>
+                  <ReactMarkdown>{guideHasDescription ? plantGuide.description : ''}</ReactMarkdown>
                 </Typography>
                 <Typography component="h3" variant="h5" color="grey">
-                  Caring for {plantGuide.commonName}
+                  {guideHasCareGuide ? `Caring for ${plantGuide.commonName}` : ''}
                 </Typography>
                 <Typography variant="body1" color="black">
-                  <ReactMarkdown>{plantGuide.careGuide}</ReactMarkdown>
+                  <ReactMarkdown>{guideHasCareGuide ? plantGuide.careGuide : ''}</ReactMarkdown>
                 </Typography>
               </Box>
             </Grid>
