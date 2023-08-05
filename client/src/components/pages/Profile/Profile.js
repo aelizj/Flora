@@ -10,10 +10,11 @@ import EditProfileDialog from './EditProfileDialog.js';
 import UserBio from './UserBio.js';
 
 const ProfilePage = () => {
-  const userData = useSelector((state) => state.user.user);
+  const { user } = useSelector((state) => state.user);
+  console.log(user);
   return (
     <div>
-      {userData.coverImageUrl ? <CoverPhoto userData={userData}/> : <Box sx={{ padding: 4 }}/>}
+      {user.coverImageUrl ? <CoverPhoto user={user}/> : <Box sx={{ padding: 4 }}/>}
       <Container>
         <Box
           sx={{
@@ -23,26 +24,27 @@ const ProfilePage = () => {
             minHeight: 'fit-content',
           }}
         >
-          <UserAvatar avatar={userData.profileImageUrl} />
-          <UserInfo name={`${userData.firstName} ${userData.lastName}`} email={userData.email} location={userData.location} />
+          <UserAvatar avatar={user.profileImageUrl} />
+          <UserInfo name={`${user.firstName} ${user.lastName}`} email={user.email} location={user.location} />
           <Grid
             container
             direction="row"
             columnSpacing={2}
             sx={{ my: 2, width: '100%' }}
           >
-            {userData.bio ? <UserBio userData={userData} /> : <></>}
+            {user.bio ? <UserBio user={user} /> : <></>}
             {[ 'plants', 'interests', 'wishlist'].map((category, index) => (
               <Grid item xs={12} sm={4} key={index}>
                 <UserCard
-                  userData={userData}
+                  user={user}
                   category={category}
                 />
               </Grid>
             ))}
           </Grid>
-          <UserAchievements achievements={userData.achievements} />
-          <EditProfileDialog user={userData}/>
+          { user.authoredPlantGuides ? user.authoredPlantGuides.join(' | ') : ''}
+          { user.achievements ? <UserAchievements achievements={user.achievements} /> : <></> }
+          <EditProfileDialog user={user}/>
         </Box>
       </Container>
     </div>
