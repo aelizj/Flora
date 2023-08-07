@@ -28,6 +28,12 @@ const PlantGuide = () => {
   const guideHasCareGuide = !!(plantGuide.careGuide);
   const guideHasAuthor = !!(plantGuide.author);
 
+  let readableDate;
+  if (plantGuide.createdAt) {
+    const dateObj = new Date(Date.parse(plantGuide.createdAt));
+    readableDate = dateObj.toLocaleString('en-US', {dateStyle: 'short', timeStyle: 'short'});
+  }
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error}</p>
   if (!plantGuide) return <p>No plant data!</p>
@@ -51,6 +57,10 @@ const PlantGuide = () => {
           </Typography>
           <Typography component="h2" variant="body1" color="secondary" sx={{ fontStyle: 'italic' }}>
             {guideHasAuthor ? `by ${plantGuide.author.username}` : ''}
+
+          </Typography>
+          <Typography component="h2" variant="body1" color="secondary" sx={{ fontStyle: 'italic' }}>
+            posted {readableDate ? readableDate : plantGuide.createdAt}
           </Typography>
         </Box>
         <Box div className='plant-guide-content'>
@@ -68,6 +78,9 @@ const PlantGuide = () => {
                 </Typography>
                 <Typography variant="body1" color="black">
                   <ReactMarkdown>{guideHasCareGuide ? plantGuide.careGuide : ''}</ReactMarkdown>
+                </Typography>
+                <Typography variant="body2" color="black">
+                  <ReactMarkdown></ReactMarkdown>
                 </Typography>
               </Box>
             </Grid>

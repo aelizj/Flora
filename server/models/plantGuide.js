@@ -35,12 +35,12 @@ const PlantGuideSchema = new mongoose.Schema({
     required: false,
   },
   createdAt: {
-    type: String,
+    type: Date,
     default: Date.now,
     required: [true, 'A timestamp for createdAt is needed to submit.'],
   },
   updatedAt: {
-    type: String,
+    type: Date,
     default: Date.now,
     required: [true, 'A timestamp for updatedAt is needed to submit.'],
   },
