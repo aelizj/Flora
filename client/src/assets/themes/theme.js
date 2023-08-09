@@ -8,7 +8,7 @@ import "@fontsource/unbounded/700.css";
 
 const testTheme = createTheme({
   typography: {
-    htmlFontSize: 16,
+    htmlFontSize: 20,
     fontFamily: [
       '"Instrument Sans"',
       'sans-serif',
