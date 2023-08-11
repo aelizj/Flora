@@ -8,7 +8,7 @@ import { dirname } from 'path';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
-import config from '../config.js';
+import config from './config.js';
 import apiRoutes from './routes/api.js';
 import User from './models/user.js';
 
