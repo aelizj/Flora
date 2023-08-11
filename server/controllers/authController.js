@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import config from '../../config.js';
+import config from '../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
