@@ -1,0 +1,27 @@
+{
+  "family": "flora-app",
+  "container-definitions": [
+    {
+      "name": "flora-app",
+      "image": "141892977197.dkr.ecr.us-west-2.amazonaws.com/flora-app:latest",
+      "memory": 512,
+      "cpu": "256",
+      "portMappings": [
+        {
+          "containerPort": 5001,
+          "hostPost": 5001
+        }
+      ],
+      "environment": [
+        {
+          "name": "DB",
+          "value": "mongodb+srv://flora-admin:O0iJEqWtmoa2XEGF@floradb0.luhykkz.mongodb.net/floradb?retryWrites=true&w=majority"
+        },
+        {
+          "name": "JWT_SECRET",
+          "value": "46c2222506e402938c5fa3bc54eeb5a9f60d5fb9a708cba78dbc20c93cf08b2153bd3440de30a9c1d9fbb414e19743838ea227dc04a86d4d3b65b6f8ae476cc4"
+        }
+      ]
+    }
+  ]
+}

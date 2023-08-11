@@ -1,10 +1,10 @@
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
@@ -68,6 +68,8 @@ app.use('/api', apiRoutes);
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
+
+console.log(process.env.DB);
 
 mongoose
   .connect(process.env.DB, {
