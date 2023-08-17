@@ -1,22 +1,29 @@
-FROM node:current-slim
+FROM      node:current-slim
 
-ENV NODE_ENV production
+ENV       NODE_ENV production
 
-WORKDIR /app
+WORKDIR   /app
+
+COPY      ./logs ./logs
 
 # Copy server files and install server dependencies
-COPY ./package*.json ./
-RUN npm ci --omit=dev
+COPY      ./package*.json ./
+RUN       npm ci --omit=dev
 
 # Copy client files, install client dependencies, and build client
-COPY ./client ./client
-RUN cd client && npm ci --omit=dev && npm run build
+COPY      ./client ./client
+RUN       cd client && npm ci --omit=dev && npm run build
 
-# Copy remaining server
-COPY ./server ./server
+# Copy remaining server files
+COPY      ./server ./server
 
-USER node
+# Copy startup script
+COPY      ./scripts/startup.sh ./scripts/startup.sh
+RUN       chmod +x ./scripts/startup.sh
 
-EXPOSE 3000
+USER      node
 
-CMD npm start
+EXPOSE    3000
+EXPOSE    5001
+
+CMD      ["./scripts/startup.sh"]
