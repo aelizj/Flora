@@ -4,9 +4,12 @@ import config from '../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
+import { RouteProcessingStart, RouteProcessingSuccess, RouteProcessingFailure } from '../utils/routeProcessing.js';
 
 // Validates user token
 const validateToken = async (req, res, next) => {
+  RouteProcessingStart(req.method, req.url);
+
   const token = req.cookies.jwt;
   if (!token) return next(new HttpError('No token provided', 401));
   try {
@@ -18,17 +21,22 @@ const validateToken = async (req, res, next) => {
     } catch (error) {
       console.error('Token decode error: ', error);
     }
+
     const user = decoded ? await User.findById(decoded._id) : null;
     if (!user) throw new Error('User not found');
+    RouteProcessingSuccess(req.method, req.url, res);
     return res.json(user);
   } catch (error) {
     console.error('Token verification error: ', error);
+    RouteProcessingFailure(req.method, req.url, error);
     return next(new HttpError('Invalid token', 401));
   }
 };
 
 // Adds new user to database
 const registerUser = async (req, res, next) => {
+  RouteProcessingStart(req.method, req.url);
+
   const existingUser = await User.findOne({ email: req.body.email });
   if (existingUser) return next(new HttpError('That email is already in use.', 400)); // Feels like 409 conflict but operation doesn't retry
 
@@ -49,14 +57,18 @@ const registerUser = async (req, res, next) => {
   try {
     await newUser.save();
   } catch (error) {
+    RouteProcessingFailure(req.method, req.url, error);
     return next(new HttpError(`Error occurred during registration: ${error}`, 500));
   }
 
+  RouteProcessingSuccess(req.method, req.url, res);
   return createTokenAndSetCookie(newUser, res, next);
 };
 
 // Validates entered user credentials
 const loginUser = async (req, res, next) => {
+  RouteProcessingStart(req.method, req.url);
+
   if (!req.body.email || !req.body.password) {
     return next(new HttpError('All fields are required for submission.', 400));
   }
@@ -68,14 +80,18 @@ const loginUser = async (req, res, next) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new HttpError('Incorrect password.', 403));
+    RouteProcessingSuccess(req.method, req.url, res);
     return createTokenAndSetCookie(user, res, next);
   } catch (error) {
+    RouteProcessingFailure(req.method, req.url, error);
     return next(new HttpError(`Error occured during login: ${error}`, 500));
   }
 };
 
 // Logs out user
 const logoutUser = async (req, res, next) => {
+  RouteProcessingStart(req.method, req.url);
+
   if (!req.cookies.jwt) {
     return next(new HttpError('Bad request', 400));
   }
@@ -83,8 +99,10 @@ const logoutUser = async (req, res, next) => {
   try {
     res.clearCookie('jwt');
     res.clearCookie('isAuthenticated');
+    RouteProcessingSuccess(req.method, req.url, res);
     return res.send('Successfully logged out!');
   } catch (error) {
+    RouteProcessingFailure(req.method, req.url, error);
     return next(new HttpError(`Error occured during logout: ${error}`, 500));
   }
 };
