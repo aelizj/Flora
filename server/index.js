@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import path, { dirname } from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
@@ -11,6 +11,7 @@ import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
 import config from './config.js';
 import apiRoutes from './routes/api.js';
 import User from './models/user.js';
+import { seedPlantGuidesCollection, seedUsersCollection } from './utils/seedDb.js';
 
 dotenv.config();
 
@@ -19,7 +20,8 @@ app.use(cookieParser());
 app.use((req, res, next) => {
   next();
 });
-const port = process.env.PORT || 5001;
+
+const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -28,7 +30,6 @@ const cookieExtractor = (req) => {
   if (req && req.cookies) {
     token = req.cookies['jwt'];
   }
-
   return token;
 };
 
@@ -48,7 +49,6 @@ passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
     }
 
     return done(null, false);
-    // or you could create a new account
   } catch (error) {
     return console.err(error);
   }
@@ -65,11 +65,17 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use('/api', apiRoutes);
 
+// Serve static assets (React frontend)
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
-
-console.log(process.env.DB);
 
 mongoose
   .connect(process.env.DB, {
@@ -78,6 +84,9 @@ mongoose
   })
   .then(() => console.log('Database connected successfully.'))
   .catch((err) => console.error('Error connecting to database: ', err));
+
+await seedUsersCollection();
+await seedPlantGuidesCollection();
 
 app.use((err, req, res, next) => {
   console.error(err);

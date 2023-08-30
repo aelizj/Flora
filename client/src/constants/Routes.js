@@ -1,5 +1,5 @@
 // API Routes
-export const API_BASE_URL               = 'http://localhost:5001';
+export const API_BASE_URL               = 'https://www.floraapp.dev';
 export const API_VALIDATE_TOKEN_URL     = '/api/validate-token';
 export const API_LOGIN_USER_URL         = '/api/login';
 export const API_LOGOUT_USER_URL        = '/api/logout'

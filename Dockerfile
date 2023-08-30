@@ -1,12 +1,25 @@
 FROM      node:current-slim
 
 ENV       NODE_ENV production
-
+ENV       DB mongodb://localhost:27017/floradb
 WORKDIR   /app
 
 COPY      ./logs ./logs
 
-# Copy server files and install server dependencies
+# Install MongoDB dependencies
+RUN       echo "deb http://deb.debian.org/debian oldstable main" >> /etc/apt/sources.list
+RUN       apt-get update && apt-cache search libssl && apt-get install -y wget gnupg lsb-release libssl1.1
+
+# Add MongoDB official repo
+RUN       wget -qO - https://www.mongodb.org/static/pgp/server-7.0.asc | apt-key add -
+RUN       echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/7.0 main" | tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+# Install MongoDB
+RUN       apt-get update && apt-get install -y mongodb-org
+
+# Create a MongoDB data directory
+RUN       mkdir -p /data/db
+
+# Copy server package files and install server dependencies
 COPY      ./package*.json ./
 RUN       npm ci --omit=dev
 
@@ -17,13 +30,16 @@ RUN       cd client && npm ci --omit=dev && npm run build
 # Copy remaining server files
 COPY      ./server ./server
 
+RUN       echo "lets force it to redo layers after this again"
+
 # Copy startup script
 COPY      ./scripts/startup.sh ./scripts/startup.sh
 RUN       chmod +x ./scripts/startup.sh
 
+RUN       chmod -R 777 /data/db
+
 USER      node
 
 EXPOSE    3000
-EXPOSE    5001
 
-CMD      ["./scripts/startup.sh"]
+CMD       ["./scripts/startup.sh"]

@@ -9,12 +9,19 @@ import testTheme from './assets/themes/theme';
 const theme = testTheme;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-  <StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </Provider>
-  </StrictMode>
-);
+console.log('Inside client-side index.js file');
+
+try {
+  root.render(
+    <StrictMode>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </StrictMode>
+  );
+} catch (error) {
+  console.error(error);
+  throw(error);
+}

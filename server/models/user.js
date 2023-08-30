@@ -30,12 +30,12 @@ const UserSchema = new mongoose.Schema({
   bio: {
     type: String,
     default: '',
-    required: 'false',
+    required: false,
   },
   location: {
     type: String,
     default: '',
-    required: 'false',
+    required: false,
   },
   interests: {
     type: Array,

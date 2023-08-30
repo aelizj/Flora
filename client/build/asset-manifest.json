@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a37d2d25.css",
-    "main.js": "/static/js/main.6e0c1fdb.js",
+    "main.js": "/static/js/main.607d9a0b.js",
     "static/media/unbounded-all-700-normal.woff": "/static/media/unbounded-all-700-normal.0c8dc24f23592ce2df17.woff",
     "static/media/unbounded-all-500-normal.woff": "/static/media/unbounded-all-500-normal.2164ea89247bde39eb55.woff",
     "static/media/unbounded-all-300-normal.woff": "/static/media/unbounded-all-300-normal.8b97a259022e929c491b.woff",
@@ -27,7 +27,7 @@
     "static/media/unbounded-vietnamese-300-normal.woff2": "/static/media/unbounded-vietnamese-300-normal.fdb0b8d931b69503baa7.woff2",
     "static/media/unbounded-vietnamese-400-normal.woff2": "/static/media/unbounded-vietnamese-400-normal.f5b4770cd328adb5f69b.woff2",
     "static/media/unbounded-vietnamese-200-normal.woff2": "/static/media/unbounded-vietnamese-200-normal.02721ccc871c3c5c2296.woff2",
-    "static/media/PlantIcon.svg": "/static/media/PlantIcon.21c89aa10d9cc5da990a70286af722b6.svg",
+    "static/media/PlantIcon.svg": "/static/media/PlantIcon.400cdfe06d5a5782130f25bfe49d64a5.svg",
     "static/media/unbounded-cyrillic-ext-300-normal.woff2": "/static/media/unbounded-cyrillic-ext-300-normal.c488aced8a5a7d0d5010.woff2",
     "static/media/unbounded-cyrillic-ext-500-normal.woff2": "/static/media/unbounded-cyrillic-ext-500-normal.a7f11f247ba45cd2380a.woff2",
     "static/media/unbounded-cyrillic-ext-200-normal.woff2": "/static/media/unbounded-cyrillic-ext-200-normal.c87f0285c1d1457da862.woff2",
@@ -35,10 +35,10 @@
     "index.html": "/index.html",
     "static/media/unbounded-cyrillic-ext-400-normal.woff2": "/static/media/unbounded-cyrillic-ext-400-normal.3608c435ed123a7dd849.woff2",
     "main.a37d2d25.css.map": "/static/css/main.a37d2d25.css.map",
-    "main.6e0c1fdb.js.map": "/static/js/main.6e0c1fdb.js.map"
+    "main.607d9a0b.js.map": "/static/js/main.607d9a0b.js.map"
   },
   "entrypoints": [
     "static/css/main.a37d2d25.css",
-    "static/js/main.6e0c1fdb.js"
+    "static/js/main.607d9a0b.js"
   ]
 }

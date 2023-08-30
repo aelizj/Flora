@@ -1,5 +1,4 @@
-npm start &
-cd client
-npm start &
+mongod &
+npm run start &
 
-tail -f ../logs/containerStartup.log
+tail -f ./logs/containerStartup.log

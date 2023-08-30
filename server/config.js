@@ -1,10 +1,11 @@
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const config = {
   cors: {
-    origin: 'http://localhost:3000',
-    credentials: true
+    origin: 'http://flora-app-lb-649416333.us-west-2.elb.amazonaws.com',
+    credentials: true,
   },
   jwt: {
     secretOrPublicKey: process.env.JWT_SECRET || 'SetSecretInDotEnv',

@@ -16,6 +16,8 @@ import PeopleRoundedIcon from '@mui/icons-material/PeopleRounded';
 import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 
 const App = () => {
+  console.log('Inside app component');
+
   const dispatch = useDispatch();
 
   useEffect(() => {
