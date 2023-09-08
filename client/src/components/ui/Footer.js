@@ -11,19 +11,19 @@ const StickyFooter = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        minHeight: '90vh',
       }}
     >
       <Box
         component="footer"
         sx={{
-          py: 3,
-          px: 2,
+          py: 1,
+          px: 0,
           mt: 'auto',
+          backgroundColor: "#EDF1EA"
         }}
       >
-        <Container maxWidth="100%" sx={{justifyContent: 'space-evenly', component: 'div',}}>
-          <Typography variant="footer" color="primary"  sx={{ flexGrow: 1,  }}>
+        <Container maxWidth="100%" sx={{ justifyContent: 'space-evenly', component: 'div',  }}>
+          <Typography variant="footer" color="text.primary"  sx={{ flexGrow: 1, fontWeight: 'normal' }}>
             Copyright ©Flora 2023
           </Typography>
         </Container>

@@ -50,7 +50,7 @@ const MainComponent = ({ drawerOpen, theme }) => {
   return (
     <Main open={drawerOpen} theme={theme} sx={{ padding: 0 }}>
       <DrawerHeader />
-      <Container maxWidth="100%" disableGutters >
+      <Container maxWidth="100%" disableGutters sx={{ minHeight: '100vh'}} >
         <Routes>
           {/* Unprotected routes */}
           <Route path={HOME_PAGE_URL}                   element={<Home />} />
@@ -65,8 +65,9 @@ const MainComponent = ({ drawerOpen, theme }) => {
           <Route path={COMMUNITY_PAGE_URL}              element={isAuthenticated ? <Community /> : <Login />}/>
           <Route path={`${PLANT_GUIDES_INDEX_URL}/:id`} element={isAuthenticated ? <PlantGuide /> : <Login />} />
         </Routes>
-        <Footer />
       </Container>
+      <Footer />
+
     </Main>
   );
 };
