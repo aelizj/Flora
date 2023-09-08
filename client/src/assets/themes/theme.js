@@ -6,7 +6,7 @@ import "@fontsource/unbounded/500.css";
 import "@fontsource/unbounded/700.css";
 
 
-const testTheme = createTheme({
+const floraTheme = createTheme({
   typography: {
     htmlFontSize: 20,
     fontFamily: [
@@ -23,9 +23,10 @@ const testTheme = createTheme({
       '"Segoe UI Symbol"',
     ].join(','),
     button: {
+      fontFamily: '"Unbounded"',
       textTransform: 'uppercase',
-      fontSize: 16,
-      fontWeight: 600
+      fontSize: 14,
+      fontWeight: 500,
     },
     drawerLink: {
       fontFamily: '"Unbounded"',
@@ -34,8 +35,8 @@ const testTheme = createTheme({
     },
     footer: {
       fontFamily: '"Unbounded"',
-      fontWeight: 500,
-      fontSize: 10,
+      fontWeight: 200,
+      fontSize: 8,
     },
     h1: {
       fontFamily: [
@@ -70,10 +71,11 @@ const testTheme = createTheme({
   },
    palette: {
      primary: {
-       main: '#739e47',
+       main: '#7E9458',
+       light: '#A4BB7E',
      },
      secondary: {
-       main: '#477335',
+       main: '#5C6D40 ',
      },
    },
    components: {
@@ -91,4 +93,4 @@ const testTheme = createTheme({
   },
 });
 
-export default testTheme;
+export default floraTheme;

@@ -77,7 +77,7 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h5" noWrap component="div" sx={{ flexGrow: 1 }}>
+        <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
           <Link href={HOME_PAGE_URL} color='#fff' underline='none'>
             Flora
           </Link>

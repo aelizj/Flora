@@ -14,11 +14,11 @@ import {
   Typography,
   Grid,
   TextField,
-  Button,
   Link,
   InputAdornment,
   IconButton
 } from '@mui/material';
+import FlatButton from './FlatButton';
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -139,14 +139,16 @@ const Register = () => {
               />
             </Grid>
           </Grid>
-          <Button
+          <FlatButton
+            aria-label='submit'
             type="submit"
             fullWidth
+            color="primary"
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
             Sign Up
-          </Button>
+          </FlatButton>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link href={LOGIN_USER_URL} underline='hover' variant="body1" color="text.secondary">

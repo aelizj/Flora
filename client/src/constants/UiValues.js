@@ -1,2 +1,4 @@
-export const drawerWidth = 260;
-export const mainColor= '#739e47';
+import floraTheme from "../assets/themes/theme";
+
+export const drawerWidth = 250;
+export const mainColor= floraTheme.palette.secondary.main;
