@@ -10,7 +10,6 @@ import { REGISTER_USER_URL } from "../../constants/Routes";
 import {
   Avatar,
   Box,
-  Button,
   CssBaseline,
   Grid,
   IconButton,
@@ -20,6 +19,7 @@ import {
   TextField,
   Typography
 } from "@mui/material";
+import FlatButton from "./FlatButton";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
 
-          <Typography component="h1" variant="h4" color="text.secondary">
+          <Typography component="h1" variant="h4" color="text.primary">
             Sign in
           </Typography>
 
@@ -120,7 +120,8 @@ export default function Login() {
               }}
             />
 
-            <Button
+            <FlatButton
+              aria-label='submit'
               type="submit"
               fullWidth
               color="primary"
@@ -130,7 +131,7 @@ export default function Login() {
               <Typography variant="button">
                 Sign In
               </Typography>
-            </Button>
+            </FlatButton>
 
             <Grid container>
               <Grid item xs>

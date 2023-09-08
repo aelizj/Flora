@@ -43,7 +43,7 @@ const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) =>
       open={drawerOpen}
     >
       <DrawerHeader theme={theme}>
-        <IconButton onClick={handleDrawerClose}>
+        <IconButton aria-label='close drawer' onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
         </IconButton>
       </DrawerHeader>
@@ -55,6 +55,7 @@ const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) =>
           >
             <ListItem key={link.path} disablePadding>
               <ListItemButton
+                aria-label={link.name}
                 selected={selectedIndex === index}
                 onClick={(event) => handleListItemClick(event, index)}
                 disableRipple
@@ -63,7 +64,7 @@ const DrawerComponent = ({ drawerOpen, handleDrawerClose, theme, linkIcons }) =>
                 {React.createElement(linkIcons[index], { style: { color: mainColor } })}
                 </ListItemIcon>
                 <ListItemText primary={
-                  <Typography variant="drawerLink" color="primary">
+                  <Typography variant="drawerLink" color="secondary">
                     {link.name}
                   </Typography>} />
               </ListItemButton>
