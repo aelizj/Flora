@@ -1,9 +1,8 @@
 import React from 'react';
 import { styled, Container, Typography, Grid, Box, Card, CardMedia  } from '@mui/material';
-import FlatButton from '../../ui/FlatButton';
-import { REGISTER_USER_URL, LOGIN_USER_URL } from '../../../constants/Routes';
 import tropicalPlantsPic from '../../../assets/images/tropicalPlants.jpg';
 import plantRoom from '../../../assets/images/plantRoom.jpg';
+import HomePageButtons from './HomePageButtons';
 
 const Item = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -15,28 +14,13 @@ const Item = styled(Card)(({ theme }) => ({
   boxShadow: 'none'
 }));
 
-const HomePageButton = styled(FlatButton)(({ theme }) => ({
-  color: '#fff',
-  height: 65,
-  width: 200,
-}));
-
-const HomePageLoginButton = styled(HomePageButton) (({ theme }) => ({
-  '&:hover': {
-    backgroundColor: theme.palette.secondary.main,
-    borderColor: theme.palette.secondary.main,
-    color: '#fff'
-  }
-}));
-
-const Home = () => {
+const Home = (isAuthenticated) => {
   return (
     <Container maxWidth='100%' sx={{ minHeight: '100vh', py: 5,backgroundColor: '#EDF1EA' }}>
       <Box sx={{ flexGrow: 1 }}>
         <Typography variant="h1" sx={{ textAlign: 'right', fontWeight: 'bold' }}>
           Flora
         </Typography>
-
         <Typography variant="h4" sx={{ p: 1, paddingBottom: 5, textAlign: 'right', fontWeight: 'light' }}>
           A place for plant lovers.
         </Typography>
@@ -76,20 +60,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Box>
-
-      <Box sx={{ flexGrow: 1, pt: 9, pb: 5, textAlign: 'center' }}>
-        <HomePageButton aria-label='register' href={REGISTER_USER_URL} variant='contained' sx={{ marginRight: 3, backgroundColor: 'primary.light', outlineWidth: 'thick' }}>
-          <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
-            Register
-          </Typography>
-        </HomePageButton>
-
-        <HomePageLoginButton aria-label='login' href={LOGIN_USER_URL} variant='outlined' sx={{ color: 'secondary.main', backgroundColor: '#fff' }}>
-          <Typography variant='h5' sx={{ fontWeight: 'bold' }}>
-            Login
-          </Typography>
-        </HomePageLoginButton>
-      </Box>
+      {isAuthenticated ? <></> : <HomePageButtons />}
     </Container>
   );
 };

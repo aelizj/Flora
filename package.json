@@ -7,7 +7,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node ./server/index",
     "server": "nodemon ./server/index",
-    "client": "npm start --prefix client",
+    "client": "npm run dev --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

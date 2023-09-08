@@ -53,7 +53,7 @@ const MainComponent = ({ drawerOpen, theme }) => {
       <Container maxWidth="100%" disableGutters sx={{ minHeight: '100vh'}} >
         <Routes>
           {/* Unprotected routes */}
-          <Route path={HOME_PAGE_URL}                   element={<Home />} />
+          <Route path={HOME_PAGE_URL}                   element={<Home isAuthenticated={isAuthenticated}/>} />
           <Route path={PLANT_GUIDES_INDEX_URL}          element={<PlantGuideList isAuthenticated={isAuthenticated} />} />
           <Route path={PLANT_BASICS_URL}                element={<PlantInfo />} />
 
