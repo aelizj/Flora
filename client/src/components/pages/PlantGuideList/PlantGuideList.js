@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Grid, Typography } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { getPlantGuides } from '../../../store/features/plantGuides';
 import AddPlantGuideDialog from './AddPlantGuideDialog';
 import PlantGuideCard from './PlantGuideCard';
@@ -8,28 +8,39 @@ import PlantGuideCard from './PlantGuideCard';
 const PlantGuideList = ({ isAuthenticated }) => {
   const dispatch = useDispatch();
   const { loading, plantGuidesArray, error } = useSelector(state => state.plantGuides);
+  const plantGuides = (plantGuidesArray) => {
+    return (
+      <div>
+        <Grid container spacing={0}>
+          {plantGuidesArray && plantGuidesArray.map(plantGuide => (
+            <Grid item xs={4} key={plantGuide.id}>
+              <PlantGuideCard plantGuide={plantGuide}/>
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+    )
+  };
 
   useEffect(() => {
     dispatch(getPlantGuides());
   }, [dispatch]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return (
+    <Box sx={{justifyContent: 'center', p: 5}}>
+      <Typography variant='h5' sx={{ fontWeight: 'bold'}}>
+        There aren't any plant guides yet.
+      </Typography>
+    </Box>
+  );
 
   return (
     <Container sx={{ p: 2 }}>
-      <Typography component="h1" variant="h2" color="secondary">
+      <Typography component="h1" variant="h2" color="secondary" fontWeight='bold' sx={{ py: 5 }}>
         Plant Guides
       </Typography>
-      <div>
-        <Grid container spacing={0}>
-            {plantGuidesArray && plantGuidesArray.map(plantGuide => (
-              <Grid item xs={4} key={plantGuide.id}>
-                <PlantGuideCard plantGuide={plantGuide}/>
-              </Grid>
-            ))}
-        </Grid>
-      </div>
+      {plantGuidesArray.length > 0 ? plantGuides(plantGuidesArray) : <></>}
       {isAuthenticated ? <AddPlantGuideDialog /> : <></>}
     </Container>
   );
