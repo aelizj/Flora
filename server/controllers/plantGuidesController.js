@@ -3,6 +3,7 @@ import PlantGuide from '../models/plantGuide.js';
 import User from '../models/user.js';
 import { RouteProcessingStart, RouteProcessingSuccess, RouteProcessingFailure } from '../utils/routeProcessing.js';
 
+// Fetches all plant guides from db
 const getPlantGuides = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   try {
@@ -15,6 +16,7 @@ const getPlantGuides = async (req, res, next) => {
   }
 };
 
+// Adds plant guide to db
 const createPlantGuide = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   try {
@@ -33,6 +35,7 @@ const createPlantGuide = async (req, res, next) => {
   }
 };
 
+// Fetches a plant guide from db by id
 const getPlantGuideById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   const { id } = req.params;
@@ -41,6 +44,7 @@ const getPlantGuideById = async (req, res, next) => {
     if (!plantGuide) {
       next(new HttpError('Could not find plant with the provided id.', 404));
     }
+
     RouteProcessingSuccess(req.method, req.url, res);
     res.json({ plantGuide });
   } catch (error) {
@@ -49,6 +53,7 @@ const getPlantGuideById = async (req, res, next) => {
   }
 };
 
+// Deletes a plant guide from db by id
 const deletePlantGuideById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   const { id } = req.params;

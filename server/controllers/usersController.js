@@ -2,9 +2,9 @@ import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import { RouteProcessingStart, RouteProcessingSuccess, RouteProcessingFailure } from '../utils/routeProcessing.js';
 
+// Fetches all users from db
 const getUsers = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   try {
     const users = await User.find({}, '_id firstName lastName username email createdAt updatedAt');
     RouteProcessingSuccess(req.method, req.url, res);
@@ -15,15 +15,16 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+// Fetches a user from db by id
 const getUserById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   const { id } = req.params;
   try {
     const user = await User.findById(id);
     if (!user) {
       next(new HttpError('Could not find user with the provided id.', 404));
     }
+
     RouteProcessingSuccess(req.method, req.url, res);
     res.json({ user });
   } catch (error) {
@@ -32,9 +33,9 @@ const getUserById = async (req, res, next) => {
   }
 };
 
+// Deletes a user from db by id
 const deleteUserById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   const { id } = req.params;
   try {
     await User.findByIdAndDelete(id);
@@ -48,15 +49,16 @@ const deleteUserById = async (req, res, next) => {
   }
 };
 
+// Updates a user with provided id
 const patchUserById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   const { id } = req.params;
   try {
     const user = await User.findByIdAndUpdate(id, req.body, { new: true });
     if (!user) {
       next(new HttpError('Could not find user with the provided id.', 404));
     }
+
     RouteProcessingSuccess(req.method, req.url, res);
     return res.json({ user });
   } catch (error) {

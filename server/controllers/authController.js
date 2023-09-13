@@ -4,12 +4,15 @@ import config from '../config.js';
 import HttpError from '../utils/httpError.js';
 import User from '../models/user.js';
 import createTokenAndSetCookie from '../utils/jwtHelper.js';
-import { RouteProcessingStart, RouteProcessingSuccess, RouteProcessingFailure } from '../utils/routeProcessing.js';
+import {
+  RouteProcessingStart,
+  RouteProcessingSuccess,
+  RouteProcessingFailure,
+} from '../utils/routeProcessing.js';
 
 // Validates user token
 const validateToken = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   const jwtKey = config.jwt.secretOrPublicKey;
   const token = req.cookies.jwt;
   if (!token) return next(new HttpError('No token provided', 401));
@@ -37,13 +40,10 @@ const validateToken = async (req, res, next) => {
 // Adds new user to database
 const registerUser = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   const existingUser = await User.findOne({ email: req.body.email });
   if (existingUser) return next(new HttpError('That email is already in use.', 400)); // Feels like 409 conflict but operation doesn't retry
-
   const usernameInUse = await User.findOne({ username: req.body.username });
   if (usernameInUse) return next(new HttpError('That username is already in use', 400)); // Feels like 409 conflict but operation doesn't retry
-
   const newUser = new User({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -54,7 +54,6 @@ const registerUser = async (req, res, next) => {
 
   const salt = await bcrypt.genSalt(10);
   newUser.password = await bcrypt.hash(newUser.password, salt);
-
   try {
     await newUser.save();
   } catch (error) {
@@ -69,7 +68,6 @@ const registerUser = async (req, res, next) => {
 // Validates entered user credentials
 const loginUser = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   if (!req.body.email || !req.body.password) {
     return next(new HttpError('All fields are required for submission.', 400));
   }
@@ -77,7 +75,9 @@ const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user) return next(new HttpError('No account associated with this email address exists.', 404));
+    if (!user) {
+      return next(new HttpError('No account associated with this email address exists.', 404));
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new HttpError('Incorrect password.', 403));
@@ -89,10 +89,9 @@ const loginUser = async (req, res, next) => {
   }
 };
 
-// Logs out user
+// Logs out user and clears cookies
 const logoutUser = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
-
   if (!req.cookies.jwt) {
     return next(new HttpError('Bad request', 400));
   }
