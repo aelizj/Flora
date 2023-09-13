@@ -10,12 +10,14 @@ import { RouteProcessingStart, RouteProcessingSuccess, RouteProcessingFailure } 
 const validateToken = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
 
+  const jwtKey = config.jwt.secretOrPublicKey;
+  console.log(jwtKey);
   const token = req.cookies.jwt;
   if (!token) return next(new HttpError('No token provided', 401));
   try {
     let decoded;
     try {
-      decoded = jwt.verify(token, config.jwt.secretOrPublicKey, {
+      decoded = jwt.verify(token, jwtKey, {
         ignoreExpiration: true,
       });
     } catch (error) {

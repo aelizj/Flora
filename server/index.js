@@ -15,16 +15,17 @@ import { seedPlantGuidesCollection, seedUsersCollection } from './utils/seedDb.j
 
 dotenv.config();
 
+const port = process.env.PORT || 3000;
+const nodeEnv = process.env.NODE_ENV || 'production';
+
 const app = express();
 app.use(cookieParser());
 app.use((req, res, next) => {
   next();
 });
 
-const port = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 const cookieExtractor = (req) => {
   let token = null;
   if (req && req.cookies) {
@@ -55,12 +56,12 @@ passport.use(new JwtStrategy(opts, (jwtPayload, done) => {
 }));
 
 passport.use(new PassportJwtCookieCombo({
-  secretOrPublicKey: config.jwt.secretOrPublicKey,
+  secretOrPublicKey: opts.secretOrKey,
   jwtCookieName: 'jwt',
 }, (payload, done) => done(null, payload.user)));
 
 app.use(passport.initialize());
-app.use(cors(config.cors));
+app.use(nodeEnv === 'production' ? cors(config.production.cors) : cors(config.development.cors));
 app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use('/api', apiRoutes);
