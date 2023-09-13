@@ -11,7 +11,6 @@ import UserBio from './UserBio.js';
 
 const ProfilePage = () => {
   const { user } = useSelector((state) => state.user);
-  console.log(user);
   return (
     <div>
       {user.coverImageUrl ? <CoverPhoto user={user}/> : <Box sx={{ padding: 4 }}/>}
