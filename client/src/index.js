@@ -9,8 +9,6 @@ import floraTheme from './assets/themes/theme';
 const theme = floraTheme;
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-console.log('Inside client-side index.js file');
-
 try {
   root.render(
     <StrictMode>

@@ -11,7 +11,6 @@ const validateToken = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
 
   const jwtKey = config.jwt.secretOrPublicKey;
-  console.log(jwtKey);
   const token = req.cookies.jwt;
   if (!token) return next(new HttpError('No token provided', 401));
   try {

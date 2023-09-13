@@ -86,8 +86,9 @@ mongoose
   .then(() => console.log('Database connected successfully.'))
   .catch((err) => console.error('Error connecting to database: ', err));
 
-await seedUsersCollection();
-await seedPlantGuidesCollection();
+// Seed db
+await seedUsersCollection(); // To do: eliminate the need for this
+await seedPlantGuidesCollection(); // To do: eliminate the need for this
 
 app.use((err, req, res, next) => {
   console.error(err);
