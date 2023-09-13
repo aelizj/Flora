@@ -29,7 +29,7 @@ const __dirname = dirname(__filename);
 const cookieExtractor = (req) => {
   let token = null;
   if (req && req.cookies) {
-    token = req.cookies['jwt'];
+    token = req.cookies.jwt;
   }
   return token;
 };
