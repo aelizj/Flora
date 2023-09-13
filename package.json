@@ -5,6 +5,8 @@
   "main": "/server/index.js",
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "lint": "npx eslint ./server/**/*.js ./client/src/**/*.js",
+    "lintfix": "npx eslint ./server/**/*.js ./client/src/**/*.js --fix",
     "start": "node ./server/index",
     "server": "nodemon ./server/index",
     "client": "npm run dev --prefix client",
