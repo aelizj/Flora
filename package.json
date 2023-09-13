@@ -4,12 +4,12 @@
   "type": "module",
   "main": "/server/index.js",
   "scripts": {
+    "client": "npm run dev --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "lint": "npx eslint ./server/**/*.js ./client/src/**/*.js",
     "lintfix": "npx eslint ./server/**/*.js ./client/src/**/*.js --fix",
-    "start": "node ./server/index",
     "server": "nodemon ./server/index",
-    "client": "npm run dev --prefix client",
+    "start": "node ./server/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
