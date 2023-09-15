@@ -1,0 +1,86 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Flora App Infrastructure
+
+Parameters:
+  TaskDefinitionArn:
+    Description: The ARN for the Task Definition
+    Type: String
+
+  TargetGroupArn:
+    Description: The ARN for the Target Group
+    Type: String
+
+  CertificateArn:
+    Description: The ARN for the SSL Certificate
+    Type: String
+
+  SecurityGroupId:
+    Description: Security Group ID
+    Type: String
+
+  Subnets:
+    Description: List of subnets
+    Type: List<AWS::EC2::Subnet::Id>
+
+Resources:
+  FloraCluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: flora-cluster
+
+  FloraService:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: flora-service
+      Cluster: !Ref FloraCluster
+      TaskDefinition: !Ref TaskDefinitionArn
+      DesiredCount: 1
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          SecurityGroups:
+            - !Ref SecurityGroupId
+          Subnets: !Ref Subnets
+
+  FloraLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      LoadBalancerName: flora-app-lb
+      Type: application
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref SecurityGroupId
+      Subnets: !Ref Subnets
+
+  FloraListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref FloraLoadBalancer
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroupArn
+      Protocol: HTTPS
+      SslPolicy: ELBSecurityPolicy-TLS-1-2-2017-01
+      Certificates:
+        - CertificateArn: !Ref CertificateArn
+      Port: 443
+
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: flora-app-lg
+      RetentionInDays: 1
+
+Outputs:
+  ClusterName:
+    Description: ECS Cluster Name
+    Value: !Ref FloraCluster
+
+  ServiceName:
+    Description: ECS Service Name
+    Value: !Ref FloraService
+
+  LoadBalancerDNS:
+    Description: LoadBalancer DNS Name
+    Value: !GetAtt FloraLoadBalancer.DNSName
