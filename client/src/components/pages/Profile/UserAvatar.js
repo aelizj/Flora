@@ -14,8 +14,8 @@ const UserAvatar = ({ avatar }) => {
       <Avatar
         sx={{
           bgcolor: lightGreen[400],
-          height: { xs: 56, sm: 80 },
-          width: { xs: 56, sm: 80 }
+          height: { xs: 56, sm: 80, md: 120 },
+          width: { xs: 56, sm: 80, md: 120 }
         }}
         src={avatar}
       />
