@@ -6,7 +6,7 @@ info:
   description: "API for Flora - a community for plant lovers."
 
 servers:
-  - url: http://localhost:5001/api
+  - url: http://localhost:3000/api
 
 paths:
   /register:
