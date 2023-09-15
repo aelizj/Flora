@@ -16,14 +16,12 @@ const config = {
       credentials: true,
     },
   },
-
   development: {
     cors: {
       origin: `http://localhost:${port}`,
       credentials: true,
     },
   },
-
   jwt: {
     secretOrPublicKey: jwtKey,
     jwtCookie: {
