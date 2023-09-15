@@ -11,7 +11,7 @@ const seedUsersCollection = async () => {
     email: 'aneljo@flora.com',
     password: 'password',
     location: 'Somewhere, USA',
-    bio: 'I like plants.',
+    bio: '🌱 Plant enthusiast with a penchant for hydroponics. Cultivating green spaces, one drop at a time. #PlantLove #HydroponicHobbyist',
     interests: ['Philodendrons'],
     wishlist: ['Philodendron glorious'],
     plants: ['Monstera deliciosa', 'Philodendron micans', 'Philodendron silver sword'],
