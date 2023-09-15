@@ -1,5 +1,5 @@
 const RouteProcessingStart = (method, path) => {
-  console.log(`ROUTE_PROCESSING_START: ${method} ${path}`);
+  console.log(`\nROUTE_PROCESSING_START: ${method} ${path}`);
 };
 
 const RouteProcessingSuccess = (method, path, res) => {
