@@ -1,7 +1,9 @@
 {
   "files": {
     "main.css": "/static/css/main.a37d2d25.css",
-    "main.js": "/static/js/main.607d9a0b.js",
+    "main.js": "/static/js/main.ee825b05.js",
+    "static/media/tropicalPlants.jpg": "/static/media/tropicalPlants.f0c460a0f08bfbe3ea2e.jpg",
+    "static/media/plantRoom.jpg": "/static/media/plantRoom.c76e8bdc7236e69e7263.jpg",
     "static/media/unbounded-all-700-normal.woff": "/static/media/unbounded-all-700-normal.0c8dc24f23592ce2df17.woff",
     "static/media/unbounded-all-500-normal.woff": "/static/media/unbounded-all-500-normal.2164ea89247bde39eb55.woff",
     "static/media/unbounded-all-300-normal.woff": "/static/media/unbounded-all-300-normal.8b97a259022e929c491b.woff",
@@ -35,10 +37,10 @@
     "index.html": "/index.html",
     "static/media/unbounded-cyrillic-ext-400-normal.woff2": "/static/media/unbounded-cyrillic-ext-400-normal.3608c435ed123a7dd849.woff2",
     "main.a37d2d25.css.map": "/static/css/main.a37d2d25.css.map",
-    "main.607d9a0b.js.map": "/static/js/main.607d9a0b.js.map"
+    "main.ee825b05.js.map": "/static/js/main.ee825b05.js.map"
   },
   "entrypoints": [
     "static/css/main.a37d2d25.css",
-    "static/js/main.607d9a0b.js"
+    "static/js/main.ee825b05.js"
   ]
 }
