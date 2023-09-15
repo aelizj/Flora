@@ -1,3 +1,3 @@
 # Flora
 
-A community for plant lovers.
+A place for plant lovers.
