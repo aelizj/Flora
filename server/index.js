@@ -1,10 +1,10 @@
+import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import dotenv from 'dotenv';
 import passport from 'passport';
 import { Strategy as JwtStrategy } from 'passport-jwt';
 import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
