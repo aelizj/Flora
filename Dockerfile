@@ -3,7 +3,7 @@ FROM      node:current-slim
 ENV       DB mongodb://localhost:27017/floradb
 ENV       AWS_JWT_SECRET_NAME flora/jwtSecret
 
-# For development use
+# FOR DEVELOPMENT USE ONLY
 ENV       JWT_DEV_KEY VgvTPz56XxoWhx9ZavI1sNLs0333C71LWvQHqIEPERGKYrnt+yX9gJZqa6N49OKDyhJ/fJiCZh+5mRAMotq7IHvjgSUnbftLplH+9rXqIiqZpapf8ON/bvmIHHZ1VyB+iCvwr7jTnEgNuVR9d8kNBMBh5rVT7fyyW++ml9LrTzY=
 
 WORKDIR   /app
