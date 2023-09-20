@@ -58,8 +58,8 @@ const MainComponent = ({ drawerOpen, theme }) => {
           <Route path={PLANT_BASICS_URL}                element={<PlantInfo />} />
 
           {/* Protected routes */}
-          <Route path={LOGIN_USER_URL}                  element={isAuthenticated ? <Home /> : <Login />} />
-          <Route path={REGISTER_USER_URL}               element={isAuthenticated ? <Home /> : <Register />} />
+          <Route path={LOGIN_USER_URL}                  element={isAuthenticated ? <Home isAuthenticated={isAuthenticated} /> : <Login />} />
+          <Route path={REGISTER_USER_URL}               element={isAuthenticated ? <Home isAuthenticated={isAuthenticated} /> : <Register />} />
           <Route path={PROFILE_PAGE_URL}                element={isAuthenticated ? <Profile /> : <Login />}  />
           <Route path={EVENTS_PAGE_URL}                 element={isAuthenticated ? <Events /> : <Login />} />
           <Route path={COMMUNITY_PAGE_URL}              element={isAuthenticated ? <Community /> : <Login />}/>

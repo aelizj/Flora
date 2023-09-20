@@ -14,7 +14,7 @@ const Item = styled(Card)(({ theme }) => ({
   boxShadow: 'none'
 }));
 
-const Home = (isAuthenticated) => {
+const Home = ({ isAuthenticated }) => {
   return (
     <Container maxWidth='100%' sx={{ minHeight: '100vh', py: 5,backgroundColor: '#EDF1EA' }}>
       <Box sx={{ flexGrow: 1 }}>
