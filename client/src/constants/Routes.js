@@ -23,5 +23,3 @@ export const USERS_INDEX_URL            = '/users';
 export const PLANT_BASICS_URL           = '/basics';
 export const COMMUNITY_PAGE_URL         = '/community';
 export const EVENTS_PAGE_URL            = '/events';
-
-
