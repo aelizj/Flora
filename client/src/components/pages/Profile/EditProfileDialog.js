@@ -125,7 +125,7 @@ const EditProfileDialog = ({ user }) => {
             helperText={errors.email?.message}
           />
 
-          <TextField
+          <TextField // TODO: Set up photo upload (GitHub Issue #12)
             {...register('profileImageUrl', {
               maxLength: {
                 value: 500,
@@ -145,7 +145,7 @@ const EditProfileDialog = ({ user }) => {
             helperText={errors.bio?.profileImageUrl}
           />
 
-          <TextField
+          <TextField // TODO: Set up photo upload (GitHub Issue #12)
             {...register('coverImageUrl', {
               maxLength: {
                 value: 500,

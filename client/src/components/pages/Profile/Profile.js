@@ -41,13 +41,12 @@ const ProfilePage = () => {
               </Grid>
             ))}
           </Grid>
-          { user.authoredPlantGuides ? user.authoredPlantGuides.join(' | ') : ''}
+          { user.authoredPlantGuides ? user.authoredPlantGuides.join(' | ') : ''} [// TODO: Deleted plant guide not removed from user's profile (GitHub Issue #18)]
           { user.achievements ? <UserAchievements achievements={user.achievements} /> : <></> }
           <EditProfileDialog user={user}/>
         </Box>
       </Container>
     </div>
-
   );
 }
 

@@ -54,6 +54,7 @@ const getPlantGuideById = async (req, res, next) => {
 };
 
 // Deletes a plant guide from db by id
+// TODO: Deleted plant guide not removed from user's profile (GitHub Issue #18)]
 const deletePlantGuideById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   const { id } = req.params;
