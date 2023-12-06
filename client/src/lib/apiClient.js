@@ -106,6 +106,15 @@ const getPlantGuideById = async (id) => {
   }
 };
 
+const deletePlantGuideById = async (id) => {
+  try {
+    const response = await apiClient.delete(`${API_PLANT_GUIDES_INDEX_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   validateToken,
   loginUser,
@@ -117,4 +126,5 @@ export {
   getPlantGuides,
   createPlantGuide,
   getPlantGuideById,
+  deletePlantGuideById,
 };
