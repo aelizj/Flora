@@ -36,7 +36,7 @@ const floraTheme = createTheme({
     footer: {
       fontFamily: '"Unbounded"',
       fontWeight: 200,
-      fontSize: 8,
+      fontSize: 6,
     },
     h1: {
       fontFamily: [
