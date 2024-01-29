@@ -8,8 +8,8 @@ import PlantGuideCard from './PlantGuideCard';
 // const FilterBar = () => {
 //   return (
 //     <Container maxWidth="100%">
-//       <Box sx={{ flexGrow: 1, py: 5}}>
-//         <TextField size='small'></TextField>
+//       <Box sx={{ flexGrow: 1, paddingTop: 2}}>
+//         <TextField fullWidth></TextField>
 //       </Box>
 //     </Container>
 //   )
@@ -49,7 +49,8 @@ const PlantGuideList = ({ isAuthenticated }) => {
   );
 
   return (
-    <Container sx={{ p: 2 }}>
+    <Container sx={{ p: 2, paddingBottom: 20 }}>
+      {/* <FilterBar></FilterBar> */}
       <Typography component="h1" variant="h2" color="secondary" fontWeight='bold' sx={{ py: 5 }}>
         Plant Guides
       </Typography>
