@@ -22,7 +22,7 @@ const createPlantGuide = async (req, res, next) => {
   try {
     const plantGuide = await PlantGuide.create(req.body.plantGuide);
     const user = await User.findById(plantGuide.author.id);
-    user.authoredPlantGuides.push(plantGuide._id);
+    user.authoredPlantGuides.push(plantGuide);
     await user.save();
     await PlantGuide.find({ _id: plantGuide._id }, 'commonName scientificName _id createdAt updatedAt')
       .then((result) => res.json(result))
@@ -53,12 +53,33 @@ const getPlantGuideById = async (req, res, next) => {
   }
 };
 
+// Updates a plant guide with provided id
+const patchPlantGuideById = async (req, res, next) => {
+  RouteProcessingStart(req.method, req.url);
+  const { id } = req.params;
+  try {
+    const plantGuide = await PlantGuide.findByIdAndUpdate(id, req.body, { new: true });
+    if (!plantGuide) {
+      next(new HttpError('Could not find user with the provided id.', 404));
+    }
+
+    RouteProcessingSuccess(req.method, req.url, res);
+    return res.json({ plantGuide });
+  } catch (error) {
+    RouteProcessingFailure(req.method, req.url, error);
+    return next(new HttpError('Something went wrong, please try again', 500));
+  }
+};
+
 // Deletes a plant guide from db by id
 // TODO: Deleted plant guide not removed from user's profile (GitHub Issue #18)]
 const deletePlantGuideById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   const { id } = req.params;
   try {
+    console.log('in backend api');
+    const plantGuide = await PlantGuide.findById(id);
+    console.log(plantGuide);
     await PlantGuide.findByIdAndDelete(id);
     RouteProcessingSuccess(req.method, req.url, res);
     return res.send('Plant guide successfully deleted!');
@@ -72,5 +93,6 @@ export {
   getPlantGuides,
   createPlantGuide,
   getPlantGuideById,
+  patchPlantGuideById,
   deletePlantGuideById,
 };

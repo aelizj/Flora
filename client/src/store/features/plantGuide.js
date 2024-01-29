@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   getPlantGuideById as apiGetPlantGuideById,
+  patchPlantGuideById as apiPatchPlantGuideById,
   deletePlantGuideById as apiDeletePlantGuideById,
 } from '../../lib/apiClient';
 import {  } from "../../lib/apiClient";
@@ -10,6 +11,19 @@ export const getPlantGuideById = createAsyncThunk(
   async(id) => {
     const response = await apiGetPlantGuideById(id);
     return response;
+  }
+);
+
+export const patchPlantGuideById = createAsyncThunk(
+  'plantGuide/patchPlantGuideById',
+  async(data, thunkAPI) => {
+    try {
+      const id = data.id;
+      const response = await apiPatchPlantGuideById(id, data);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message })
+    }
   }
 );
 
@@ -42,6 +56,20 @@ const plantGuideSlice = createSlice({
       .addCase(getPlantGuideById.rejected, (state, action) => {
         state.loading = false;
         state.plantGuide = {};
+        state.error = action.error.code;
+      })
+      .addCase(patchPlantGuideById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(patchPlantGuideById.fulfilled, (state, action) => {
+        const { plantGuide } = action.payload;
+        state.plantGuide = plantGuide;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(patchPlantGuideById.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.code;
       })
       .addCase(deletePlantGuideById.pending, (state, action) => {

@@ -10,6 +10,7 @@ import {
   getPlantGuides,
   createPlantGuide,
   getPlantGuideById,
+  patchPlantGuideById,
   deletePlantGuideById,
 } from '../controllers/plantGuidesController.js';
 import {
@@ -32,7 +33,8 @@ router.delete('/users/:id', deleteUserById);
 router.get('/users', getUsers);
 
 router.get('/plant-guides/:id', passport.authenticate('jwt', { session: false }), getPlantGuideById);
-router.delete('/plant-guides/:id', deletePlantGuideById);
+router.patch('/plant-guides/:id', passport.authenticate('jwt', { session: false }), patchPlantGuideById);
+router.delete('/plant-guides/:id', passport.authenticate('jwt', { session: false }), deletePlantGuideById);
 router.post('/plant-guides', passport.authenticate('jwt', { session: false }), createPlantGuide);
 router.get('/plant-guides', getPlantGuides);
 

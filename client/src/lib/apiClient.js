@@ -16,6 +16,9 @@ const apiClient = axios.create({
   timeout: 10000,
 });
 
+// ----------------------------------------------------------------------------
+// USER ROUTES
+// ----------------------------------------------------------------------------
 const validateToken = async () => {
   try {
     const response = await apiClient.get(API_VALIDATE_TOKEN_URL);
@@ -79,6 +82,18 @@ const patchUser = async (id, data) => {
   }
 };
 
+const deleteUserById = async(id) => {
+  try {
+    const response = await apiClient.delete(`${API_USERS_INDEX_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// PLANT GUIDE ROUTES
+// ----------------------------------------------------------------------------
 const getPlantGuides = async () => {
   try {
     const response = await apiClient.get(API_PLANT_GUIDES_INDEX_URL);
@@ -106,7 +121,16 @@ const getPlantGuideById = async (id) => {
   }
 };
 
-const deletePlantGuideById = async (id) => {
+const patchPlantGuideById = async (id, data) => {
+  try{
+    const response = await apiClient.patch(`${API_PLANT_GUIDES_INDEX_URL}/${id}`, data);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const deletePlantGuideById = async ({ id }) => {
   try {
     const response = await apiClient.delete(`${API_PLANT_GUIDES_INDEX_URL}/${id}`);
     return response.data;
@@ -123,8 +147,10 @@ export {
   getUsers,
   getUserById,
   patchUser,
+  deleteUserById,
   getPlantGuides,
   createPlantGuide,
   getPlantGuideById,
+  patchPlantGuideById,
   deletePlantGuideById,
 };
