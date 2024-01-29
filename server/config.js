@@ -18,7 +18,7 @@ const config = {
   },
   development: {
     cors: {
-      origin: `http://localhost:${port}`,
+      origin: 'http://localhost:3000',
       credentials: true,
     },
   },

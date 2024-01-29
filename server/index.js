@@ -11,7 +11,7 @@ import PassportJwtCookieCombo from 'passport-jwt-cookiecombo';
 import config from './config.js';
 import apiRoutes from './routes/api.js';
 import User from './models/user.js';
-import { seedPlantGuidesCollection, seedUsersCollection } from './utils/seedDb.js';
+// import { seedPlantGuidesCollection, seedUsersCollection } from './utils/seedDb.js';
 
 dotenv.config();
 
@@ -66,13 +66,15 @@ app.use(express.static(`${__dirname}/public`));
 app.use(express.json());
 app.use('/api', apiRoutes);
 
-// Serve static assets (React frontend)
-app.use(express.static(path.join(__dirname, '../client/build')));
+if (nodeEnv === 'production') {
+  // Serve static assets (React frontend)
+  app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Handle React routing, return all requests to React app
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
-});
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+  });
+}
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
@@ -87,8 +89,8 @@ mongoose
   .catch((err) => console.error('Error connecting to database: ', err));
 
 // Seed db
-await seedUsersCollection(); // To do: eliminate the need for this
-await seedPlantGuidesCollection(); // To do: eliminate the need for this
+// await seedUsersCollection(); // To do: eliminate the need for this
+// await seedPlantGuidesCollection(); // To do: eliminate the need for this
 
 app.use((err, req, res, next) => {
   console.error(err);
