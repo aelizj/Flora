@@ -110,7 +110,7 @@ const AddPlantGuideDialog = () => {
             error={!!errors.scientificName}
             helperText={errors.scientificName? errors.scientificName.message : "Plant's binomial scientific name; i.e. Pilea peperomioides"}
           />
-          <TextField
+          <TextField // TODO: Set up photo upload (GitHub Issue #12)
             {...register('imageUrl', {
               maxLength: {
                 value: 250,
