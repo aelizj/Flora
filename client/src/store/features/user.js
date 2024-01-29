@@ -5,6 +5,8 @@ import {
   validateToken as apiValidateToken,
   logoutUser as apiLogoutUser,
   patchUser as apiPatchUser,
+  getUserById as apiGetUserById,
+  deleteUserById as apiDeleteUserById,
 } from '../../lib/apiClient';
 
 export function loadAuthState() {
@@ -18,6 +20,7 @@ export function loadAuthState() {
       if (isAuthenticated) {
         try {
           const response = await apiValidateToken();
+          console.log(response);
           dispatch(setCurrentUser(response));
         } catch (error) {
           console.error('Error validating token', error);
@@ -26,6 +29,32 @@ export function loadAuthState() {
     }
   };
 };
+
+export const getUserById = createAsyncThunk(
+  'user/getUserById',
+  async(data, thunkAPI) => {
+    try {
+      const id = data.id;
+      const response = await apiGetUserById(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message })
+    }
+  }
+);
+
+export const deleteUserById = createAsyncThunk(
+  'user/deleteUserById',
+  async(data, thunkAPI) => {
+    try {
+      const id = data.id;
+      const response = await apiDeleteUserById(id);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+)
 
 export const patchUser = createAsyncThunk(
   'user/patchUser',
@@ -150,6 +179,33 @@ export const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.code;
       })
+      .addCase(getUserById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(getUserById.fulfilled, (state, action) => {
+        const { user } = action.payload;
+        state.user = user;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(getUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.code;
+      })
+      .addCase(deleteUserById.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(deleteUserById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = {};
+        state.error = null;
+      })
+      .addCase(deleteUserById.rejected, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        state.error = action.error.code;
+      });
   }
 });
 
