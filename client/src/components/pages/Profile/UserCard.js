@@ -20,6 +20,10 @@ import {
 import FlatButton from '../../ui/FlatButton';
 import { patchUser } from '../../../store/features/user';
 
+const toTitleCase = (str) => {
+  return str.slice(0,1).toUpperCase() + str.slice(1);
+}
+
 const UserCard = ({ user, category }) => {
   const dispatch = useDispatch();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -54,7 +58,7 @@ const UserCard = ({ user, category }) => {
     return (
       <Paper elevation={3} sx={{ p: 2 }}>
         <Box component="span">
-          <Typography variant="h6" marginBottom={1}>{category}</Typography>
+          <Typography variant="h6" marginBottom={1}>{toTitleCase(category)}</Typography>
         </Box>
 
         <Stack direction="row" useFlexGap spacing={1} my={1} flexWrap="wrap">
@@ -83,7 +87,7 @@ const UserCard = ({ user, category }) => {
         >
           <DialogTitle>
             <Typography variant='h6' color='secondary' sx={{ fontWeight: 500}}>
-              {`Add to ${category}`}
+              {`Add to ${toTitleCase(category)}`}
             </Typography>
           </DialogTitle>
 
