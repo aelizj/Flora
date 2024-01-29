@@ -30,6 +30,7 @@ const plantGuidesSlice = createSlice({
     builder
       .addCase(getPlantGuides.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(getPlantGuides.fulfilled, (state, action) => {
         state.loading = false;
@@ -43,6 +44,7 @@ const plantGuidesSlice = createSlice({
       })
       .addCase(createPlantGuide.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(createPlantGuide.fulfilled, (state, action) => {
         state.loading = false;
