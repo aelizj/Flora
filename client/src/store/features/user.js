@@ -20,7 +20,6 @@ export function loadAuthState() {
       if (isAuthenticated) {
         try {
           const response = await apiValidateToken();
-          console.log(response);
           dispatch(setCurrentUser(response));
         } catch (error) {
           console.error('Error validating token', error);
@@ -32,9 +31,9 @@ export function loadAuthState() {
 
 export const getUserById = createAsyncThunk(
   'user/getUserById',
-  async(data, thunkAPI) => {
+  async({ data }, thunkAPI) => {
     try {
-      const id = data.id;
+      const id = data._id;
       const response = await apiGetUserById(id);
       return response;
     } catch (error) {
@@ -184,8 +183,8 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(getUserById.fulfilled, (state, action) => {
-        const { user } = action.payload;
-        state.user = user;
+        // const { user } = action.payload;
+        // state.user = user;
         state.loading = false;
         state.error = null;
       })

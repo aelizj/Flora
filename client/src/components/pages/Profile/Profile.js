@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container, Grid, Typography } from '@mui/material';
 import UserAvatar        from './UserAvatar.js';
 import UserInfo          from './UserInfo';
@@ -9,11 +9,18 @@ import CoverPhoto        from './CoverPhoto.js';
 import EditProfileDialog from './EditProfileDialog.js';
 import PlantGuideCard    from '../PlantGuideList/PlantGuideCard.js';
 import UserBio from './UserBio.js';
+import { getUserById } from '../../../store/features/user';
 
 const ProfilePage = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  console.log(user);
+  useEffect(() => {
+    if (user && user._id) {
+      dispatch(getUserById({ data: user }));
+    }
+  }, [dispatch, user]);
+
   return (
     <div>
       {user.coverImageUrl ? <CoverPhoto user={user}/> : <Box sx={{ padding: 4 }}/>}
@@ -45,14 +52,13 @@ const ProfilePage = () => {
               </Grid>
             ))}
 
-            {user.authoredPlantGuides &&(
+            {user.authoredPlantGuides.length > 0 && (
               <Grid item xs={12} sm={12} paddingTop={6}>
                 <Typography variant='h6' color="primary">
                   Authored Plant Guides
                 </Typography>
               </Grid>
             )}
-
 
             {user.authoredPlantGuides && user.authoredPlantGuides.map(plantGuide => (
               <Grid item xs={4} key={plantGuide.id}>
