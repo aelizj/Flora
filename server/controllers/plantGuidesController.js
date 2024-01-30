@@ -72,13 +72,14 @@ const patchPlantGuideById = async (req, res, next) => {
 };
 
 // Deletes a plant guide from db by id
-// TODO: Deleted plant guide not removed from user's profile (GitHub Issue #18)]
 const deletePlantGuideById = async (req, res, next) => {
   RouteProcessingStart(req.method, req.url);
   const { id } = req.params;
   try {
-    console.log('in backend api');
     const plantGuide = await PlantGuide.findById(id);
+    const user = await User.findById(plantGuide.author.id);
+    user.authoredPlantGuides = user.authoredPlantGuides.filter((g) => g._id.toString() !== id);
+    await user.save();
     console.log(plantGuide);
     await PlantGuide.findByIdAndDelete(id);
     RouteProcessingSuccess(req.method, req.url, res);
