@@ -4,8 +4,9 @@ import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
-import { Toolbar, Link, Typography, IconButton, MenuItem }  from '@mui/material';
+import { Toolbar, Link, Typography, IconButton, MenuItem, Paper, TextField }  from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Menu from '@mui/material/Menu';
 import { logoutUser } from '../../store/features/user';
@@ -31,6 +32,24 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+const FilterBar = () => {
+  return (
+    <Paper
+      component="form"
+      sx={{ p: '2px 2px', display: 'flex', alignItems: 'center', width: 250}}
+    >
+      <TextField
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Search"
+        inputProps={{ 'aria-label': 'search google maps' }}
+      />
+      <IconButton type="button" aria-label="search">
+        <SearchIcon />
+      </IconButton>
+    </Paper>
+  );
+};
 
 const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
   const dispatch = useDispatch();
@@ -77,11 +96,13 @@ const FloraAppBar = ({ drawerOpen, handleDrawerOpen }) => {
         >
           <MenuIcon />
         </IconButton>
+
         <Typography variant="h4" noWrap component="div" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
           <Link href={HOME_PAGE_URL} color='#fff' underline='none'>
             Flora
           </Link>
         </Typography>
+        <FilterBar />
         <div id="account-menu">
           <IconButton
             edge="end"

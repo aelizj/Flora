@@ -1,19 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Container, Grid, Typography, TextField } from '@mui/material';
+import { Box, Container, Grid, Typography } from '@mui/material';
 import { getPlantGuides } from '../../../store/features/plantGuides';
 import AddPlantGuideDialog from './AddPlantGuideDialog';
 import PlantGuideCard from './PlantGuideCard';
-
-// const FilterBar = () => {
-//   return (
-//     <Container maxWidth="100%">
-//       <Box sx={{ flexGrow: 1, paddingTop: 2}}>
-//         <TextField fullWidth></TextField>
-//       </Box>
-//     </Container>
-//   )
-// };
 
 const PlantGuideList = ({ isAuthenticated }) => {
   const dispatch = useDispatch();
@@ -39,7 +29,6 @@ const PlantGuideList = ({ isAuthenticated }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return (
     <>
-      {/* <FilterBar></FilterBar> */}
       <Box sx={{justifyContent: 'center', p: 5}}>
         <Typography variant='h5' sx={{ fontWeight: 'bold'}}>
           There aren't any plant guides yet.
@@ -50,7 +39,6 @@ const PlantGuideList = ({ isAuthenticated }) => {
 
   return (
     <Container sx={{ p: 2, paddingBottom: 20 }}>
-      {/* <FilterBar></FilterBar> */}
       <Typography component="h1" variant="h2" color="secondary" fontWeight='bold' sx={{ py: 5 }}>
         Plant Guides
       </Typography>
